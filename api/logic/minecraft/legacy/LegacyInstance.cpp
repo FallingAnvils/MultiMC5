@@ -151,10 +151,6 @@ QString LegacyInstance::resourceDir() const
 {
     return FS::PathCombine(gameRoot(), "resources");
 }
-QString LegacyInstance::texturePacksDir() const
-{
-    return FS::PathCombine(gameRoot(), "texturepacks");
-}
 
 QString LegacyInstance::runnableJar() const
 {

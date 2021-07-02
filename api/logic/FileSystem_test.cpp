@@ -99,7 +99,6 @@ slots:
                 qDebug() << entry;
             }
             QVERIFY(target_dir.entryList().contains("pack.mcmeta"));
-            QVERIFY(target_dir.entryList().contains("assets"));
         };
 
         // first try variant without trailing /

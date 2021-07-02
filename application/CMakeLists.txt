@@ -80,8 +80,6 @@ SET(MULTIMC_SOURCES
     pages/instance/GameOptionsPage.h
     pages/instance/VersionPage.cpp
     pages/instance/VersionPage.h
-    pages/instance/TexturePackPage.h
-    pages/instance/ResourcePackPage.h
     pages/instance/ModFolderPage.cpp
     pages/instance/ModFolderPage.h
     pages/instance/NotesPage.cpp
@@ -90,12 +88,8 @@ SET(MULTIMC_SOURCES
     pages/instance/LogPage.h
     pages/instance/InstanceSettingsPage.cpp
     pages/instance/InstanceSettingsPage.h
-    pages/instance/ScreenshotsPage.cpp
-    pages/instance/ScreenshotsPage.h
     pages/instance/OtherLogsPage.cpp
     pages/instance/OtherLogsPage.h
-    pages/instance/ServersPage.cpp
-    pages/instance/ServersPage.h
     pages/instance/LegacyUpgradePage.cpp
     pages/instance/LegacyUpgradePage.h
     pages/instance/WorldListPage.cpp
@@ -160,8 +154,6 @@ SET(MULTIMC_SOURCES
     # GUI - dialogs
     dialogs/AboutDialog.cpp
     dialogs/AboutDialog.h
-    dialogs/ProfileSelectDialog.cpp
-    dialogs/ProfileSelectDialog.h
     dialogs/CopyInstanceDialog.cpp
     dialogs/CopyInstanceDialog.h
     dialogs/CustomMessageBox.cpp
@@ -170,8 +162,6 @@ SET(MULTIMC_SOURCES
     dialogs/ExportInstanceDialog.h
     dialogs/IconPickerDialog.cpp
     dialogs/IconPickerDialog.h
-    dialogs/LoginDialog.cpp
-    dialogs/LoginDialog.h
     dialogs/NewComponentDialog.cpp
     dialogs/NewComponentDialog.h
     dialogs/NewInstanceDialog.cpp
@@ -186,8 +176,6 @@ SET(MULTIMC_SOURCES
     dialogs/UpdateDialog.h
     dialogs/VersionSelectDialog.cpp
     dialogs/VersionSelectDialog.h
-    dialogs/SkinUploadDialog.cpp
-    dialogs/SkinUploadDialog.h
 
 
     # GUI - widgets

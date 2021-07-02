@@ -7,15 +7,11 @@
 #include "pages/instance/LogPage.h"
 #include "pages/instance/VersionPage.h"
 #include "pages/instance/ModFolderPage.h"
-#include "pages/instance/ResourcePackPage.h"
-#include "pages/instance/TexturePackPage.h"
 #include "pages/instance/NotesPage.h"
-#include "pages/instance/ScreenshotsPage.h"
 #include "pages/instance/InstanceSettingsPage.h"
 #include "pages/instance/OtherLogsPage.h"
 #include "pages/instance/LegacyUpgradePage.h"
 #include "pages/instance/WorldListPage.h"
-#include "pages/instance/ServersPage.h"
 #include "pages/instance/GameOptionsPage.h"
 
 #include "Env.h"
@@ -42,13 +38,8 @@ public:
             modsPage->setFilter("%1 (*.zip *.jar *.litemod)");
             values.append(modsPage);
             values.append(new CoreModFolderPage(onesix.get(), onesix->coreModList(), "coremods", "coremods", tr("Core mods"), "Core-mods"));
-            values.append(new ResourcePackPage(onesix.get()));
-            values.append(new TexturePackPage(onesix.get()));
             values.append(new NotesPage(onesix.get()));
             values.append(new WorldListPage(onesix.get(), onesix->worldList()));
-            values.append(new ServersPage(onesix));
-            // values.append(new GameOptionsPage(onesix.get()));
-            values.append(new ScreenshotsPage(FS::PathCombine(onesix->gameRoot(), "screenshots")));
             values.append(new InstanceSettingsPage(onesix.get()));
         }
         std::shared_ptr<LegacyInstance> legacy = std::dynamic_pointer_cast<LegacyInstance>(inst);
@@ -57,7 +48,6 @@ public:
             values.append(new LegacyUpgradePage(legacy));
             values.append(new NotesPage(legacy.get()));
             values.append(new WorldListPage(legacy.get(), legacy->worldList()));
-            values.append(new ScreenshotsPage(FS::PathCombine(legacy->gameRoot(), "screenshots")));
         }
         auto logMatcher = inst->getLogFileMatcher();
         if(logMatcher)

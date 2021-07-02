@@ -207,8 +207,6 @@ set(MINECRAFT_SOURCES
     minecraft/gameoptions/GameOptions.h
     minecraft/gameoptions/GameOptions.cpp
 
-    minecraft/update/AssetUpdateTask.h
-    minecraft/update/AssetUpdateTask.cpp
     minecraft/update/FMLLibrariesTask.cpp
     minecraft/update/FMLLibrariesTask.h
     minecraft/update/FoldersTask.cpp
@@ -228,8 +226,6 @@ set(MINECRAFT_SOURCES
     minecraft/launch/LauncherPartLaunch.h
     minecraft/launch/PrintInstanceInfo.cpp
     minecraft/launch/PrintInstanceInfo.h
-    minecraft/launch/ReconstructAssets.cpp
-    minecraft/launch/ReconstructAssets.h
     minecraft/launch/ScanModFolders.cpp
     minecraft/launch/ScanModFolders.h
     minecraft/launch/VerifyJavaInstall.cpp
@@ -290,20 +286,6 @@ set(MINECRAFT_SOURCES
     minecraft/mod/ModFolderLoadTask.cpp
     minecraft/mod/LocalModParseTask.h
     minecraft/mod/LocalModParseTask.cpp
-    minecraft/mod/ResourcePackFolderModel.h
-    minecraft/mod/ResourcePackFolderModel.cpp
-    minecraft/mod/TexturePackFolderModel.h
-    minecraft/mod/TexturePackFolderModel.cpp
-
-    # Assets
-    minecraft/AssetsUtils.h
-    minecraft/AssetsUtils.cpp
-
-    # Minecraft services
-    minecraft/services/SkinUpload.cpp
-    minecraft/services/SkinUpload.h
-    minecraft/services/SkinDelete.cpp
-    minecraft/services/SkinDelete.h
 
     mojang/PackageManifest.h
     mojang/PackageManifest.cpp

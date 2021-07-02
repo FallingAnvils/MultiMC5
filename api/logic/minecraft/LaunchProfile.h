@@ -14,7 +14,6 @@ public: /* application of profile variables from patches */
     void applyAppletClass(const QString& appletClass);
     void applyMinecraftArguments(const QString& minecraftArguments);
     void applyMinecraftVersionType(const QString& type);
-    void applyMinecraftAssets(MojangAssetIndexInfo::Ptr assets);
     void applyTraits(const QSet<QString> &traits);
     void applyTweakers(const QStringList &tweakers);
     void applyJarMods(const QList<LibraryPtr> &jarMods);
@@ -31,7 +30,6 @@ public: /* getters for profile variables */
     QString getMainClass() const;
     QString getAppletClass() const;
     QString getMinecraftVersionType() const;
-    MojangAssetIndexInfo::Ptr getMinecraftAssets() const;
     QString getMinecraftArguments() const;
     const QSet<QString> & getTraits() const;
     const QStringList & getTweakers() const;
@@ -58,8 +56,6 @@ private:
     /// Release type - "release" or "snapshot"
     QString m_minecraftVersionType;
 
-    /// Assets type - "legacy" or a version ID
-    MojangAssetIndexInfo::Ptr m_minecraftAssets;
 
     /**
      * arguments that should be used for launching minecraft

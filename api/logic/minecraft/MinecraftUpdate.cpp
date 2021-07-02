@@ -68,11 +68,6 @@ void MinecraftUpdate::executeTask()
         m_tasks.append(std::make_shared<FMLLibrariesTask>(m_inst));
     }
 
-    /*// assets update
-    {
-        m_tasks.append(std::make_shared<AssetUpdateTask>(m_inst));
-    }*/
-
     if(!m_preFailure.isEmpty())
     {
         emitFailed(m_preFailure);

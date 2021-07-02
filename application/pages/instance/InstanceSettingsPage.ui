@@ -39,7 +39,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="minecraftTab">
       <attribute name="title">
@@ -282,58 +282,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="workaroundsPage">
-      <attribute name="title">
-       <string>Workarounds</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_8">
-       <item>
-        <widget class="QGroupBox" name="nativeWorkaroundsGroupBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="title">
-          <string>Native libraries</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <widget class="QCheckBox" name="useNativeGLFWCheck">
-            <property name="text">
-             <string>Use system installation of GLFW</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="useNativeOpenALCheck">
-            <property name="text">
-             <string>Use system installation of OpenAL</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="miscellanousPage">
       <attribute name="title">
        <string>Miscellanous</string>
@@ -367,41 +315,6 @@
              <string>Record time spent playing this instance</string>
             </property>
            </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="serverJoinGroupBox">
-         <property name="title">
-          <string>Set a server to join on launch</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
-          <item>
-           <layout class="QGridLayout" name="serverJoinLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="serverJoinAddressLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Server address:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="serverJoinAddress"/>
-            </item>
-           </layout>
           </item>
          </layout>
         </widget>
@@ -447,9 +360,6 @@
   <tabstop>permGenSpinBox</tabstop>
   <tabstop>javaArgumentsGroupBox</tabstop>
   <tabstop>jvmArgsTextBox</tabstop>
-  <tabstop>nativeWorkaroundsGroupBox</tabstop>
-  <tabstop>useNativeGLFWCheck</tabstop>
-  <tabstop>useNativeOpenALCheck</tabstop>
   <tabstop>showGameTime</tabstop>
   <tabstop>recordGameTime</tabstop>
  </tabstops>

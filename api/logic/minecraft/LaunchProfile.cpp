@@ -5,7 +5,6 @@ void LaunchProfile::clear()
 {
     m_minecraftVersion.clear();
     m_minecraftVersionType.clear();
-    m_minecraftAssets.reset();
     m_minecraftArguments.clear();
     m_tweakers.clear();
     m_mainClass.clear();
@@ -48,14 +47,6 @@ void LaunchProfile::applyMinecraftArguments(const QString& minecraftArguments)
 void LaunchProfile::applyMinecraftVersionType(const QString& type)
 {
     applyString(type, this->m_minecraftVersionType);
-}
-
-void LaunchProfile::applyMinecraftAssets(MojangAssetIndexInfo::Ptr assets)
-{
-    if(assets)
-    {
-        m_minecraftAssets = assets;
-    }
 }
 
 void LaunchProfile::applyTraits(const QSet<QString>& traits)
@@ -239,15 +230,6 @@ ProblemSeverity LaunchProfile::getProblemSeverity() const
 QString LaunchProfile::getMinecraftVersionType() const
 {
     return m_minecraftVersionType;
-}
-
-std::shared_ptr<MojangAssetIndexInfo> LaunchProfile::getMinecraftAssets() const
-{
-    if(!m_minecraftAssets)
-    {
-        return std::make_shared<MojangAssetIndexInfo>("legacy");
-    }
-    return m_minecraftAssets;
 }
 
 QString LaunchProfile::getMinecraftArguments() const

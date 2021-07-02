@@ -25,7 +25,6 @@ slots:
         {
             QDir target_dir(FS::PathCombine(path, "test_folder"));
             QVERIFY(target_dir.entryList().contains("pack.mcmeta"));
-            QVERIFY(target_dir.entryList().contains("assets"));
         };
 
         // 1. test with no trailing /

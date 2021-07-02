@@ -45,7 +45,6 @@ public:
     ////// Directories //////
     QString libDir() const;
     QString savesDir() const;
-    QString texturePacksDir() const;
     QString jarModsDir() const;
     QString loaderModsDir() const;
     QString coreModsDir() const;
@@ -91,7 +90,7 @@ public:
 
     QSet<QString> traits() const override
     {
-        return {"legacy-instance", "texturepacks"};
+        return {"legacy-instance"};
     };
 
     virtual bool shouldUpdate() const;

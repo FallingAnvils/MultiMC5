@@ -20,7 +20,6 @@
 #include "minecraft/launch/LauncherPartLaunch.h"
 #include "minecraft/launch/DirectJavaLaunch.h"
 #include "minecraft/launch/ModMinecraftJar.h"
-#include "minecraft/launch/ReconstructAssets.h"
 #include "minecraft/launch/ScanModFolders.h"
 #include "minecraft/launch/VerifyJavaInstall.h"
 #include "java/launch/CheckJava.h"
@@ -29,15 +28,12 @@
 #include "meta/VersionList.h"
 
 #include "mod/ModFolderModel.h"
-#include "mod/ResourcePackFolderModel.h"
-#include "mod/TexturePackFolderModel.h"
 #include "WorldList.h"
 
 #include "icons/IIconList.h"
 
 #include <QCoreApplication>
 #include "PackProfile.h"
-#include "AssetsUtils.h"
 #include "MinecraftUpdate.h"
 #include "MinecraftLoadAndCheck.h"
 #include <minecraft/gameoptions/GameOptions.h>
@@ -212,16 +208,6 @@ QString MinecraftInstance::modsCacheLocation() const
 QString MinecraftInstance::coreModsDir() const
 {
     return FS::PathCombine(gameRoot(), "coremods");
-}
-
-QString MinecraftInstance::resourcePacksDir() const
-{
-    return FS::PathCombine(gameRoot(), "resourcepacks");
-}
-
-QString MinecraftInstance::texturePacksDir() const
-{
-    return FS::PathCombine(gameRoot(), "texturepacks");
 }
 
 QString MinecraftInstance::instanceConfigFolder() const
@@ -428,19 +414,8 @@ QStringList MinecraftInstance::processMinecraftArgs(int serverPort) const
 
     QString absRootDir = QDir(gameRoot()).absolutePath();
     token_mapping["game_directory"] = absRootDir;
-    /*QString absAssetsDir = QDir("assets/").absolutePath();
-    auto assets = profile->getMinecraftAssets();
-    token_mapping["game_assets"] = AssetsUtils::getAssetsDir(assets->id, resourcesDir()).absolutePath();
-
-    // 1.7.3+ assets tokens
-    token_mapping["assets_root"] = absAssetsDir;
-    token_mapping["assets_index_name"] = assets->id;*/
 
     QStringList parts = args_pattern.split(' ', QString::SkipEmptyParts);
-    /*for (int i = 0; i < parts.length(); i++)
-    {
-        parts[i] = replaceTokensIn(parts[i], token_mapping);
-    }*/
     return parts;
 }
 
@@ -908,28 +883,6 @@ std::shared_ptr<ModFolderModel> MinecraftInstance::coreModList() const
         connect(this, &BaseInstance::runningStatusChanged, m_core_mod_list.get(), &ModFolderModel::disableInteraction);
     }
     return m_core_mod_list;
-}
-
-std::shared_ptr<ModFolderModel> MinecraftInstance::resourcePackList() const
-{
-    if (!m_resource_pack_list)
-    {
-        m_resource_pack_list.reset(new ResourcePackFolderModel(resourcePacksDir()));
-        m_resource_pack_list->disableInteraction(isRunning());
-        connect(this, &BaseInstance::runningStatusChanged, m_resource_pack_list.get(), &ModFolderModel::disableInteraction);
-    }
-    return m_resource_pack_list;
-}
-
-std::shared_ptr<ModFolderModel> MinecraftInstance::texturePackList() const
-{
-    if (!m_texture_pack_list)
-    {
-        m_texture_pack_list.reset(new TexturePackFolderModel(texturePacksDir()));
-        m_texture_pack_list->disableInteraction(isRunning());
-        connect(this, &BaseInstance::runningStatusChanged, m_texture_pack_list.get(), &ModFolderModel::disableInteraction);
-    }
-    return m_texture_pack_list;
 }
 
 std::shared_ptr<WorldList> MinecraftInstance::worldList() const

@@ -110,8 +110,6 @@ QString PackInstallTask::getDirForModType(ModType type, QString raw)
         case ModType::Root:
         case ModType::Extract:
         case ModType::Decomp:
-        case ModType::TexturePackExtract:
-        case ModType::ResourcePackExtract:
         case ModType::MCPC:
             return Q_NULLPTR;
         case ModType::Forge:
@@ -133,10 +131,6 @@ QString PackInstallTask::getDirForModType(ModType type, QString raw)
             return "coremods";
         case ModType::Plugins:
             return "plugins";
-        case ModType::TexturePack:
-            return "texturepacks";
-        case ModType::ResourcePack:
-            return "resourcepacks";
         case ModType::ShaderPack:
             return "shaderpacks";
         case ModType::Millenaire:

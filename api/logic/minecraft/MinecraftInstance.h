@@ -38,8 +38,6 @@ public:
 
     ////// Directories and files //////
     QString jarModsDir() const;
-    QString resourcePacksDir() const;
-    QString texturePacksDir() const;
     QString loaderModsDir() const;
     QString coreModsDir() const;
     QString modsCacheLocation() const;
@@ -70,8 +68,6 @@ public:
     //////  Mod Lists  //////
     std::shared_ptr<ModFolderModel> loaderModList() const;
     std::shared_ptr<ModFolderModel> coreModList() const;
-    std::shared_ptr<ModFolderModel> resourcePackList() const;
-    std::shared_ptr<ModFolderModel> texturePackList() const;
     std::shared_ptr<WorldList> worldList() const;
     std::shared_ptr<GameOptions> gameOptionsModel() const;
 

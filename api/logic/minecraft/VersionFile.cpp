@@ -22,10 +22,6 @@ void VersionFile::applyTo(LaunchProfile *profile)
     {
         profile->applyMinecraftVersion(minecraftVersion);
         profile->applyMinecraftVersionType(type);
-        // HACK: ignore assets from other version files than Minecraft
-        // workaround for stupid assets issue caused by amazon:
-        // https://www.theregister.co.uk/2017/02/28/aws_is_awol_as_s3_goes_haywire/
-        profile->applyMinecraftAssets(mojangAssetIndex);
     }
 
     profile->applyMainJar(mainJar);
