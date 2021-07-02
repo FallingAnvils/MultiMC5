@@ -35,9 +35,9 @@ public:
     {
         m_parentWidget = widget;
     }
-    void setServerToJoin(MinecraftServerTargetPtr serverToJoin)
+    void setServerPort(int serverPort)
     {
-        m_serverToJoin = std::move(serverToJoin);
+        m_serverPort = serverPort;
     }
     QString id()
     {
@@ -64,5 +64,5 @@ private:
     InstanceWindow *m_console = nullptr;
     AuthSessionPtr m_session;
     shared_qobject_ptr<LaunchTask> m_launcher;
-    MinecraftServerTargetPtr m_serverToJoin;
+    int m_serverPort;
 };

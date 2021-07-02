@@ -67,8 +67,6 @@ ServerStatus::ServerStatus(QWidget *parent, Qt::WindowFlags f) : QWidget(parent,
     addLine();
     addStatus("session.minecraft.net", tr("Session"));
     addLine();
-    addStatus("textures.minecraft.net", tr("Skins"));
-    addLine();
     addStatus("api.mojang.com", tr("API"));
 
     m_statusRefresh = new QToolButton(this);

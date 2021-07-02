@@ -27,4 +27,4 @@ struct MinecraftServerTarget {
     static MULTIMC_LOGIC_EXPORT MinecraftServerTarget parse(const QString &fullAddress);
 };
 
-typedef std::shared_ptr<MinecraftServerTarget> MinecraftServerTargetPtr;
+typedef std::shared_ptr<int> MinecraftServerTargetPtr;

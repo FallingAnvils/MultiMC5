@@ -62,8 +62,8 @@ public class OneSixLauncher implements Launcher
         traits = params.allSafe("traits", new ArrayList<String>());
         nativePath = params.first("natives");
 
-        userName = params.first("userName");
-        sessionId = params.first("sessionId");
+        //userName = params.first("userName");
+        //sessionId = params.first("sessionId");
         windowTitle = params.firstSafe("windowTitle", "Minecraft");
         windowParams = params.firstSafe("windowParams", "854x480");
 
@@ -156,7 +156,7 @@ public class OneSixLauncher implements Launcher
     int launchWithMainClass()
     {
         // window size, title and state, onesix
-        if (maximize)
+        /*if (maximize)
         {
             // FIXME: there is no good way to maximize the minecraft window in onesix.
             // the following often breaks linux screen setups
@@ -176,7 +176,7 @@ public class OneSixLauncher implements Launcher
             mcparams.add(serverAddress);
             mcparams.add("--port");
             mcparams.add(serverPort);
-        }
+        }*/
 
         // Get the Minecraft Class.
         Class<?> mc;

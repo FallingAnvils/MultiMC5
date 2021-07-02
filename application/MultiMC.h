@@ -156,7 +156,7 @@ public slots:
             InstancePtr instance,
             bool online = true,
             BaseProfilerFactory *profiler = nullptr,
-            MinecraftServerTargetPtr serverToJoin = nullptr
+            int serverPort = 0
     );
     bool kill(InstancePtr instance);
 
@@ -228,7 +228,7 @@ private:
     SetupWizard * m_setupWizard = nullptr;
 public:
     QString m_instanceIdToLaunch;
-    QString m_serverToJoin;
+    int m_serverPort;
     bool m_liveCheck = false;
     QUrl m_zipToImport;
     std::unique_ptr<QFile> logFile;

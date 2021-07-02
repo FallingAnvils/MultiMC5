@@ -191,10 +191,10 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         parser.addOption("launch");
         parser.addShortOpt("launch", 'l');
         parser.addDocumentation("launch", "Launch the specified instance (by instance ID)");
-        // --server
-        parser.addOption("server");
-        parser.addShortOpt("server", 's');
-        parser.addDocumentation("server", "Join the specified server on launch "
+        // --port
+        parser.addOption("port");
+        parser.addShortOpt("port", 'p');
+        parser.addDocumentation("port", "Set the specified server port "
                                           "(only valid in combination with --launch)");
         // --alive
         parser.addSwitch("alive");
@@ -237,7 +237,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         }
     }
     m_instanceIdToLaunch = args["launch"].toString();
-    m_serverToJoin = args["server"].toString();
+    m_serverPort = args["port"].toInt();
     m_liveCheck = args["alive"].toBool();
     m_zipToImport = args["import"].toUrl();
 
@@ -299,9 +299,9 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         return;
     }
 
-    if(m_instanceIdToLaunch.isEmpty() && !m_serverToJoin.isEmpty())
+    if(m_instanceIdToLaunch.isEmpty() && m_serverPort)
     {
-        std::cerr << "--server can only be used in combination with --launch!" << std::endl;
+        std::cerr << "--port can only be used in combination with --launch!" << std::endl;
         m_status = MultiMC::Failed;
         return;
     }
@@ -331,10 +331,10 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
             }
             else
             {
-                if(!m_serverToJoin.isEmpty())
+                if(!m_serverPort)
                 {
                     m_peerInstance->sendMessage(
-                            "launch-with-server " + m_instanceIdToLaunch + " " + m_serverToJoin, timeout);
+                            "launch-with-port " + m_instanceIdToLaunch + " " + m_serverPort, timeout);
                 }
                 else
                 {
@@ -420,9 +420,9 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         {
             qDebug() << "ID of instance to launch   : " << m_instanceIdToLaunch;
         }
-        if(!m_serverToJoin.isEmpty())
+        if(m_serverPort)
         {
-            qDebug() << "Address of server to join  :" << m_serverToJoin;
+            qDebug() << "Port of server  :" << m_serverPort;
         }
         qDebug() << "<> Paths set.";
     }
@@ -869,19 +869,16 @@ void MultiMC::performMainStartupAction()
         auto inst = instances()->getInstanceById(m_instanceIdToLaunch);
         if(inst)
         {
-            MinecraftServerTargetPtr serverToJoin = nullptr;
-
-            if(!m_serverToJoin.isEmpty())
+            if(m_serverPort)
             {
-                serverToJoin.reset(new MinecraftServerTarget(MinecraftServerTarget::parse(m_serverToJoin)));
-                qDebug() << "<> Instance" << m_instanceIdToLaunch << "launching with server" << m_serverToJoin;
+                qDebug() << "<> Instance" << m_instanceIdToLaunch << "launching with port" << m_serverPort;
             }
             else
             {
                 qDebug() << "<> Instance" << m_instanceIdToLaunch << "launching";
             }
 
-            launch(inst, true, nullptr, serverToJoin);
+            launch(inst, true, nullptr, m_serverPort);
             return;
         }
     }
@@ -963,18 +960,18 @@ void MultiMC::messageReceived(const QString& message)
             launch(inst, true, nullptr);
         }
     }
-    else if(command == "launch-with-server")
+    else if(command == "launch-with-port")
     {
         QString instanceID = message.section(' ', 1, 1);
-        QString serverToJoin = message.section(' ', 2, 2);
+        int serverPort = message.section(' ', 2, 2).toInt();
         if(instanceID.isEmpty())
         {
             qWarning() << "Received" << command << "message without an instance ID.";
             return;
         }
-        if(serverToJoin.isEmpty())
+        if(!serverPort)
         {
-            qWarning() << "Received" << command << "message without a server to join.";
+            qWarning() << "Received" << command << "message without a server port number.";
             return;
         }
         auto inst = instances()->getInstanceById(instanceID);
@@ -984,7 +981,7 @@ void MultiMC::messageReceived(const QString& message)
                     inst,
                     true,
                     nullptr,
-                    std::make_shared<MinecraftServerTarget>(MinecraftServerTarget::parse(serverToJoin))
+                    serverPort
             );
         }
     }
@@ -1079,7 +1076,7 @@ bool MultiMC::launch(
         InstancePtr instance,
         bool online,
         BaseProfilerFactory *profiler,
-        MinecraftServerTargetPtr serverToJoin
+        int serverPort
 ) {
     if(m_updateRunning)
     {
@@ -1101,7 +1098,7 @@ bool MultiMC::launch(
         controller->setInstance(instance);
         controller->setOnline(online);
         controller->setProfiler(profiler);
-        controller->setServerToJoin(serverToJoin);
+        controller->setServerPort(serverPort);
         if(window)
         {
             controller->setParentWidget(window);

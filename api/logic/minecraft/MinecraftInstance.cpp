@@ -95,6 +95,9 @@ MinecraftInstance::MinecraftInstance(SettingsObjectPtr globalSettings, SettingsO
     m_settings->registerOverride(globalSettings->getSetting("MinecraftWinWidth"), windowSetting);
     m_settings->registerOverride(globalSettings->getSetting("MinecraftWinHeight"), windowSetting);
 
+    // server port
+    m_settings->registerSetting("ServerPort", 25565);
+
     // Memory
     auto memorySetting = m_settings->registerSetting("OverrideMemory", false);
     m_settings->registerOverride(globalSettings->getSetting("MinMemAlloc"), memorySetting);
@@ -404,7 +407,7 @@ static QString replaceTokensIn(QString text, QMap<QString, QString> with)
 }
 
 QStringList MinecraftInstance::processMinecraftArgs(
-        AuthSessionPtr session, MinecraftServerTargetPtr serverToJoin) const
+        AuthSessionPtr session, int serverPort) const
 {
     auto profile = m_components->getProfile();
     QString args_pattern = profile->getMinecraftArguments();
@@ -413,15 +416,14 @@ QStringList MinecraftInstance::processMinecraftArgs(
         args_pattern += " --tweakClass " + tweaker;
     }
 
-    if (serverToJoin && !serverToJoin->address.isEmpty())
+    if (serverPort)
     {
-        args_pattern += " --server " + serverToJoin->address;
-        args_pattern += " --port " + QString::number(serverToJoin->port);
+        args_pattern += " --port " + QString::number(serverPort);
     }
 
     QMap<QString, QString> token_mapping;
     // yggdrasil!
-    if(session)
+    /*if(session)
     {
         token_mapping["auth_username"] = session->username;
         token_mapping["auth_session"] = session->session;
@@ -430,7 +432,7 @@ QStringList MinecraftInstance::processMinecraftArgs(
         token_mapping["auth_uuid"] = session->uuid;
         token_mapping["user_properties"] = session->serializeUserProperties();
         token_mapping["user_type"] = session->user_type;
-    }
+    }*/
 
     // blatant self-promotion.
     token_mapping["profile_name"] = token_mapping["version_name"] = "MultiMC5";
@@ -439,23 +441,23 @@ QStringList MinecraftInstance::processMinecraftArgs(
 
     QString absRootDir = QDir(gameRoot()).absolutePath();
     token_mapping["game_directory"] = absRootDir;
-    QString absAssetsDir = QDir("assets/").absolutePath();
+    /*QString absAssetsDir = QDir("assets/").absolutePath();
     auto assets = profile->getMinecraftAssets();
     token_mapping["game_assets"] = AssetsUtils::getAssetsDir(assets->id, resourcesDir()).absolutePath();
 
     // 1.7.3+ assets tokens
     token_mapping["assets_root"] = absAssetsDir;
-    token_mapping["assets_index_name"] = assets->id;
+    token_mapping["assets_index_name"] = assets->id;*/
 
     QStringList parts = args_pattern.split(' ', QString::SkipEmptyParts);
-    for (int i = 0; i < parts.length(); i++)
+    /*for (int i = 0; i < parts.length(); i++)
     {
         parts[i] = replaceTokensIn(parts[i], token_mapping);
-    }
+    }*/
     return parts;
 }
 
-QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, MinecraftServerTargetPtr serverToJoin)
+QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, int serverPort)
 {
     QString launchScript;
 
@@ -476,16 +478,15 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, MinecraftS
         launchScript += "appletClass " + appletClass + "\n";
     }
 
-    if (serverToJoin && !serverToJoin->address.isEmpty())
+    if (serverPort)
     {
-        launchScript += "serverAddress " + serverToJoin->address + "\n";
-        launchScript += "serverPort " + QString::number(serverToJoin->port) + "\n";
+        launchScript += "serverPort " + QString::number(serverPort) + "\n";
     }
 
     // generic minecraft params
     for (auto param : processMinecraftArgs(
             session,
-            nullptr /* When using a launch script, the server parameters are handled by it*/
+            serverPort
     ))
     {
         launchScript += "param " + param + "\n";
@@ -505,11 +506,11 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, MinecraftS
     }
 
     // legacy auth
-    if(session)
+    /*if(session)
     {
         launchScript += "userName " + session->player_name + "\n";
-        launchScript += "sessionId " + session->session + "\n";
-    }
+        launchScript += "sess`onId " + session->session + "\n";
+    }*/
 
     // libraries and class path.
     {
@@ -532,11 +533,11 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, MinecraftS
         launchScript += "traits " + trait + "\n";
     }
     launchScript += "launcher onesix\n";
-    // qDebug() << "Generated launch script:" << launchScript;
+    //qDebug() << "Generated launch script:" << launchScript;
     return launchScript;
 }
 
-QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, MinecraftServerTargetPtr serverToJoin)
+QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, int serverPort)
 {
     QStringList out;
     out << "Main Class:" << "  " + getMainClass() << "";
@@ -651,7 +652,7 @@ QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, Minecr
         out << "";
     }
 
-    auto params = processMinecraftArgs(nullptr, serverToJoin);
+    auto params = processMinecraftArgs(nullptr, serverPort);
     out << "Params:";
     out << "  " + params.join(' ');
     out << "";
@@ -825,7 +826,7 @@ shared_qobject_ptr<Task> MinecraftInstance::createUpdateTask(Net::Mode mode)
     return nullptr;
 }
 
-shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPtr session, MinecraftServerTargetPtr serverToJoin)
+shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPtr session, int serverPort)
 {
     // FIXME: get rid of shared_from_this ...
     auto process = LaunchTask::create(std::dynamic_pointer_cast<MinecraftInstance>(shared_from_this()));
@@ -855,21 +856,6 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
     // create the .minecraft folder and server-resource-packs (workaround for Minecraft bug MCL-3732)
     {
         process->appendStep(new CreateGameFolders(pptr));
-    }
-
-    if (!serverToJoin && m_settings->get("JoinServerOnLaunch").toBool())
-    {
-        QString fullAddress = m_settings->get("JoinServerOnLaunchAddress").toString();
-        serverToJoin.reset(new MinecraftServerTarget(MinecraftServerTarget::parse(fullAddress)));
-    }
-
-    if(serverToJoin && serverToJoin->port == 25565)
-    {
-        // Resolve server address to join on launch
-        auto *step = new LookupServerAddress(pptr);
-        step->setLookupAddress(serverToJoin->address);
-        step->setOutputAddressPtr(serverToJoin);
-        process->appendStep(step);
     }
 
     // run pre-launch command if that's needed
@@ -903,17 +889,12 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
 
     // print some instance info here...
     {
-        process->appendStep(new PrintInstanceInfo(pptr, session, serverToJoin));
+        process->appendStep(new PrintInstanceInfo(pptr, session, serverPort));
     }
 
     // extract native jars if needed
     {
         process->appendStep(new ExtractNatives(pptr));
-    }
-
-    // reconstruct assets if needed
-    {
-        process->appendStep(new ReconstructAssets(pptr));
     }
 
     // verify that minimum Java requirements are met
@@ -929,7 +910,8 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
             auto step = new LauncherPartLaunch(pptr);
             step->setWorkingDirectory(gameRoot());
             step->setAuthSession(session);
-            step->setServerToJoin(serverToJoin);
+            if(!serverPort) serverPort = m_settings->get("ServerPort").toInt();
+            step->setServerPort(serverPort);
             process->appendStep(step);
         }
         else if (method == "DirectJava")
@@ -937,7 +919,8 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
             auto step = new DirectJavaLaunch(pptr);
             step->setWorkingDirectory(gameRoot());
             step->setAuthSession(session);
-            step->setServerToJoin(serverToJoin);
+            if(!serverPort) serverPort = m_settings->get("ServerPort").toInt();
+            step->setServerPort(serverPort);
             process->appendStep(step);
         }
     }

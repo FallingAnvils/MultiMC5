@@ -96,11 +96,11 @@ void PrintInstanceInfo::executeTask()
 
 #ifdef Q_OS_LINUX
     ::probeProcCpuinfo(log);
-    ::runLspci(log);
-    ::runGlxinfo(log);
+    //::runLspci(log);
+    //::runGlxinfo(log);
 #endif
 
     logLines(log, MessageLevel::MultiMC);
-    logLines(instance->verboseDescription(m_session, m_serverToJoin), MessageLevel::MultiMC);
+    logLines(instance->verboseDescription(m_session, m_serverPort), MessageLevel::MultiMC);
     emitSucceeded();
 }

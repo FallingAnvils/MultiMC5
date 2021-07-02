@@ -41,9 +41,9 @@ public:
         m_session = session;
     }
 
-    void setServerToJoin(MinecraftServerTargetPtr serverToJoin)
+    void setServerPort(int serverPort)
     {
-        m_serverToJoin = std::move(serverToJoin);
+        m_serverPort = std::move(serverPort);
     }
 
 private slots:
@@ -54,7 +54,7 @@ private:
     QString m_command;
     AuthSessionPtr m_session;
     QString m_launchScript;
-    MinecraftServerTargetPtr m_serverToJoin;
+    int m_serverPort;
 
     bool mayProceed = false;
 };

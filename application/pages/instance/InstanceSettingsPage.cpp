@@ -62,37 +62,10 @@ void InstanceSettingsPage::applySettings()
 {
     SettingsObject::Lock lock(m_settings);
 
-    // Console
-    bool console = ui->consoleSettingsBox->isChecked();
-    m_settings->set("OverrideConsole", console);
-    if (console)
-    {
-        m_settings->set("ShowConsole", ui->showConsoleCheck->isChecked());
-        m_settings->set("AutoCloseConsole", ui->autoCloseConsoleCheck->isChecked());
-        m_settings->set("ShowConsoleOnError", ui->showConsoleErrorCheck->isChecked());
-    }
-    else
-    {
-        m_settings->reset("ShowConsole");
-        m_settings->reset("AutoCloseConsole");
-        m_settings->reset("ShowConsoleOnError");
-    }
+    // port number
+    int serverPort = ui->portNumberSpinBox->value();
+    m_settings->set("ServerPort", serverPort);
 
-    // Window Size
-    bool window = ui->windowSizeGroupBox->isChecked();
-    m_settings->set("OverrideWindow", window);
-    if (window)
-    {
-        m_settings->set("LaunchMaximized", ui->maximizedCheckBox->isChecked());
-        m_settings->set("MinecraftWinWidth", ui->windowWidthSpinBox->value());
-        m_settings->set("MinecraftWinHeight", ui->windowHeightSpinBox->value());
-    }
-    else
-    {
-        m_settings->reset("LaunchMaximized");
-        m_settings->reset("MinecraftWinWidth");
-        m_settings->reset("MinecraftWinHeight");
-    }
 
     // Memory
     bool memory = ui->memoryGroupBox->isChecked();
@@ -207,17 +180,9 @@ void InstanceSettingsPage::applySettings()
 
 void InstanceSettingsPage::loadSettings()
 {
-    // Console
-    ui->consoleSettingsBox->setChecked(m_settings->get("OverrideConsole").toBool());
-    ui->showConsoleCheck->setChecked(m_settings->get("ShowConsole").toBool());
-    ui->autoCloseConsoleCheck->setChecked(m_settings->get("AutoCloseConsole").toBool());
-    ui->showConsoleErrorCheck->setChecked(m_settings->get("ShowConsoleOnError").toBool());
-
-    // Window Size
-    ui->windowSizeGroupBox->setChecked(m_settings->get("OverrideWindow").toBool());
-    ui->maximizedCheckBox->setChecked(m_settings->get("LaunchMaximized").toBool());
-    ui->windowWidthSpinBox->setValue(m_settings->get("MinecraftWinWidth").toInt());
-    ui->windowHeightSpinBox->setValue(m_settings->get("MinecraftWinHeight").toInt());
+    // port number
+    int serverPort = m_settings->get("ServerPort").toInt();
+    ui->portNumberSpinBox->setValue(serverPort);
 
     // Memory
     ui->memoryGroupBox->setChecked(m_settings->get("OverrideMemory").toBool());

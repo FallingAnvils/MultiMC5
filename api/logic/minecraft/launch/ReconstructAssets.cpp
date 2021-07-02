@@ -29,7 +29,7 @@ void ReconstructAssets::executeTask()
 
     if(!AssetsUtils::reconstructAssets(assets->id, minecraftInstance->resourcesDir()))
     {
-        emit logLine("Failed to reconstruct Minecraft assets.", MessageLevel::Error);
+        emit logLine("Failed to reconstruct Minecraft assets (which should happen)", MessageLevel::Error);
     }
 
     emitSucceeded();

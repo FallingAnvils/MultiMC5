@@ -27,7 +27,7 @@ public:
     {
         return instanceRoot();
     };
-    shared_qobject_ptr<LaunchTask> createLaunchTask(AuthSessionPtr, MinecraftServerTargetPtr) override
+    shared_qobject_ptr<LaunchTask> createLaunchTask(AuthSessionPtr, int) override
     {
         return nullptr;
     }
@@ -67,7 +67,7 @@ public:
     {
         return false;
     }
-    QStringList verboseDescription(AuthSessionPtr session, MinecraftServerTargetPtr serverToJoin) override
+    QStringList verboseDescription(AuthSessionPtr session, int serverPort) override
     {
         QStringList out;
         out << "Null instance - placeholder.";

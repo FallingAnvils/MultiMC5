@@ -39,7 +39,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="minecraftTab">
       <attribute name="title">
@@ -223,134 +223,52 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="javaTab">
+     <widget class="QWidget" name="serverTab">
       <attribute name="title">
        <string>Game windows</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="windowSizeGroupBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+        <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Game Window</string>
+          <string>Server Settings</string>
          </property>
          <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
           <bool>false</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QCheckBox" name="maximizedCheckBox">
-            <property name="text">
-             <string>Start Minecraft maximized?</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayoutWindowSize">
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelWindowHeight">
-              <property name="text">
-               <string>Window height:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelWindowWidth">
-              <property name="text">
-               <string>Window width:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QSpinBox" name="windowWidthSpinBox">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>65536</number>
-              </property>
-              <property name="singleStep">
-               <number>1</number>
-              </property>
-              <property name="value">
-               <number>854</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="windowHeightSpinBox">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>65536</number>
-              </property>
-              <property name="value">
-               <number>480</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <widget class="QLabel" name="portNumberLabel">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>60</y>
+            <width>54</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Port:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="portNumberSpinBox">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>50</y>
+            <width>101</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>65535</number>
+          </property>
+          <property name="value">
+           <number>25565</number>
+          </property>
+         </widget>
         </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="consoleSettingsBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="title">
-          <string>Conso&amp;le Settings</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QCheckBox" name="showConsoleCheck">
-            <property name="text">
-             <string>Show console while the game is running?</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="autoCloseConsoleCheck">
-            <property name="text">
-             <string>Automatically close console when the game quits?</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="showConsoleErrorCheck">
-            <property name="text">
-             <string>Show console when the game crashes?</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacerMinecraft_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>88</width>
-           <height>125</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -529,14 +447,6 @@
   <tabstop>permGenSpinBox</tabstop>
   <tabstop>javaArgumentsGroupBox</tabstop>
   <tabstop>jvmArgsTextBox</tabstop>
-  <tabstop>windowSizeGroupBox</tabstop>
-  <tabstop>maximizedCheckBox</tabstop>
-  <tabstop>windowWidthSpinBox</tabstop>
-  <tabstop>windowHeightSpinBox</tabstop>
-  <tabstop>consoleSettingsBox</tabstop>
-  <tabstop>showConsoleCheck</tabstop>
-  <tabstop>autoCloseConsoleCheck</tabstop>
-  <tabstop>showConsoleErrorCheck</tabstop>
   <tabstop>nativeWorkaroundsGroupBox</tabstop>
   <tabstop>useNativeGLFWCheck</tabstop>
   <tabstop>useNativeOpenALCheck</tabstop>
