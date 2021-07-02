@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,7 +131,7 @@ void DownloadTask::processDownloadedVersionInfo()
     QObject::connect(netJob.get(), &NetJob::progress, this, &DownloadTask::fileDownloadProgressChanged);
     QObject::connect(netJob.get(), &NetJob::failed, this, &DownloadTask::fileDownloadFailed);
 
-    if(netJob->size() == 1) // Translation issues... see https://github.com/MultiMC/MultiMC5/issues/1701
+    if(netJob->size() == 1) // Translation issues... see https://github.com/MultiServerMC/MultiServerMC5/issues/1701
     {
         setStatus(tr("Downloading one update file."));
     }

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
 #include "minecraft/legacy/LegacyInstance.h"
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 #include "tasks/Task.h"
 
 namespace Ui
@@ -40,7 +40,7 @@ public:
     }
     virtual QIcon icon() const override
     {
-        return MMC->getThemedIcon("checkupdate");
+        return MSMC->getThemedIcon("checkupdate");
     }
     virtual QString id() const override
     {

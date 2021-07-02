@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #pragma once
 
 #include "InstanceTask.h"
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 #include "net/NetJob.h"
 #include <QUrl>
 #include <QFuture>
@@ -32,7 +32,7 @@ namespace Flame
     class FileResolvingTask;
 }
 
-class MULTIMC_LOGIC_EXPORT InstanceImportTask : public InstanceTask
+class MULTISERVERMC_LOGIC_EXPORT InstanceImportTask : public InstanceTask
 {
     Q_OBJECT
 public:
@@ -44,7 +44,7 @@ protected:
 
 private:
     void processZipPack();
-    void processMultiMC();
+    void processMultiServerMC();
     void processFlame();
     void processTechnic();
 
@@ -66,7 +66,7 @@ private: /* data */
     QFutureWatcher<nonstd::optional<QStringList>> m_extractFutureWatcher;
     enum class ModpackType{
         Unknown,
-        MultiMC,
+        MultiServerMC,
         Flame,
         Technic
     } m_modpackType = ModpackType::Unknown;

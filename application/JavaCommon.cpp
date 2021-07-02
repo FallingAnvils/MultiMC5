@@ -1,6 +1,6 @@
 #include "JavaCommon.h"
 #include "dialogs/CustomMessageBox.h"
-#include <MMCStrings.h>
+#include <MSMCStrings.h>
 
 bool JavaCommon::checkJVMArgs(QString jvmargs, QWidget *parent)
 {

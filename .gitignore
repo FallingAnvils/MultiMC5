@@ -3,7 +3,7 @@ Thumbs.db
 .user
 .directory
 resources/CMakeFiles
-resources/MultiMCLauncher.jar
+resources/MultiServerMCLauncher.jar
 *~
 *.swp
 html/

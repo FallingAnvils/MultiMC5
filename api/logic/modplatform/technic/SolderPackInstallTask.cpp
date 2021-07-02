@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 #include <FileSystem.h>
 #include <Json.h>
 #include <QtConcurrentRun>
-#include <MMCZip.h>
+#include <MSMCZip.h>
 #include "TechnicPackProcessor.h"
 
 Technic::SolderPackInstallTask::SolderPackInstallTask(const QUrl &sourceUrl, const QString &minecraftVersion)
@@ -117,7 +117,7 @@ void Technic::SolderPackInstallTask::downloadSucceeded()
         while (m_modCount > i)
         {
             auto path = FS::PathCombine(m_outputDir.path(), QString("%1").arg(i));
-            if (!MMCZip::extractDir(path, extractDir))
+            if (!MSMCZip::extractDir(path, extractDir))
             {
                 return false;
             }

@@ -1,4 +1,4 @@
-# MultiMC 0.6.12
+# MultiServerMC 0.6.12
 
 After roughly one year of maintenance and development work by various contributors, we're just calling it a good time to release.
 
@@ -12,7 +12,7 @@ We've added a whole bunch of new modpack platforms to pick from right into the n
 
 - GH-3095: Added an FTB pack browser
 
-  Temporarily, MultiMC ignores download failures for FTB packs (GH-3304). This is because the platform has consistency issues.
+  Temporarily, MultiServerMC ignores download failures for FTB packs (GH-3304). This is because the platform has consistency issues.
 
 - GH-469: Added a Technic/Solder pack browser
 
@@ -28,7 +28,7 @@ We've added a whole bunch of new modpack platforms to pick from right into the n
 
 - GH-3130: Skin upload has been switched over to the new Mojang API and should have less issues.
 
-- MultiMC now shows world icons and allows resetting world icons in `View Worlds`.
+- MultiServerMC now shows world icons and allows resetting world icons in `View Worlds`.
 
 - GH-3229: Copy seed button has been updated to be compatible with newer versions of the game.
 
@@ -52,7 +52,7 @@ We've added a whole bunch of new modpack platforms to pick from right into the n
 
 - Removed some hacks previously required to get Forge working
 
-  MultiMC no longer contains pack200 and the custom lzma format support used by Forge only.
+  MultiServerMC no longer contains pack200 and the custom lzma format support used by Forge only.
 
 - Some preparations have been done to allow downloading Java runtimes from Mojang - support for the Piston repository.
 
@@ -60,7 +60,7 @@ We've added a whole bunch of new modpack platforms to pick from right into the n
 
 # Previous releases
 
-## MultiMC 0.6.11
+## MultiServerMC 0.6.11
 
 This adds Forge 1.13+ support using [ForgeWrapper](https://github.com/ZekerZhayard/ForgeWrapper) by ZekerZhayard.
 
@@ -68,21 +68,21 @@ This adds Forge 1.13+ support using [ForgeWrapper](https://github.com/ZekerZhaya
 
 - GH-2988: You can now import instances and curse modpacks from the command line with the `--import` option followed by either an URL or a local file path.
 
-- GH-2544: MultiMC now supports downloading library files without including them on the Java classpath.
+- GH-2544: MultiServerMC now supports downloading library files without including them on the Java classpath.
 
   This is done by adding them to the `mavenFiles` list instead of the `libraries` list.
 
   Such downloads are not deduplicated or version upgraded like libraries are.
 
-  This enables ForgeWrapper to work - MultiMC downloads all the files, and ForgeWrapper runs the Forge installer during instance start when needed.
+  This enables ForgeWrapper to work - MultiServerMC downloads all the files, and ForgeWrapper runs the Forge installer during instance start when needed.
 
-## MultiMC 0.6.8
+## MultiServerMC 0.6.8
 
 This is mostly about removal of the 'curse URL' related features, because they were of low quality and generally unreliable.
 
 There are some bug fixes included.
 
-MultiMC also migrated to a new continuous deployment system, which makes everything that much smoother.
+MultiServerMC also migrated to a new continuous deployment system, which makes everything that much smoother.
 
 ### New or changed features
 
@@ -100,7 +100,7 @@ MultiMC also migrated to a new continuous deployment system, which makes everyth
 
     - When selecting languages, European Portuguese is now displaying properly.
 
-- Accessibility has been further improved - the main window reads as `MultiMC`, not a long string of nonsensical version numbers, when announced by a screen reader.
+- Accessibility has been further improved - the main window reads as `MultiServerMC`, not a long string of nonsensical version numbers, when announced by a screen reader.
 
 - Removed the unimplemented Technic page from instance creation dialog.
 
@@ -123,7 +123,7 @@ MultiMC also migrated to a new continuous deployment system, which makes everyth
 - When a component is customized, the launcher will not try to update it in an infinite loop when something else requires a different version.
 
 
-## MultiMC 0.6.7
+## MultiServerMC 0.6.7
 
 The previous release introduced some extra buttons that made the instance window way too big for some displays. This release is aimed at fixing that, along with other UI and performance improvements.
 
@@ -155,7 +155,7 @@ There are some accessibility fixes thrown in too.
 
 - Main window instance list is now compatible with screen readers.
 
-  If you have poor or no eyesight, this makes MultiMC usable.
+  If you have poor or no eyesight, this makes MultiServerMC usable.
 
 - More instance pages are now visible when the instance is running.
 
@@ -172,15 +172,15 @@ There are some accessibility fixes thrown in too.
   Sorting cascades from 'Enabled' to 'Name' and then 'Version'. This means that if you sort 'Enabled', the enabled and disabled mods are still sorted
   by name and mods with the same name will be also sorted by version.
 
-## MultiMC 0.6.6
+## MultiServerMC 0.6.6
 
 This release is mostly the smaller things that have accumulated over time, along with a big change in linux packaging.
 
-No 1.13+ Forge news yet. That's going to be a major overhaul of many of the internals of MultiMC.
+No 1.13+ Forge news yet. That's going to be a major overhaul of many of the internals of MultiServerMC.
 
 ### **IMPORTANT**
 
-On linux, MultiMC no longer bundles the Qt libraries. This fixes many issues, but it might not run after the update unless you have the required libraries installed.
+On linux, MultiServerMC no longer bundles the Qt libraries. This fixes many issues, but it might not run after the update unless you have the required libraries installed.
 
 Make sure you have the following packages before you update:
 
@@ -189,7 +189,7 @@ Make sure you have the following packages before you update:
 - CentOS/RHEL/Fedora: `qt5-qtbase-gui`
 - Suse: `libqt5-qtbase`
 
-MultiMC on linux is built with Qt 5.4 and older versions of Qt will not work.
+MultiServerMC on linux is built with Qt 5.4 and older versions of Qt will not work.
 
 This should be a massive improvement to system integration on linux and resolves GH-1784, GH-2605, GH-1979, GH-2271, GH-1992, GH-1816 and their many duplicates.
 
@@ -201,7 +201,7 @@ This should be a massive improvement to system integration on linux and resolves
 
 - Massively improved support for icon formats when importing and exporting instances.
 
-  All of the formats MultiMC supports are now supported in exported instances too, instead of just PNG.
+  All of the formats MultiServerMC supports are now supported in exported instances too, instead of just PNG.
 
 - Added the pocket fox icon.
 
@@ -215,19 +215,19 @@ This should be a massive improvement to system integration on linux and resolves
 
   Much overdue. It's good. Fabric mod metadata is also supported in the mod pages.
 
-- MultiMC now recognizes the new `experimental` Minecraft versions.
+- MultiServerMC now recognizes the new `experimental` Minecraft versions.
 
   Go mess with the combat experiment. It's interesting.
 
 - Added Twitch URL as an option to the Add Instance dialog.
 
-  You can now drag the purple download buttons from CurseForge into MultiMC and get a modpack out of it. Much easier!
+  You can now drag the purple download buttons from CurseForge into MultiServerMC and get a modpack out of it. Much easier!
 
 ### Bugfixes
 
 - Translation folder is now created sooner, making first launch translation fetch work again.
 
-- GH-2716: MultiMC will no longer try to censor values shorter than 4 characters in logs.
+- GH-2716: MultiServerMC will no longer try to censor values shorter than 4 characters in logs.
 
   It was actually leaking information and destroying the logs instead of helping.
 
@@ -235,13 +235,13 @@ This should be a massive improvement to system integration on linux and resolves
 
 - GH-2591: Fix multiple potential memory leaks and crashes related to destroying objects with Qt memory lifecycle model.
 
-- `run.sh` on linux now passes all arguments to MultiMC.
+- `run.sh` on linux now passes all arguments to MultiServerMC.
 
 - Adding a disabled mod duplicate now replaces the existing mod.
 
 - GH-2592: Newly created instances are now selected again. This was a very old regression.
 
-- GH-689: MultiMC no longer creates an imgur album for single screenshot uploads.
+- GH-689: MultiServerMC no longer creates an imgur album for single screenshot uploads.
 
 - GH-1813: `#` is now saved properly when used in instance notes.
 
@@ -253,7 +253,7 @@ This should be a massive improvement to system integration on linux and resolves
 
 - Icon scaling issues on macOS should now be fixed.
 
-## MultiMC 0.6.5
+## MultiServerMC 0.6.5
 
 Finalizing the translation workflow improvements and adding fixes for sounds missing in old game versions.
 
@@ -268,7 +268,7 @@ Finalizing the translation workflow improvements and adding fixes for sounds mis
   Also, a minor issue with the reconstruction being done twice per launch has been fixed.
 
 
-## MultiMC 0.6.4
+## MultiServerMC 0.6.4
 
 Update for a better translation workflow, and new FTB API location.
 
@@ -276,23 +276,23 @@ Update for a better translation workflow, and new FTB API location.
 
 - FTB API location has changed
 
-  MultiMC now uses the new location and should keep working.
+  MultiServerMC now uses the new location and should keep working.
 
 - Translations have been overhauled, again
 
-  It is now possible to put the translation source `.po` files into the `translations` folder and see changes in MultiMC immediately.
+  It is now possible to put the translation source `.po` files into the `translations` folder and see changes in MultiServerMC immediately.
 
   The new translation workflow is like this:
-  * Get a `.po` file from here the [translations repository](https://github.com/MultiMC/MultiMC5-translate).
+  * Get a `.po` file from here the [translations repository](https://github.com/MultiServerMC/MultiServerMC5-translate).
   * Alternatively, get the `template.pot` and start a new translation based on it.
   * Put it in the `translations` folder.
   * Edit it with [POEdit](https://poedit.net/).
   * See the changes in real time.
   * When done, post the changed files on discord, or github.
 
-  When using a `.po` file, MultiMC logs which strings are missing from the translation on the currently displayed UI screen(s), and which one are marked as fuzzy. This should make it easy to determine what's important.
+  When using a `.po` file, MultiServerMC logs which strings are missing from the translation on the currently displayed UI screen(s), and which one are marked as fuzzy. This should make it easy to determine what's important.
 
-## MultiMC 0.6.3
+## MultiServerMC 0.6.3
 
 This is a release mostly aimed at getting all the small changes and fixes out of the door.
 
@@ -300,8 +300,8 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Local libraries are only loaded from inside the instances now.
 
-  Before, MultiMC allowed loading local libraries from the main `libraries` folder.
-  This in turn allowed existence of instances which could not be transported from one installation of MultiMC to another.
+  Before, MultiServerMC allowed loading local libraries from the main `libraries` folder.
+  This in turn allowed existence of instances which could not be transported from one installation of MultiServerMC to another.
 
   GH-2475: A bug that allowed the launch to continue with missing local libraries has also been fixed.
 
@@ -315,17 +315,17 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Instance creation can now be interrupted / aborted.
 
-- GH-2053: You can now inspect and change the `servers.dat` file from MultiMC.
+- GH-2053: You can now inspect and change the `servers.dat` file from MultiServerMC.
 
-- MultiMC now uses the https protocol for many more network requests.
+- MultiServerMC now uses the https protocol for many more network requests.
 
 - GH-2352: There is now a button to open the `.minecraft` folder inside the selected instance.
 
-- GH-2232: MultiMC can now use `.gif` icons (not animated).
+- GH-2232: MultiServerMC can now use `.gif` icons (not animated).
 
 - GH-2101: Instance renaming is now done inline, in the actual instance list.
 
-- GH-2452: When deleting a group, MultiMC asks for confirmation.
+- GH-2452: When deleting a group, MultiServerMC asks for confirmation.
 
 - GH-1552: PermGen is no longer shown when it's not appropriate (java 8 and up).
 
@@ -351,7 +351,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
   - GH-2355: Whitespace prefix or suffix is no longer allowed.
   - GH-2238: Newlines in instance names are no longer allowed either.
 
-- GH-2412: MultiMC no longer leaves behind zombie processes after launch on linux.
+- GH-2412: MultiServerMC no longer leaves behind zombie processes after launch on linux.
 
 - GH-2382: Version filter for the forge/liteloader version lists was not matching the whole version name.
 
@@ -359,17 +359,17 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Some memory leaks of downloaded data have been fixed.
 
-- MultiMC now handles instance groups and instance group saving better.
+- MultiServerMC now handles instance groups and instance group saving better.
 
   Long deleted groups no longer persist in the group list.
 
 - GH-2467: Broken (and nonsensical) sorting indicators have been removed from the versions page header.
 
-## MultiMC 0.6.2
+## MultiServerMC 0.6.2
 
 ### New or changed features
 
-- MultiMC now has FTB integration:
+- MultiServerMC now has FTB integration:
 
   - Official and third-party modpacks work.
   - Codes for private modpacks are not implemented yet.
@@ -378,7 +378,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - New instance dialog:
 
-  - It has been completely overhauled and now uses the same kind of paged dialog design as the rest of MultiMC.
+  - It has been completely overhauled and now uses the same kind of paged dialog design as the rest of MultiServerMC.
   - Vanilla version list now has a filter for version types.
   - FTB integration gets a page here, along with zip import and vanilla.
   - Technic integration is a definite possibility in the future.
@@ -391,19 +391,19 @@ This is a release mostly aimed at getting all the small changes and fixes out of
   - GH-604: Uses the same font settings as the main log.
 
 - Icon selection dialog now has a button for opening the icons folder.
-- MultiMC now has a shinier, updated logo.
+- MultiServerMC now has a shinier, updated logo.
 - GH-2150: Custom commands have been split from the java settings into a new page.
 
   The use of variables in custom commands is now better documented.
   The label shows that they need to be prefixed by `$`.
 
 - Player name is no longer censored in logs.
-- MultiMC now probes the system for the name of the linux distribution as part of analytics. This will be used to focus future packaging efforts.
+- MultiServerMC now probes the system for the name of the linux distribution as part of analytics. This will be used to focus future packaging efforts.
 - Secret cheat code has been added... What does it do?
 
 ### Bugfixes
 
-- VisualVM integration now works when VisualVM is bundled inside the MultiMC folder (uses a relative path).
+- VisualVM integration now works when VisualVM is bundled inside the MultiServerMC folder (uses a relative path).
 - When reinstalling a component, or changing a component version, the custom version is now removed first.
 - GH-2134: Fix multiple issues with the skin upload:
 
@@ -411,10 +411,10 @@ This is a release mostly aimed at getting all the small changes and fixes out of
   - When the new skin file is specified using the `file://` URL scheme, it will now work correctly.
 
 - GH-2143: Mojang services status display now reflects the current set of services.
-- GH-2154: MultiMC now ignores the `hidden` flag of instance folders and they should show up correctly.
+- GH-2154: MultiServerMC now ignores the `hidden` flag of instance folders and they should show up correctly.
 - When migrating Legacy instances, custom `minecraft.jar` will be preserved.
 
-## MultiMC 0.6.1
+## MultiServerMC 0.6.1
 
 ### New or changed features
 
@@ -425,7 +425,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 - Several issues related to bad URLs returned by the Curse servers have been fixed.
 
   The Curse platform does not use valid URLs according to [RFC 3986, section 2](https://tools.ietf.org/html/rfc3986#section-2) by including spaces and UTF-8 characters without percent encoding them.
-  MultiMC has been improved to handle these invalid URLs and report errors in case other invalid URLs are encountered.
+  MultiServerMC has been improved to handle these invalid URLs and report errors in case other invalid URLs are encountered.
   This affected pretty much all modpack imports. You may want to reimport them if you were affected by this.
 
 - GH-1780, GH-2102, GH-2103: Multiple issues with the build system and packaging on linux have been fixed.
@@ -434,7 +434,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
   - Installation using the `lin-bundle` layout has been fixed on platforms that use position independent code.
   - `CMAKE_INSTALL_PREFIX` and `DESTDIR` now behave as expected on linux platforms.
 
-- MultiMC no longer logs the process environment and launch scripts to its log files.
+- MultiServerMC no longer logs the process environment and launch scripts to its log files.
 
 - GH-2089: Mention of instance tracking has been removed from the deletion confirmation dialog.
 
@@ -446,19 +446,19 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - GH-2119: The main instance view scrollbar now correctly updates when the window is resized without changing the number of icons that can fit into it horizontally.
 
-## MultiMC 0.6.0
+## MultiServerMC 0.6.0
 
 ### New or changed features
 
-- Contact with Mojang, Forge and LiteLoader servers is no longer handled by MultiMC, but a metadata server. Instead of generating and storing the files at the point of installation, they are updated hourly on the server and can be fixed when something goes wrong.
+- Contact with Mojang, Forge and LiteLoader servers is no longer handled by MultiServerMC, but a metadata server. Instead of generating and storing the files at the point of installation, they are updated hourly on the server and can be fixed when something goes wrong.
 
   This goes along with some changes to the instance format and to the metadata format.
 
-  Instead of including the metadata JSON files directly in the instances, the instances now contain a new `mmc-pack.json` file that specifies versions to be used.
+  Instead of including the metadata JSON files directly in the instances, the instances now contain a new `msmc-pack.json` file that specifies versions to be used.
 
   The metadata can be found at [v1.meta.multimc.org](https://v1.meta.multimc.org), the [meta.multimc.org](https://meta.multimc.org) endpoint that was used during development will be replaced by documentation.
 
-  This should be a much more reliable solution going forward, because it allows fixing issues without releasing new versions of MultiMC or reinstalling Forge/LiteLoader/others.
+  This should be a much more reliable solution going forward, because it allows fixing issues without releasing new versions of MultiServerMC or reinstalling Forge/LiteLoader/others.
 
 - Tracking of FTB launcher instances has been replaced with direct import of Curse modpacks.
 
@@ -467,24 +467,24 @@ This is a release mostly aimed at getting all the small changes and fixes out of
   - Drag & Drop it on top of the main window, or select it in the new instance dialog.
   - Let the magic happen.
 
-  If you need help moving over your old instances or worlds from the FTB launcher, stop by in the MultiMC discord server.
+  If you need help moving over your old instances or worlds from the FTB launcher, stop by in the MultiServerMC discord server.
 
   The Curse import functionality is there thanks to the work [@Dries007](https://twitter.com/driesk007) and [@NikkiAI](https://twitter.com/NikkyAI) have done on [CurseMeta](https://cursemeta.dries007.net/).
 
-- GH-1314: MultiMC now allows replacing the main jar in an instance without having to mod the Mojang jars.
+- GH-1314: MultiServerMC now allows replacing the main jar in an instance without having to mod the Mojang jars.
 
   This goes along with changing the wording of the jar mod button to make it clear that it adds files to the main Minecraft jar instead of installing mod files with the `.jar` extension.
 
 - Because the current instance format can now handle replacing the main jar, Legacy format instances are no longer directly supported.
 
   Instead of launching, you will be prompted to convert them to the current instance format.
-  If the automated process fails, stop by in the MultiMC discord server and ask for help.
+  If the automated process fails, stop by in the MultiServerMC discord server and ask for help.
 
 - Main window UI has been changed for increased clarity.
 
   Many people had issues finding the settings and instead ended up using the per-instance overrides. The main toolbar now has labels and the per-instance overrides have been deemphasized by removing the direct path to them from the main window. In general, it should be easier to find the right settings menu without getting things completely wrong on the first try.
 
-- GH-1997: MultiMC now supports Java 9.
+- GH-1997: MultiServerMC now supports Java 9.
 
   This does not mean that the current mod loaders and mods do, but you can run Vanilla Minecraft with Java 9 now.
 
@@ -513,11 +513,11 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - GH-1855: The instance window now has an offline launch button.
 
-- GH-1886: UI now clarifies that MultiMC proxy settings do not apply to the game.
+- GH-1886: UI now clarifies that MultiServerMC proxy settings do not apply to the game.
 
-- It is now possible to package MultiMC on linux without hacks.
+- It is now possible to package MultiServerMC on linux without hacks.
 
-  The build system has a concept of 'install layouts'. Example Arch linux package that uses this (multimc-git) is [available in the AUR](https://aur.archlinux.org/packages/multimc-git).
+  The build system has a concept of 'install layouts'. Example Arch linux package that uses this (multiservermc-git) is [available in the AUR](https://aur.archlinux.org/packages/multiservermc-git).
 
 - Wrapper commands now support arguments.
 
@@ -538,7 +538,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 - There are some under the hood improvements for ancient Minecraft versions and versions not provided by Mojang.
 
     - The `haspaid` parameter is set for the applet wrapper.
-    - MultiMC will prefer to use `.minecraft` instead of `minecraft` folder inside the instances now.
+    - MultiServerMC will prefer to use `.minecraft` instead of `minecraft` folder inside the instances now.
     - There is some preliminary support for classic multiplayer - see [this workflowy list](https://workflowy.com/s/2EyDMcp7CU#/1cbfc198cf28) for details.
     - A new `noapplet` trait has been added to allow running legacy Minecraft versions without the applet wrapper.
 
@@ -560,15 +560,15 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - paste.ee upload now works again.
 
-  MultiMC now uses its new API. If you used a custom API key before, you will need to generate a new one.
+  MultiServerMC now uses its new API. If you used a custom API key before, you will need to generate a new one.
 
 - GH-1873, GH-1873, GH-1875 : The main window can now be closed regardless of running instances and running instances directly will not create a main window.
 
-- GH-1854: MultiMC should no longer crash when the instance is closed while the kill confirmation dialog is open.
+- GH-1854: MultiServerMC should no longer crash when the instance is closed while the kill confirmation dialog is open.
 
 - GH-1956: Launch will abort sooner when important files are missing.
 
-- GH-1874: Instance launching and updating MultiMC are now mutually exclusive.
+- GH-1874: Instance launching and updating MultiServerMC are now mutually exclusive.
 
   It was possible to do both at the same time, with undefined results.
 
@@ -584,13 +584,13 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - GH-1882: Update dialog will now save its location and size.
 
-- GH-1885: MultiMC will now correctly download zero-byte files.
+- GH-1885: MultiServerMC will now correctly download zero-byte files.
 
   No content does not equal no file and a presence of a file can mean the difference between something working or not.
 
 - When importing modpacks, file permissions from the pack archive will no longer be preserved.
 
-  The archives are sometimes broken and have invalid permissions, especially when coming from sources other than MultiMC.
+  The archives are sometimes broken and have invalid permissions, especially when coming from sources other than MultiServerMC.
 
 - Instance export filter has been fixed.
 
@@ -605,7 +605,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Rare problems with error 201 during Mojang authentication have been fixed.
 
-- GH-1971: MultiMC will now no longer check path prefixes when importing instances.
+- GH-1971: MultiServerMC will now no longer check path prefixes when importing instances.
 
   This has caused more issues than it solved. Now it will simply try to move the files instead of giving up early.
 
@@ -623,7 +623,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - The checkboxes in the accounts settings page now have the correct appearance.
 
-- MultiMC responds to account manipulation better.
+- MultiServerMC responds to account manipulation better.
 
     - Setting and resetting default account will update the account list properly.
     - Removing the active account will now also reset it (previously, it would 'stay around').
@@ -633,7 +633,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - In the instance export dialog, the sorting order has been changed to go from `a` to `z`, not backwards.
 
-## MultiMC 0.5.1
+## MultiServerMC 0.5.1
 
 ### Improvements
 
@@ -650,7 +650,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - GH-1807: Fixed 'loggging' typo in console overflow notification.
 
-- GH-1801: Launch script is no longer dumped into MultiMC's log on instance launch.
+- GH-1801: Launch script is no longer dumped into MultiServerMC's log on instance launch.
 
 - GH-1065: Use of 'folder' and 'directory' in the UI has been unified to 'folder'.
 
@@ -660,7 +660,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - GH-1789: Deletion of custom icon has been fixed.
 
-  It wasn't possible to do it from the MultiMC icon selection dialog.
+  It wasn't possible to do it from the MultiServerMC icon selection dialog.
 
 - GH-1790: While using the system theme on macOS, dialogs had wrong colors.
 
@@ -670,7 +670,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
   Upstream bug: https://bugreports.qt.io/browse/QTBUG-58268
 
-- GH-1793: The Java wizard page did not show up as expected when moving MultiMC between different computers.
+- GH-1793: The Java wizard page did not show up as expected when moving MultiServerMC between different computers.
 
   The page should now show up as expected.
 
@@ -678,7 +678,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
   The instance type of the copy was not set, causing it to not be usable.
 
-## MultiMC 0.5.0
+## MultiServerMC 0.5.0
 
 ### New or changed features
 
@@ -686,25 +686,25 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
   The resulting instance window can be closed or reopened at any point, it does not matter if the instance is running or not. The list of available pages in the instance window changes with instance state.
 
-  Multiple instances can now run from the same MultiMC - It's even more **multi** now.
+  Multiple instances can now run from the same MultiServerMC - It's even more **multi** now.
 
   On launch, the main window is kept open and running instances are marked with a badge. Opening the instance window is no longer the default action. Second activation of a running instance opens the instance window.
 
-  MultiMC can be entirely closed, keeping Minecraft instances running. However, if you close MultiMC, play time tracking, logging and crash reporting will not work.
+  MultiServerMC can be entirely closed, keeping Minecraft instances running. However, if you close MultiServerMC, play time tracking, logging and crash reporting will not work.
 
   Accounts which are in use are marked as such. If you plan to run multiple instances with multiple accounts, it is advisable to not set a default account to make it ask which one to use on launch.
 
-- It is no longer possible to run multiple copies of MultiMC from a single folder
+- It is no longer possible to run multiple copies of MultiServerMC from a single folder
 
-  This generally caused strange configuration and Mojang login issues because the running MultiMC copies did not know about each other.
+  This generally caused strange configuration and Mojang login issues because the running MultiServerMC copies did not know about each other.
 
   With the ability to launch multiple instances with different accounts, it is no longer needed.
 
-  Trying to run a second copy will focus the existing window. If MultiMC was started without a main window, a new main window will be opened. If the second copy is launching an instance from the command line, it will launch in the first copy instead.
+  Trying to run a second copy will focus the existing window. If MultiServerMC was started without a main window, a new main window will be opened. If the second copy is launching an instance from the command line, it will launch in the first copy instead.
 
-  This feature is also used for better checking of correct update completion (GH-1726). It should no longer be possible for MultiMC to end up in a state when it is unable to start - the old version checks that the new one can start and respond to liveness checks by writing a file.
+  This feature is also used for better checking of correct update completion (GH-1726). It should no longer be possible for MultiServerMC to end up in a state when it is unable to start - the old version checks that the new one can start and respond to liveness checks by writing a file.
 
-- GH-903: MultiMC now supports theming
+- GH-903: MultiServerMC now supports theming
 
   By default, it comes with a Dark, Bright, System (the old default) and Custom theme.
 
@@ -715,17 +715,17 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Translations have been overhauled
 
-  You no longer need to restart MultiMC to change its active translation. MultiMC also asks which translation to use on the first start.
+  You no longer need to restart MultiServerMC to change its active translation. MultiServerMC also asks which translation to use on the first start.
 
   There is a lot that has to be done with translations, but at least now it should be easier to work with them and use them.
 
-- MultiMC now includes Google Analytics
+- MultiServerMC now includes Google Analytics
 
   The purpose of this is to determine where to focus future effort. Generally, only basic technical information is collected:
 
   - OS name, version, and architecture
   - Java version, architecture and memory settings
-  - MultiMC version
+  - MultiServerMC version
   - System RAM size
 
   It does not activate until you agree with it. It may be expanded upon later, in which case you will be asked to agree again.
@@ -738,7 +738,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Java detection has been improved
 
-  MultiMC will prefer looking for `javaw.exe` on Windows and now can scan most, if not all the usual Linux java paths.
+  MultiServerMC will prefer looking for `javaw.exe` on Windows and now can scan most, if not all the usual Linux java paths.
 
 - Java memory settings now allow running with less memory
 
@@ -792,7 +792,7 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
 - Instances can now contain libraries
 
-  Any libraries stored in `$instanceroot/libraries/` will override the libraries from MultiMC's global folders, as long as they are marked `local` in the JSON patch.
+  Any libraries stored in `$instanceroot/libraries/` will override the libraries from MultiServerMC's global folders, as long as they are marked `local` in the JSON patch.
 
   This should make installing library-based mods easier in the future, and allow to include them in modpacks.
 
@@ -812,11 +812,11 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
   Leading and trailing spaces in names can confuse Windows Explorer and Java.
 
-- GH-1586: MultiMC now prints to command line on Windows, so you can review the command line options.
+- GH-1586: MultiServerMC now prints to command line on Windows, so you can review the command line options.
 
 - GH-1699: Linux builds no longer contain the XCB library
 
-  This caused many compatibility issues on with certain Linux graphics drivers and prevented MultiMC from starting.
+  This caused many compatibility issues on with certain Linux graphics drivers and prevented MultiServerMC from starting.
 
 - GH-1731: it was possible for the Screenshots page to show a list of all system drives.
 
@@ -853,25 +853,25 @@ This is a release mostly aimed at getting all the small changes and fixes out of
 
   It is now a lot of tiny reusable tasks that chain together.
 
-  MultiMC now also has a separate launch method that works more like the Mojang launcher (not using a launcher part, but running Java directly).
+  MultiServerMC now also has a separate launch method that works more like the Mojang launcher (not using a launcher part, but running Java directly).
 
-## MultiMC 0.4.11
+## MultiServerMC 0.4.11
 
 This release contains mainly a workaround for Minecraft 1.9 support and returned support for OSX 10.7.
 
 ### **IMPORTANT**
 
-- GH-1410: MultiMC crashes on launch on OSX 10.7
+- GH-1410: MultiServerMC crashes on launch on OSX 10.7
 
-  MultiMC didn't work on OSX 10.7 because of an oversight in the build server setup. This has been fixed.
+  MultiServerMC didn't work on OSX 10.7 because of an oversight in the build server setup. This has been fixed.
 
 - GH-1453: Minecraft 1.9 snapshots didn't download and launch properly
 
-  This has been caused by a change on Mojang servers - the data is now stored in a different location and the files describing the releases have a different format. The required changes on MultiMC side aren't complete yet, but it's enough to get snapshots working.
+  This has been caused by a change on Mojang servers - the data is now stored in a different location and the files describing the releases have a different format. The required changes on MultiServerMC side aren't complete yet, but it's enough to get snapshots working.
 
   Full support for the new version file format will come in the next release.
 
-- MultiMC version file format was simplified
+- MultiServerMC version file format was simplified
 
   Some undocumented and unused features were removed from the format. Mostly version patches that removed libraries, advanced library application, and merging rules, and things of similar nature. If you used them, you used an undocumented feature that is impossible to reach from the UI.
 
@@ -885,40 +885,40 @@ This release contains mainly a workaround for Minecraft 1.9 support and returned
 
   This doesn't apply to every possible issue yet and will be expanded upon in the next release.
 
-## MultiMC 0.4.10
+## MultiServerMC 0.4.10
 
 Second hotfix for issues with wifi connections.
 
 ### **IMPORTANT**
 
-- GH-1422: Huge ping spikes while using MultiMC
+- GH-1422: Huge ping spikes while using MultiServerMC
 
   Another day, another fix. The bearer plugins added in 0.4.9 didn't really help and we ran into more bugs.
 
   This time, the presence of the network bearer plugins caused a lot of network lag for people on wifi connections.
 
-  Because this wasn't a problem on the previous version of Qt MultiMC used (5.4.2), I ended up reverting to that. This is a temporary solution until the Qt framework can be rebuilt and retested for every platform without this broken feature.
+  Because this wasn't a problem on the previous version of Qt MultiServerMC used (5.4.2), I ended up reverting to that. This is a temporary solution until the Qt framework can be rebuilt and retested for every platform without this broken feature.
 
   The upstream bug is [QTBUG-40332](https://bugreports.qt.io/browse/QTBUG-40332) and despite being closed, it is far from fixed.
 
 Because of the reverted Qt version, OSX 10.7 *might* work again. If it does, please do tell, it would help with figuring out what went wrong there :)
 
 
-## MultiMC 0.4.9
+## MultiServerMC 0.4.9
 
 Hotfix for issues with wifi connections.
 
 ### **IMPORTANT**
 
-- GH-1408: MultiMC 0.4.8 doesn't work on wireless connections.
+- GH-1408: MultiServerMC 0.4.8 doesn't work on wireless connections.
 
   This is especially the case on Windows. If you already updated to 0.4.8, you will need to do a manual update, or use a wired connection to do the update.
 
-  The issue was caused by a change in the underlying framework (Qt), and MultiMC not including the network bearer plugins. This made it think that the connection is always down and not try to contact any servers because of that.
+  The issue was caused by a change in the underlying framework (Qt), and MultiServerMC not including the network bearer plugins. This made it think that the connection is always down and not try to contact any servers because of that.
 
   The upstream bug is [QTBUG-49267](https://bugreports.qt.io/browse/QTBUG-49267).
 
-- GH-1410: MultiMC crashes on launch on OS X 10.7.5
+- GH-1410: MultiServerMC crashes on launch on OS X 10.7.5
 
   OSX 10.7.x is no longer supported by Apple and I do not have a system to test and fix this.
 
@@ -928,24 +928,24 @@ Hotfix for issues with wifi connections.
 
 - GH-1362: When uploading or copying the Minecraft log, the action is logged, including a full timestamp.
 
-## MultiMC 0.4.8
+## MultiServerMC 0.4.8
 
 Fluffy and functional!
 
 ### **IMPORTANT**
 
-- GH-1402: MultiMC will keep its binary filename after an update if you rename it.
+- GH-1402: MultiServerMC will keep its binary filename after an update if you rename it.
 
   Note that this doesn't happen with this (0.4.8) update yet, because the old update method is still used.
 
-  If you renamed `MultiMC.exe` for any reason, you will have to manually remove the renamed file after the update and rename the new `MultiMC.exe`.
+  If you renamed `MultiServerMC.exe` for any reason, you will have to manually remove the renamed file after the update and rename the new `MultiServerMC.exe`.
 
   Future updates should no longer have this issue.
 
 
 ### New features
 
-- GH-1047, GH-1233: MultiMC now includes basic Minecraft world management.
+- GH-1047, GH-1233: MultiServerMC now includes basic Minecraft world management.
 
   This is a new page in the console/edit instance window.
 
@@ -955,21 +955,21 @@ Fluffy and functional!
   - Copy the world seed value
   - Run MCEdit - the MCEdit feature has been moved here.
 
-- GH-1217: MultiMC now tracks instance play time and displays it when the instance is selected.
+- GH-1217: MultiServerMC now tracks instance play time and displays it when the instance is selected.
 
 - New buttons on the top toolbar:
-  - GH-1238: button for the [MultiMC subreddit](https://www.reddit.com/r/MultiMC/).
-  - GH-1397: button for joining the [MultiMC discord voice/chat server](https://discord.gg/0k2zsXGNHs0fE4Wm).
+  - GH-1238: button for the [MultiServerMC subreddit](https://www.reddit.com/r/MultiServerMC/).
+  - GH-1397: button for joining the [MultiServerMC discord voice/chat server](https://discord.gg/0k2zsXGNHs0fE4Wm).
 
-    Both are there for you to interact with other MultiMC users and us.
+    Both are there for you to interact with other MultiServerMC users and us.
 
-- GH-253, GH-1300: MultiMC can now be started with the `-l "Instance ID"` parameter, launching the specified instance directly.
+- GH-253, GH-1300: MultiServerMC can now be started with the `-l "Instance ID"` parameter, launching the specified instance directly.
 
 ### Improvements
 
 - Instance list
   - GH-1121: Instances are now selected after you create them.
-  - GH-93: When copying an instance, you can tell MultiMC to not copy the worlds.
+  - GH-93: When copying an instance, you can tell MultiServerMC to not copy the worlds.
 
 - Mod and resource pack lists
   - GH-1237: Mod info is now clickable and selectable.
@@ -980,7 +980,7 @@ Fluffy and functional!
   - GH-1009: MCEdit Unified on linux is now recognized properly.
 
 - Mojang login and accounts:
-  - GH-1158: A unique ID is generated on the MultiMC side before login, instead of letting the server decide.
+  - GH-1158: A unique ID is generated on the MultiServerMC side before login, instead of letting the server decide.
   - When a password is required, the user login is partially obscured.
   - The dropdown menu on the main window now lists profiles, not accounts.
 
@@ -998,7 +998,7 @@ Fluffy and functional!
   - GH-1275: Server resource pack folder is created on launch.
     - This is a workaround for Minecraft bug MCL-3732.
   - GH-1320: Improve compatibility with non-Oracle Java.
-  - GH-1355: MMC environment will no longer leak into Minecraft after MultiMC updates itself.
+  - GH-1355: MSMC environment will no longer leak into Minecraft after MultiServerMC updates itself.
 
 - Minecraft log:
   - Java exception detection in Minecraft logs has been improved.
@@ -1010,7 +1010,7 @@ Fluffy and functional!
 
     The log window now has a configurable limit for the number of lines remembered. You can also specify whether it stops logging or forgets on the fly once the limit is breached.
 
-    This prevents the MultiMC log window from using too much memory on logging. The default limit is 100000 lines and the logging stops.
+    This prevents the MultiServerMC log window from using too much memory on logging. The default limit is 100000 lines and the logging stops.
 
     Minecraft logging this much is a sign of a problem that needs to be fixed. Any complaints should be addressed to the responsible mod authors.
 
@@ -1022,39 +1022,39 @@ Fluffy and functional!
   - Hidden log files are shown in 'Other logs'.
 
 - User skins:
-  - MultiMC now uses [crafatar.com](https://crafatar.com/) for skin downloads instead of the Mojang servers.
+  - MultiServerMC now uses [crafatar.com](https://crafatar.com/) for skin downloads instead of the Mojang servers.
 
 - Java:
-  - GH-1365: MultiMC now supports Java 9 and its new version numbering.
-  - GH-1262: Java can now be placed in a folder relative to MultiMC's folder. This allows bundling of JREs with MultiMC.
+  - GH-1365: MultiServerMC now supports Java 9 and its new version numbering.
+  - GH-1262: Java can now be placed in a folder relative to MultiServerMC's folder. This allows bundling of JREs with MultiServerMC.
 
 - Translations:
-  - GH-1313: Some parts of the MultiMC user interface have been marked as 'not for translation'.
+  - GH-1313: Some parts of the MultiServerMC user interface have been marked as 'not for translation'.
 
 ### Internals and internal bug fixes
 
 - GH-1052: All the dependencies were rebuilt and the build environment upgraded to the latest compiler versions.
 - GH-1051: The CDPATH environment variable is now ignored.
-- GH-77, GH-1059, GH-1060: The MultiMC updater is no longer used or necessary.
+- GH-77, GH-1059, GH-1060: The MultiServerMC updater is no longer used or necessary.
 
   It is only present to preserve compatibility with previous versions.
   Updates now work properly on Windows systems when you have Unicode (like ❄, Ǣ or Ω) characters in the path.
 
-- GH-1069, GH-1100: `LD_LIBRARY_PATH` and `LD_PRELOAD` environment variables supplied to MultiMC now don't affect MultiMC but affect the launched game.
+- GH-1069, GH-1100: `LD_LIBRARY_PATH` and `LD_PRELOAD` environment variables supplied to MultiServerMC now don't affect MultiServerMC but affect the launched game.
 
-  This means you can use something like the Steam overlay in MultiMC instances on Linux.
-  If you need to use these variables for MultiMC itself, you can use `MMC_LIBRARY_PATH` and `MMC_PRELOAD` instead.
+  This means you can use something like the Steam overlay in MultiServerMC instances on Linux.
+  If you need to use these variables for MultiServerMC itself, you can use `MSMC_LIBRARY_PATH` and `MSMC_PRELOAD` instead.
 
-- GH-1389: External processes (like folder views, editors, etc.) are now started in a way that prevents the MultiMC environment to be reused by them.
-- GH-1355: If `LD_LIBRARY_PATH` contains any of MultiMC's internal folders, this will not propagate to started processes.
-- GH-1231, GH-1378: libpng is now included with the Linux version of MultiMC
+- GH-1389: External processes (like folder views, editors, etc.) are now started in a way that prevents the MultiServerMC environment to be reused by them.
+- GH-1355: If `LD_LIBRARY_PATH` contains any of MultiServerMC's internal folders, this will not propagate to started processes.
+- GH-1231, GH-1378: libpng is now included with the Linux version of MultiServerMC
 - GH-1202: SSL certificates are now rebuilt on start on OSX.
 
 - GH-1303: Translations and notification cache are stored in the normal data folder now, not alongside the binaries. This only affects third party Linux packaging.
 - GH-1266, GH-1301: Linux runner scripts has been improved.
-- GH-1360: Development and other unstable versions of MultiMC now uses GitHub commits instead of this manually maintained changelog.
+- GH-1360: Development and other unstable versions of MultiServerMC now uses GitHub commits instead of this manually maintained changelog.
 
-## MultiMC 0.4.7
+## MultiServerMC 0.4.7
 
 This is what 0.4.6 should have been. Oh well, at least it's here now!
 
@@ -1071,11 +1071,11 @@ This is what 0.4.6 should have been. Oh well, at least it's here now!
   - When loading FTB instances, there are no writes to config files anymore
 - GH-991: Implemented wrapper command functionality:
 
-  There is an extra field in the MultiMC Java settings that allows running Java inside a wrapper program or script. This means you can run Minecraft with wrappers like `optirun` and get better performance with hybrid graphics on Linux without workarounds.
+  There is an extra field in the MultiServerMC Java settings that allows running Java inside a wrapper program or script. This means you can run Minecraft with wrappers like `optirun` and get better performance with hybrid graphics on Linux without workarounds.
 - GH-997: Fixed saving of multi-line settings. This fixes notes.
 - GH-967: It is now possible to add patches (Forge and LiteLoader) to tracked FTB instances properly.
 
-  Libraries added by the patches will be taken from MultiMC's `libraries` folder, while the tracked patches will use FTB's folders.
+  Libraries added by the patches will be taken from MultiServerMC's `libraries` folder, while the tracked patches will use FTB's folders.
 
 - GH-1011 and GH-1015: Fixed various issues when the patch versions aren't complete
 
@@ -1084,7 +1084,7 @@ This is what 0.4.6 should have been. Oh well, at least it's here now!
 - GH-1021: Built in legacy Minecraft versions aren't customizable anymore
 
    The internal format for Legacy Minecraft versions does not translate to the external patch format and would cause crashes
-- GH-1016: MultiMC prints a list of mods, core mods (contents of the core mods folder) and jar mods to the log on instance start. This should help with troubleshooting.
+- GH-1016: MultiServerMC prints a list of mods, core mods (contents of the core mods folder) and jar mods to the log on instance start. This should help with troubleshooting.
 - GH-1031: Icons are exported and imported along with instances
 
     This only applies if the icon was custom (not built-in) when exporting and the user doesn't choose an icon while importing the pack.
@@ -1097,7 +1097,7 @@ This is what 0.4.6 should have been. Oh well, at least it's here now!
 
   Using the `Add jar mods` button will also show a nag dialog until it's been used successfully
 
-## MultiMC 0.4.6
+## MultiServerMC 0.4.6
 
 Long time coming, this release brought a lot of incremental improvements and fixes.
 
@@ -1123,19 +1123,19 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Jar mods are now always put into a generated temporary Minecraft jar instead of being put on the classpath
 - PermGen settings:
   - Changed default PermGen value to 128M because of many issues from new users
-  - MultiMC now recognizes the Java version used and will not add PermGen settings to Java >= 1.8
+  - MultiServerMC now recognizes the Java version used and will not add PermGen settings to Java >= 1.8
 - Implemented simple modpack import and export feature:
   - Export allows selecting which files go into the resulting zip archive
-  - Only MultiMC instances for now, other pack formats are planned
+  - Only MultiServerMC instances for now, other pack formats are planned
   - Import is either from local file or URL, URL can't have ad/click/pay gates
 - Instance copy doesn't follow symlinks on Linux anymore
   - Still does on Windows because copying symlinks requires Administrator level access
 - Instance delete doesn't follow symlinks anymore - anywhere
 - MCEdit tool now recognizes MCEdit2.exe as a valid file to runtime
 - Log uploads now follow the maximum allowed paste sizes of paste.ee and are encoded properly
-- MultiMC now doesn't use a proxy by default
+- MultiServerMC now doesn't use a proxy by default
 - Running profilers now works on Windows
-- MultiMC will warn you if you run it from WinRAR or temporary folders
+- MultiServerMC will warn you if you run it from WinRAR or temporary folders
 - Minecraft process ID is printed in the log on start
 - SSL certificates are fixed on OSX 10.10.3 and newer - see [explanation](http://www.infoworld.com/article/2911209/mac-os-x/yosemite-10103-breaks-some-applications-and-https-sites.html).
 
@@ -1176,44 +1176,44 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Updated zip manipulation library - files inside newly written zip/jar files should have proper access rights and timestamps
 - Made Minecraft resource downloads more resilient (throwing away invalid/broken index files)
 - Minecraft asset import from old format has been removed
-- Generally improved MultiMC logging:
+- Generally improved MultiServerMC logging:
   - More error logging for network tasks
   - Added timestamps relative to application start
 - Fixed issue with the application getting stuck in a modal dialog when screenshot uploads fail
-- Instance profiles and patches are now loaded lazily (speeds up MultiMC start)
+- Instance profiles and patches are now loaded lazily (speeds up MultiServerMC start)
 - Groups are saved after copying an instance
-- MultiMC launcher part will now exit cleanly when MultiMC crashes or is closed during instance launch
+- MultiServerMC launcher part will now exit cleanly when MultiServerMC crashes or is closed during instance launch
 
 
-## MultiMC 0.4.5
+## MultiServerMC 0.4.5
 - Copies of FTB instances should work again (GH-619)
 - Fixed OSX version not including the hotfix number
 - If the currently used java version goes missing, it now triggers auto-detect (GH-608)
 - Improved 'refresh' and 'update check' icons of the dark and bright simple icon themes (GH-618)
-- Fixed console window hiding - it no longer results in windowless/unusable MultiMC
+- Fixed console window hiding - it no longer results in windowless/unusable MultiServerMC
 
-## MultiMC 0.4.4
+## MultiServerMC 0.4.4
 - Other logs larger than 10MB will not load to prevent logs eating the whole available memory
-- Translations are now updated independently from MultiMC
+- Translations are now updated independently from MultiServerMC
 - Added new and reworked the old simple icon themes
 - LWJGL on OSX should no longer clash with Java 8
 - Update to newer Qt version
   - Look and feel updated for latest OSX
-- Fixed issues caused by Minecraft inheriting the environment variables from MultiMC
+- Fixed issues caused by Minecraft inheriting the environment variables from MultiServerMC
 - Minecraft log improvements:
   - Implemented search and pause
   - Automated coloring is updated for log format used by Minecraft 1.7+
   - Added settings for the font used in the console, using sensible defaults for the OS
-- Removed MultiMC crash handler, it will be replaced by a better one in the future
+- Removed MultiServerMC crash handler, it will be replaced by a better one in the future
 
-## MultiMC 0.4.3
+## MultiServerMC 0.4.3
 - Fix for issues with Minecraft version file updates
 - Fix for console window related memory leak
 - Fix for travis.ci build
 
-## MultiMC 0.4.2
+## MultiServerMC 0.4.2
 - Show a warning in the log if a library is missing
-- Fixes for relocating instances to other MultiMC installs:
+- Fixes for relocating instances to other MultiServerMC installs:
   - Libraries now use full Gradle dependency specifiers
   - Rework of forge installer (forge can reinstall itself using only the information already in the instance)
   - Fixed bugs in rarely used library insertion rules
@@ -1222,10 +1222,10 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Show a warning for paths containing a '!' (Java can't handle that properly)
 - Many smaller fixes
 
-## MultiMC 0.4.1
+## MultiServerMC 0.4.1
 - Fix LWJGL version list (SourceForge has changed the download API)
 
-## MultiMC 0.4.0
+## MultiServerMC 0.4.0
 - Jar support in 1.6+
 - Deprecated legacy instances
   - Legacy instances can still be used but not created
@@ -1245,27 +1245,27 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Several performance improvements to the group view
 - Added keyboard navigation to the group view
 
-## MultiMC 0.3.9
+## MultiServerMC 0.3.9
 - Workaround for 1.7.10 Forge
 
-## MultiMC 0.3.8
+## MultiServerMC 0.3.8
 - Workaround for performance issues with Intel integrated graphics chips
 
-## MultiMC 0.3.7
+## MultiServerMC 0.3.7
 - Fixed forge for 1.7.10-pre4 (and any future prereleases)
 
-## MultiMC 0.3.6
+## MultiServerMC 0.3.6
 - New server status - now with more color
 - Fix for FTB tracking issues
 - Fix for translations on OSX not working
 - Screenshot dialog should be harder to lose track of when used from the console window
 - A crash handler implementation has been added.
 
-## MultiMC 0.3.5
+## MultiServerMC 0.3.5
 - More versions are now selectable when changing instance versions
 - Fix for Forge/FML changing its mcmod.info metadata format
 
-## MultiMC 0.3.4
+## MultiServerMC 0.3.4
 - Show a list of Patreon patrons in credits section of the about dialog
 - Make the console window raise itself after Minecraft closes
 - Add Control/Command+q shortcut to quit from the main window
@@ -1274,21 +1274,21 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Update the OS X icon
 - Fix FTB libraries not being used properly
 
-## MultiMC 0.3.3
+## MultiServerMC 0.3.3
 - Tweak context menu to prevent accidental clicks
 - Fix adding icons to custom icon directories
 - Added a Patreon button to the toolbar
 - Minecraft authentication tasks now provide better error reports
 
-## MultiMC 0.3.2
+## MultiServerMC 0.3.2
 - Fix issues with libraries not getting replaced properly (fixes instance startup for new instances)
 - Fix April fools
 
-## MultiMC 0.3.1
+## MultiServerMC 0.3.1
 - Fix copying of FTB instances (instance type is changed properly now)
 - Customizing FTB pack versions will remove the FTB pack patch file
 
-## MultiMC 0.3
+## MultiServerMC 0.3
 - Improved instance view
 - Overhauled 1.6+ version loading
 - Added a patch system for instance modification
@@ -1312,27 +1312,27 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Setting PermGen to 64 will now omit the java parameter because it is the default
 - Fix encoding of escape sequences (tabs and newlines) in config files
 
-## MultiMC 0.2.1
+## MultiServerMC 0.2.1
 - Hotfix - move the native library extraction into the onesix launcher part.
 
-## MultiMC 0.2
+## MultiServerMC 0.2
 - Java memory settings have MB added to the number to make the units obvious.
 - Complete rework of the launcher part. No more sensitive information in the process arguments.
 - Cached downloads now do not destroy files on failure.
-- Mojang service status is now on the MultiMC status bar.
+- Mojang service status is now on the MultiServerMC status bar.
 - Java checker is no longer needed/used on instance launch.
 - Support for private FTB packs.
 - Fixed instance ID issues related to copying FTB packs without changing the instance name.
 - Forge versions are better sorted (build numbers above 999 were sorted wrong).
-- Fixed crash related to the MultiMC update channel picker in offline mode.
+- Fixed crash related to the MultiServerMC update channel picker in offline mode.
 - Started using icon themes for the application icons, fixing many OSX graphical glitches.
 - Icon sources have been located, along with icon licenses.
 - Update to the German translation.
 
-## MultiMC 0.1.1
-- Hotfix - Changed the issue tracker URL to [GitHub issues](https://github.com/MultiMC/MultiMC5/issues).
+## MultiServerMC 0.1.1
+- Hotfix - Changed the issue tracker URL to [GitHub issues](https://github.com/MultiServerMC/MultiServerMC5/issues).
 
-## MultiMC 0.1
+## MultiServerMC 0.1
 - Reworked the version numbering system to support our [new Git workflow](http://nvie.com/posts/a-successful-git-branching-model/).
 - Added a tray icon for the console window.
 - Fixed instances getting deselected after FTB instances are loaded (or whenever the model is reset).
@@ -1341,5 +1341,5 @@ Long time coming, this release brought a lot of incremental improvements and fix
 - Jar files are now distributed separately, rather than being extracted from the binary at runtime.
 - Added additional information to the about dialog.
 
-## MultiMC 0.0
+## MultiServerMC 0.0
 - Initial release.

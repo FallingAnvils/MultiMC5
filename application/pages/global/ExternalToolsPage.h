@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 #include <QWidget>
 
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 
 namespace Ui {
 class ExternalToolsPage;
@@ -38,10 +38,10 @@ public:
     }
     QIcon icon() const override
     {
-        auto icon = MMC->getThemedIcon("externaltools");
+        auto icon = MSMC->getThemedIcon("externaltools");
         if(icon.isNull())
         {
-            icon = MMC->getThemedIcon("loadermods");
+            icon = MSMC->getThemedIcon("loadermods");
         }
         return icon;
     }

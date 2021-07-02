@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 #include "java/JavaInstallList.h"
 #include "java/JavaCheckerJob.h"
 #include "java/JavaUtils.h"
-#include "MMCStrings.h"
+#include "MSMCStrings.h"
 #include "minecraft/VersionFilterData.h"
 
 JavaInstallList::JavaInstallList(QObject *parent) : BaseVersionList(parent)

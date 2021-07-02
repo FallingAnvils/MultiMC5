@@ -14,14 +14,14 @@
 #include "GradleSpecifier.h"
 #include "MojangDownloadInfo.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class Library;
 class MinecraftInstance;
 
 typedef std::shared_ptr<Library> LibraryPtr;
 
-class MULTIMC_LOGIC_EXPORT Library
+class MULTISERVERMC_LOGIC_EXPORT Library
 {
     friend class OneSixVersionFormat;
     friend class MojangVersionFormat;
@@ -158,7 +158,7 @@ public: /* methods */
                                      QStringList & failedLocalFiles, const QString & overridePath) const;
 
 private: /* methods */
-    /// the default storage prefix used by MultiMC
+    /// the default storage prefix used by MultiServerMC
     static QString defaultStoragePrefix();
 
     /// Get the prefix - root of the storage to be used
@@ -179,23 +179,23 @@ protected: /* data */
     /// DEPRECATED URL prefix of the maven repo where the file can be downloaded
     QString m_repositoryURL;
 
-    /// DEPRECATED: MultiMC-specific absolute URL. takes precedence over the implicit maven repo URL, if defined
+    /// DEPRECATED: MultiServerMC-specific absolute URL. takes precedence over the implicit maven repo URL, if defined
     QString m_absoluteURL;
 
-    /// MultiMC extension - filename override
+    /// MultiServerMC extension - filename override
     QString m_filename;
 
-    /// DEPRECATED MultiMC extension - display name
+    /// DEPRECATED MultiServerMC extension - display name
     QString m_displayname;
 
     /**
-     * MultiMC-specific type hint - modifies how the library is treated
+     * MultiServerMC-specific type hint - modifies how the library is treated
      */
     QString m_hint;
 
     /**
-     * storage - by default the local libraries folder in multimc, but could be elsewhere
-     * MultiMC specific, because of FTB.
+     * storage - by default the local libraries folder in multiservermc, but could be elsewhere
+     * MultiServerMC specific, because of FTB.
      */
     QString m_storagePrefix;
 

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "NewComponentDialog.h"
 #include "ui_NewComponentDialog.h"
 
@@ -46,7 +46,7 @@ NewComponentDialog::NewComponentDialog(const QString & initialName, const QStrin
     connect(ui->nameTextBox, &QLineEdit::textChanged, this, &NewComponentDialog::updateDialogState);
     connect(ui->uidTextBox, &QLineEdit::textChanged, this, &NewComponentDialog::updateDialogState);
 
-    auto groups = MMC->instances()->getGroups().toSet();
+    auto groups = MSMC->instances()->getGroups().toSet();
     ui->nameTextBox->setFocus();
 
     originalPlaceholderText = ui->uidTextBox->placeholderText();
@@ -68,7 +68,7 @@ void NewComponentDialog::updateDialogState()
     }
     else
     {
-        QString suggestedUid = "org.multimc.custom." + protoUid;
+        QString suggestedUid = "org.multiservermc.custom." + protoUid;
         ui->uidTextBox->setPlaceholderText(suggestedUid);
     }
     bool allowOK = !name().isEmpty() && !uid().isEmpty() && !uidBlacklist.contains(uid());

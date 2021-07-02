@@ -1,17 +1,17 @@
-Name:           MultiMC5
+Name:           MultiServerMC5
 Version:        1.4
 Release:        1%{?dist}
-Summary:        A local install wrapper for MultiMC
+Summary:        A local install wrapper for MultiServerMC
 
 License:        ASL 2.0
 URL:            https://multimc.org
 BuildArch:      x86_64
 
 Requires:       zenity qt5-qtbase wget
-Provides:       multimc MultiMC multimc5
+Provides:       multiservermc MultiServerMC multiservermc5
 
 %description
-A local install wrapper for MultiMC
+A local install wrapper for MultiServerMC
 
 %prep
 
@@ -20,20 +20,20 @@ A local install wrapper for MultiMC
 
 
 %install
-mkdir -p %{buildroot}/opt/multimc
-install -m 0644 ../ubuntu/multimc/opt/multimc/icon.svg %{buildroot}/opt/multimc/icon.svg
-install -m 0755 ../ubuntu/multimc/opt/multimc/run.sh %{buildroot}/opt/multimc/run.sh
+mkdir -p %{buildroot}/opt/multiservermc
+install -m 0644 ../ubuntu/multiservermc/opt/multiservermc/icon.svg %{buildroot}/opt/multiservermc/icon.svg
+install -m 0755 ../ubuntu/multiservermc/opt/multiservermc/run.sh %{buildroot}/opt/multiservermc/run.sh
 mkdir -p %{buildroot}/%{_datadir}/applications
-install -m 0644 ../ubuntu/multimc/usr/share/applications/multimc.desktop %{buildroot}/%{_datadir}/applications/multimc.desktop
+install -m 0644 ../ubuntu/multiservermc/usr/share/applications/multiservermc.desktop %{buildroot}/%{_datadir}/applications/multiservermc.desktop
 mkdir -p %{buildroot}/%{_metainfodir}
-install -m 0644 ../ubuntu/multimc/usr/share/metainfo/multimc.metainfo.xml %{buildroot}/%{_metainfodir}/multimc.metainfo.xml
+install -m 0644 ../ubuntu/multiservermc/usr/share/metainfo/multiservermc.metainfo.xml %{buildroot}/%{_metainfodir}/multiservermc.metainfo.xml
 
 %files
-%dir /opt/multimc
-/opt/multimc/icon.svg
-/opt/multimc/run.sh
-%{_datadir}/applications/multimc.desktop
-%{_metainfodir}/multimc.metainfo.xml
+%dir /opt/multiservermc
+/opt/multiservermc/icon.svg
+/opt/multiservermc/run.sh
+%{_datadir}/applications/multiservermc.desktop
+%{_metainfodir}/multiservermc.metainfo.xml
 
 
 %changelog

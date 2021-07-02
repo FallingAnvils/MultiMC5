@@ -8,7 +8,7 @@
 #include "net/PasteUpload.h"
 #include "dialogs/CustomMessageBox.h"
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include <settings/SettingsObject.h>
 #include <DesktopServices.h>
 #include <BuildConfig.h>
@@ -16,8 +16,8 @@
 QString GuiUtil::uploadPaste(const QString &text, QWidget *parentWidget)
 {
     ProgressDialog dialog(parentWidget);
-    auto APIKeySetting = MMC->settings()->get("PasteEEAPIKey").toString();
-    if(APIKeySetting == "multimc")
+    auto APIKeySetting = MSMC->settings()->get("PasteEEAPIKey").toString();
+    if(APIKeySetting == "multiservermc")
     {
         APIKeySetting = BuildConfig.PASTE_EE_KEY;
     }

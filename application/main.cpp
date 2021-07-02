@@ -1,4 +1,4 @@
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "MainWindow.h"
 #include "LaunchController.h"
 #include <InstanceList.h>
@@ -34,20 +34,20 @@ int main(int argc, char *argv[])
 #endif
 
     // initialize Qt
-    MultiMC app(argc, argv);
+    MultiServerMC app(argc, argv);
 
     switch (app.status())
     {
-    case MultiMC::StartingUp:
-    case MultiMC::Initialized:
+    case MultiServerMC::StartingUp:
+    case MultiServerMC::Initialized:
     {
-        Q_INIT_RESOURCE(multimc);
+        Q_INIT_RESOURCE(multiservermc);
 
         return app.exec();
     }
-    case MultiMC::Failed:
+    case MultiServerMC::Failed:
         return 1;
-    case MultiMC::Succeeded:
+    case MultiServerMC::Succeeded:
         return 0;
     }
 }

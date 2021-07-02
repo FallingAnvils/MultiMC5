@@ -4,7 +4,7 @@
 #include <QSet>
 #include <QDateTime>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 struct FMLlib
 {
@@ -28,4 +28,4 @@ struct VersionFilterData
     // release data of first version to require Java 16 (21w19a)
     QDateTime java16BeginsDate;
 };
-extern VersionFilterData MULTIMC_LOGIC_EXPORT g_VersionFilterData;
+extern VersionFilterData MULTISERVERMC_LOGIC_EXPORT g_VersionFilterData;

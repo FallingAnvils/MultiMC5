@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
 #include <QIcon>
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "BuildConfig.h"
 
 #include <net/NetJob.h>
@@ -33,10 +33,10 @@ QString getCreditsHtml(QStringList patrons)
     QTextStream stream(&output);
     stream << "<center>\n";
     // TODO: possibly retrieve from git history at build time?
-    stream << "<h3>" << QObject::tr("MultiMC Developers", "About Credits") << "</h3>\n";
+    stream << "<h3>" << QObject::tr("MultiServerMC Developers", "About Credits") << "</h3>\n";
     stream << "<p>Andrew Okin &lt;<a href='mailto:forkk@forkk.net'>forkk@forkk.net</a>&gt;</p>\n";
     stream << "<p>Petr Mrázek &lt;<a href='mailto:peterix@gmail.com'>peterix@gmail.com</a>&gt;</p>\n";
-    stream << "<p>Sky Welch &lt;<a href='mailto:multimc@bunnies.io'>multimc@bunnies.io</a>&gt;</p>\n";
+    stream << "<p>Sky Welch &lt;<a href='mailto:multiservermc@bunnies.io'>multiservermc@bunnies.io</a>&gt;</p>\n";
     stream << "<p>Jan (02JanDal) &lt;<a href='mailto:02jandal@gmail.com'>02jandal@gmail.com</a>&gt;</p>\n";
     stream << "<p>RoboSky &lt;<a href='https://twitter.com/RoboSky_'>@RoboSky_</a>&gt;</p>\n";
     stream << "<br />\n";
@@ -83,8 +83,8 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
 
     ui->urlLabel->setOpenExternalLinks(true);
 
-    ui->icon->setPixmap(MMC->getThemedIcon("logo").pixmap(64));
-    ui->title->setText("MultiMC 5");
+    ui->icon->setPixmap(MSMC->getThemedIcon("logo").pixmap(64));
+    ui->title->setText("MultiServerMC 5");
 
     ui->versionLabel->setText(tr("Version") +": " + BuildConfig.printableVersionString());
     ui->platformLabel->setText(tr("Platform") +": " + BuildConfig.BUILD_PLATFORM);
@@ -100,10 +100,10 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
         ui->channelLabel->setVisible(false);
 
     ui->redistributionText->setHtml(tr(
-"<p>We keep MultiMC open source because we think it's important to be able to see the source code for a project like this, and we do so using the Apache license.</p>\n"
-"<p>Part of the reason for using the Apache license is we don't want people using the &quot;MultiMC&quot; name when redistributing the project. "
-"This means people must take the time to go through the source code and remove all references to &quot;MultiMC&quot;, including but not limited to the project "
-"icon and the title of windows, (no <b>MultiMC-fork</b> in the title).</p>\n"
+"<p>We keep MultiServerMC open source because we think it's important to be able to see the source code for a project like this, and we do so using the Apache license.</p>\n"
+"<p>Part of the reason for using the Apache license is we don't want people using the &quot;MultiServerMC&quot; name when redistributing the project. "
+"This means people must take the time to go through the source code and remove all references to &quot;MultiServerMC&quot;, including but not limited to the project "
+"icon and the title of windows, (no <b>MultiServerMC-fork</b> in the title).</p>\n"
 "<p>The Apache license covers reasonable use for the name - a mention of the project's origins in the About dialog and the license is acceptable. "
 "However, it should be abundantly clear that the project is a fork <b>without</b> implying that you have our blessing.</p>"
     ));

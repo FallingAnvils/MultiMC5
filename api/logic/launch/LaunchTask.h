@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Authors: Orochimarufan <orochimarufan.x3@gmail.com>
  *
@@ -24,9 +24,9 @@
 #include "LoggedProcess.h"
 #include "LaunchStep.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT LaunchTask: public Task
+class MULTISERVERMC_LOGIC_EXPORT LaunchTask: public Task
 {
     Q_OBJECT
 protected:
@@ -108,8 +108,8 @@ signals:
 
 
 public slots:
-    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
-    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
+    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::MultiServerMC);
+    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::MultiServerMC);
     void onReadyForLaunch();
     void onStepFinished();
     void onProgressReportingRequested();

@@ -5,7 +5,7 @@
 #include <settings/Setting.h>
 #include "settings/SettingsObject.h"
 #include "Env.h"
-#include <MMCStrings.h>
+#include <MSMCStrings.h>
 #include <pathmatcher/RegexpMatcher.h>
 #include <pathmatcher/MultiMatcher.h>
 #include <FileSystem.h>
@@ -410,7 +410,7 @@ QStringList MinecraftInstance::processMinecraftArgs(int serverPort) const
     QMap<QString, QString> token_mapping;
 
     // blatant self-promotion.
-    token_mapping["profile_name"] = token_mapping["version_name"] = "MultiMC5";
+    token_mapping["profile_name"] = token_mapping["version_name"] = "MultiServerMC5";
 
     token_mapping["version_type"] = profile->getMinecraftVersionType();
 
@@ -756,7 +756,7 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(int serverPor
 
     // print a header
     {
-        process->appendStep(new TextPrint(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::MultiMC));
+        process->appendStep(new TextPrint(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::MultiServerMC));
     }
 
     // check java

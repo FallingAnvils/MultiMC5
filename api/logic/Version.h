@@ -3,11 +3,11 @@
 #include <QString>
 #include <QList>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class QUrl;
 
-class MULTIMC_LOGIC_EXPORT Version
+class MULTISERVERMC_LOGIC_EXPORT Version
 {
 public:
     Version(const QString &str);

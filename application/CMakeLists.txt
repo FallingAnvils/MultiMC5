@@ -3,11 +3,11 @@ project(application)
 ################################ FILES ################################
 
 ######## Sources and headers ########
-SET(MULTIMC_SOURCES
+SET(MULTISERVERMC_SOURCES
     # Application base
     main.cpp
-    MultiMC.h
-    MultiMC.cpp
+    MultiServerMC.h
+    MultiServerMC.cpp
     UpdateController.cpp
     UpdateController.h
 
@@ -98,8 +98,8 @@ SET(MULTIMC_SOURCES
     pages/global/LanguagePage.h
     pages/global/MinecraftPage.cpp
     pages/global/MinecraftPage.h
-    pages/global/MultiMCPage.cpp
-    pages/global/MultiMCPage.h
+    pages/global/MultiServerMCPage.cpp
+    pages/global/MultiServerMCPage.h
     pages/global/ProxyPage.cpp
     pages/global/ProxyPage.h
     pages/global/PasteEEPage.cpp
@@ -220,7 +220,7 @@ SET(MULTIMC_SOURCES
     )
 
 ######## UIs ########
-SET(MULTIMC_UIS
+SET(MULTISERVERMC_UIS
     # Instance pages
     pages/instance/GameOptionsPage.ui
     pages/instance/VersionPage.ui
@@ -238,7 +238,7 @@ SET(MULTIMC_UIS
     pages/global/ExternalToolsPage.ui
     pages/global/JavaPage.ui
     pages/global/MinecraftPage.ui
-    pages/global/MultiMCPage.ui
+    pages/global/MultiServerMCPage.ui
     pages/global/ProxyPage.ui
     pages/global/PasteEEPage.ui
 
@@ -270,40 +270,40 @@ SET(MULTIMC_UIS
     widgets/MCModInfoFrame.ui
 )
 
-set(MULTIMC_QRCS
-    resources/multimc/multimc.qrc
+set(MULTISERVERMC_QRCS
+    resources/multiservermc/multiservermc.qrc
     resources/documents/documents.qrc
 )
 
 ######## Windows resource files ########
 if(WIN32)
-    set(MULTIMC_RCS resources/multimc.rc)
+    set(MULTISERVERMC_RCS resources/multiservermc.rc)
 endif()
 
 # Qt 5 stuff
-qt5_wrap_ui(MULTIMC_UI ${MULTIMC_UIS})
-qt5_add_resources(MULTIMC_RESOURCES ${MULTIMC_QRCS})
+qt5_wrap_ui(MULTISERVERMC_UI ${MULTISERVERMC_UIS})
+qt5_add_resources(MULTISERVERMC_RESOURCES ${MULTISERVERMC_QRCS})
 
 # Add executable
-add_executable(MultiMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
-target_link_libraries(MultiMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer)
-if(DEFINED MultiMC_APP_BINARY_NAME)
-    set_target_properties(MultiMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
+add_executable(MultiServerMC MACOSX_BUNDLE WIN32 ${MULTISERVERMC_SOURCES} ${MULTISERVERMC_UI} ${MULTISERVERMC_RESOURCES} ${MULTISERVERMC_RCS})
+target_link_libraries(MultiServerMC MultiServerMC_gui ${QUAZIP_LIBRARIES} hoedown MultiServerMC_rainbow LocalPeer)
+if(DEFINED MultiServerMC_APP_BINARY_NAME)
+    set_target_properties(MultiServerMC PROPERTIES OUTPUT_NAME "${MultiServerMC_APP_BINARY_NAME}")
 endif()
-if(DEFINED MultiMC_BINARY_RPATH)
-    SET_TARGET_PROPERTIES(MultiMC PROPERTIES INSTALL_RPATH "${MultiMC_BINARY_RPATH}")
+if(DEFINED MultiServerMC_BINARY_RPATH)
+    SET_TARGET_PROPERTIES(MultiServerMC PROPERTIES INSTALL_RPATH "${MultiServerMC_BINARY_RPATH}")
 endif()
-if(DEFINED MultiMC_APP_BINARY_DEFS)
-    target_compile_definitions(MultiMC PRIVATE ${MultiMC_APP_BINARY_DEFS})
+if(DEFINED MultiServerMC_APP_BINARY_DEFS)
+    target_compile_definitions(MultiServerMC PRIVATE ${MultiServerMC_APP_BINARY_DEFS})
 endif()
 
-install(TARGETS MultiMC
+install(TARGETS MultiServerMC
     BUNDLE DESTINATION ${BUNDLE_DEST_DIR} COMPONENT Runtime
     LIBRARY DESTINATION ${LIBRARY_DEST_DIR} COMPONENT Runtime
     RUNTIME DESTINATION ${BINARY_DEST_DIR} COMPONENT Runtime
 )
 
-#### The MultiMC bundle mess! ####
+#### The MultiServerMC bundle mess! ####
 # Bundle utilities are used to complete the portable packages - they add all the libraries that would otherwise be missing on the target system.
 # NOTE: it seems that this absolutely has to be here, and nowhere else.
 if(INSTALL_BUNDLE STREQUAL "full")

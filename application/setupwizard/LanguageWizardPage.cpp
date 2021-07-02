@@ -1,5 +1,5 @@
 #include "LanguageWizardPage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 #include <translations/TranslationsModel.h>
 
 #include "widgets/LanguageSelectionWidget.h"
@@ -28,13 +28,13 @@ bool LanguageWizardPage::wantsRefreshButton()
 
 void LanguageWizardPage::refresh()
 {
-    auto translations = MMC->translations();
+    auto translations = MSMC->translations();
     translations->downloadIndex();
 }
 
 bool LanguageWizardPage::validatePage()
 {
-    auto settings = MMC->settings();
+    auto settings = MSMC->settings();
     QString key = mainWidget->getSelectedLanguageKey();
     settings->set("Language", key);
     return true;
@@ -43,6 +43,6 @@ bool LanguageWizardPage::validatePage()
 void LanguageWizardPage::retranslate()
 {
     setTitle(tr("Language"));
-    setSubTitle(tr("Select the language to use in MultiMC"));
+    setSubTitle(tr("Select the language to use in MultiServerMC"));
     mainWidget->retranslate();
 }

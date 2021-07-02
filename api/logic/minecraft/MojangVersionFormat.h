@@ -5,9 +5,9 @@
 #include <QJsonDocument>
 #include <ProblemProvider.h>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT MojangVersionFormat
+class MULTISERVERMC_LOGIC_EXPORT MojangVersionFormat
 {
 friend class OneSixVersionFormat;
 protected:

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ void PrintInstanceInfo::executeTask()
     //::runGlxinfo(log);
 #endif
 
-    logLines(log, MessageLevel::MultiMC);
-    logLines(instance->verboseDescription(m_serverPort), MessageLevel::MultiMC);
+    logLines(log, MessageLevel::MultiServerMC);
+    logLines(instance->verboseDescription(m_serverPort), MessageLevel::MultiServerMC);
     emitSucceeded();
 }

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,16 @@
 #include <QDir>
 #include <QtGui/QIcon>
 #include <memory>
-#include "MMCIcon.h"
+#include "MSMCIcon.h"
 #include "settings/Setting.h"
 #include "Env.h" // there is a global icon list inside Env.
 #include <icons/IIconList.h>
 
-#include "multimc_gui_export.h"
+#include "multiservermc_gui_export.h"
 
 class QFileSystemWatcher;
 
-class MULTIMC_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
+class MULTISERVERMC_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
 {
     Q_OBJECT
 public:
@@ -58,7 +58,7 @@ public:
     void installIcons(const QStringList &iconFiles) override;
     void installIcon(const QString &file, const QString &name) override;
 
-    const MMCIcon * icon(const QString &key) const;
+    const MSMCIcon * icon(const QString &key) const;
 
     void startWatching();
     void stopWatching();
@@ -83,6 +83,6 @@ private:
     shared_qobject_ptr<QFileSystemWatcher> m_watcher;
     bool is_watching;
     QMap<QString, int> name_index;
-    QVector<MMCIcon> icons;
+    QVector<MSMCIcon> icons;
     QDir m_dir;
 };

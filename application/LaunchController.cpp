@@ -1,6 +1,6 @@
 #include "LaunchController.h"
 #include "MainWindow.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "dialogs/CustomMessageBox.h"
 #include "dialogs/ProgressDialog.h"
 #include "InstanceWindow.h"
@@ -59,7 +59,7 @@ void LaunchController::launchInstance()
     auto showConsole = m_instance->settings()->get("ShowConsole").toBool();
     if(!console && showConsole)
     {
-        MMC->showInstanceWindow(m_instance);
+        MSMC->showInstanceWindow(m_instance);
     }
     connect(m_launcher.get(), &LaunchTask::readyForLaunch, this, &LaunchController::readyForLaunch);
     connect(m_launcher.get(), &LaunchTask::succeeded, this, &LaunchController::onSucceeded);
@@ -67,7 +67,7 @@ void LaunchController::launchInstance()
     connect(m_launcher.get(), &LaunchTask::requestProgress, this, &LaunchController::onProgressRequested);
 
     // Prepend Version
-    m_launcher->prependStep(new TextPrint(m_launcher.get(), "MultiMC version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::MultiMC));
+    m_launcher->prependStep(new TextPrint(m_launcher.get(), "MultiServerMC version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::MultiServerMC));
     m_launcher->start();
 }
 
@@ -126,7 +126,7 @@ void LaunchController::onFailed(QString reason)
 {
     if(m_instance->settings()->get("ShowConsoleOnError").toBool())
     {
-        MMC->showInstanceWindow(m_instance, "console");
+        MSMC->showInstanceWindow(m_instance, "console");
     }
     emitFailed(reason);
 }

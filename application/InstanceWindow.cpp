@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 
 #include "InstanceWindow.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 
 #include <QScrollBar>
 #include <QMessageBox>
@@ -35,7 +35,7 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
 
-    auto icon = MMC->icons()->getIcon(m_instance->iconKey());
+    auto icon = MSMC->icons()->getIcon(m_instance->iconKey());
     QString windowTitle = tr("Console window for ") + m_instance->name();
 
     // Set window properties
@@ -83,9 +83,9 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
 
     // restore window state
     {
-        auto base64State = MMC->settings()->get("ConsoleWindowState").toByteArray();
+        auto base64State = MSMC->settings()->get("ConsoleWindowState").toByteArray();
         restoreState(QByteArray::fromBase64(base64State));
-        auto base64Geometry = MMC->settings()->get("ConsoleWindowGeometry").toByteArray();
+        auto base64Geometry = MSMC->settings()->get("ConsoleWindowGeometry").toByteArray();
         restoreGeometry(QByteArray::fromBase64(base64Geometry));
     }
 
@@ -171,8 +171,8 @@ void InstanceWindow::closeEvent(QCloseEvent *event)
         return;
     }
 
-    MMC->settings()->set("ConsoleWindowState", saveState().toBase64());
-    MMC->settings()->set("ConsoleWindowGeometry", saveGeometry().toBase64());
+    MSMC->settings()->set("ConsoleWindowState", saveState().toBase64());
+    MSMC->settings()->set("ConsoleWindowGeometry", saveGeometry().toBase64());
     emit isClosing();
     event->accept();
 }
@@ -186,11 +186,11 @@ void InstanceWindow::on_btnKillMinecraft_clicked()
 {
     if(m_instance->isRunning())
     {
-        MMC->kill(m_instance);
+        MSMC->kill(m_instance);
     }
     else
     {
-        MMC->launch(m_instance, true, nullptr);
+        MSMC->launch(m_instance, true, nullptr);
     }
 }
 

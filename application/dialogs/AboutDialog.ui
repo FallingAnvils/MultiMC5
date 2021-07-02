@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>About MultiMC</string>
+   <string>About MultiServerMC</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -83,7 +83,7 @@
       </font>
      </property>
      <property name="text">
-      <string notr="true">MultiMC 5</string>
+      <string notr="true">MultiServerMC 5</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -146,7 +146,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MultiMC is a custom launcher that makes managing Minecraft easier by allowing you to have multiple instances of Minecraft at once.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MultiServerMC is a custom launcher that makes managing Minecraft easier by allowing you to have multiple instances of Minecraft at once.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -165,7 +165,7 @@
           </font>
          </property>
          <property name="text">
-          <string>© 2012-2021 MultiMC Contributors</string>
+          <string>© 2012-2021 MultiServerMC Contributors</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -180,7 +180,7 @@
           </font>
          </property>
          <property name="text">
-          <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/MultiMC/MultiMC5&quot;&gt;https://github.com/MultiMC/MultiMC5&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/MultiServerMC/MultiServerMC5&quot;&gt;https://github.com/MultiServerMC/MultiServerMC5&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

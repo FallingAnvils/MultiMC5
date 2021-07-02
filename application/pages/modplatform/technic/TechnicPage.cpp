@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #include "TechnicPage.h"
 #include "ui_TechnicPage.h"
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "dialogs/NewInstanceDialog.h"
 #include "TechnicModel.h"
 #include <QKeyEvent>
@@ -111,7 +111,7 @@ void TechnicPage::suggestCurrent()
     NetJob *netJob = new NetJob(QString("Technic::PackMeta(%1)").arg(current.name));
     std::shared_ptr<QByteArray> response = std::make_shared<QByteArray>();
     QString slug = current.slug;
-    netJob->addNetAction(Net::Download::makeByteArray(QString("https://api.technicpack.net/modpack/%1?build=multimc").arg(slug), response.get()));
+    netJob->addNetAction(Net::Download::makeByteArray(QString("https://api.technicpack.net/modpack/%1?build=multiservermc").arg(slug), response.get()));
     QObject::connect(netJob, &NetJob::succeeded, this, [this, response, slug]
     {
         if (current.slug != slug)

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
 #include <qtimer.h>
 #include <memory>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class HttpMetaCache;
 
-class MULTIMC_LOGIC_EXPORT MetaEntry
+class MULTISERVERMC_LOGIC_EXPORT MetaEntry
 {
 friend class HttpMetaCache;
 protected:
@@ -79,7 +79,7 @@ protected:
 
 typedef std::shared_ptr<MetaEntry> MetaEntryPtr;
 
-class MULTIMC_LOGIC_EXPORT HttpMetaCache : public QObject
+class MULTISERVERMC_LOGIC_EXPORT HttpMetaCache : public QObject
 {
     Q_OBJECT
 public:

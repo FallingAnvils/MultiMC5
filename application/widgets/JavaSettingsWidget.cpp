@@ -1,5 +1,5 @@
 #include "JavaSettingsWidget.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 
 #include <java/JavaInstall.h>
 #include <dialogs/CustomMessageBox.h>
@@ -21,9 +21,9 @@ JavaSettingsWidget::JavaSettingsWidget(QWidget* parent) : QWidget(parent)
 {
     m_availableMemory = Sys::getSystemRam() / Sys::mebibyte;
 
-    goodIcon = MMC->getThemedIcon("status-good");
-    yellowIcon = MMC->getThemedIcon("status-yellow");
-    badIcon = MMC->getThemedIcon("status-bad");
+    goodIcon = MSMC->getThemedIcon("status-good");
+    yellowIcon = MSMC->getThemedIcon("status-yellow");
+    badIcon = MSMC->getThemedIcon("status-bad");
     setupUi();
 
     connect(m_minMemSpinBox, SIGNAL(valueChanged(int)), this, SLOT(memoryValueChanged(int)));
@@ -115,9 +115,9 @@ void JavaSettingsWidget::setupUi()
 
 void JavaSettingsWidget::initialize()
 {
-    m_versionWidget->initialize(MMC->javalist().get());
+    m_versionWidget->initialize(MSMC->javalist().get());
     m_versionWidget->setResizeOn(2);
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
     // Memory
     observedMinMemory = s->get("MinMemAlloc").toInt();
     observedMaxMemory = s->get("MaxMemAlloc").toInt();
@@ -146,7 +146,7 @@ JavaSettingsWidget::ValidationStatus JavaSettingsWidget::validate()
                 this,
                 tr("No Java version selected"),
                 tr("You didn't select a Java version or selected something that doesn't work.\n"
-                    "MultiMC will not be able to start Minecraft.\n"
+                    "MultiServerMC will not be able to start Minecraft.\n"
                     "Do you wish to proceed without any Java?"
                     "\n\n"
                     "You can change the Java version in the settings later.\n"

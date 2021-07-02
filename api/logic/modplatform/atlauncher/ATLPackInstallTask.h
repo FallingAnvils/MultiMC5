@@ -4,7 +4,7 @@
 #include "ATLPackManifest.h"
 
 #include "InstanceTask.h"
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 #include "net/NetJob.h"
 #include "settings/INISettingsObject.h"
 #include "minecraft/MinecraftInstance.h"
@@ -15,7 +15,7 @@
 
 namespace ATLauncher {
 
-class MULTIMC_LOGIC_EXPORT UserInteractionSupport {
+class MULTISERVERMC_LOGIC_EXPORT UserInteractionSupport {
 
 public:
     /**
@@ -31,7 +31,7 @@ public:
 
 };
 
-class MULTIMC_LOGIC_EXPORT PackInstallTask : public InstanceTask
+class MULTISERVERMC_LOGIC_EXPORT PackInstallTask : public InstanceTask
 {
 Q_OBJECT
 

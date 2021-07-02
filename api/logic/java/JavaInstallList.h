@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@
 
 #include "QObjectPtr.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class JavaListLoadTask;
 
-class MULTIMC_LOGIC_EXPORT JavaInstallList : public BaseVersionList
+class MULTISERVERMC_LOGIC_EXPORT JavaInstallList : public BaseVersionList
 {
     Q_OBJECT
     enum class Status

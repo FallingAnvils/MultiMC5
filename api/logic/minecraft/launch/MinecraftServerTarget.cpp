@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ MinecraftServerTarget MinecraftServerTarget::parse(const QString &fullAddress) {
 
     // The logic below replicates the exact logic minecraft uses for parsing server addresses.
     // While the conversion is not lossless and eats errors, it ensures the same behavior
-    // within Minecraft and MultiMC when entering server addresses.
+    // within Minecraft and MultiServerMC when entering server addresses.
     if (fullAddress.startsWith("["))
     {
         int bracket = fullAddress.indexOf("]");

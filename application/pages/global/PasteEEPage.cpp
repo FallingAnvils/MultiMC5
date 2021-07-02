@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #include "settings/SettingsObject.h"
 #include "tools/BaseProfiler.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 
 PasteEEPage::PasteEEPage(QWidget *parent) :
     QWidget(parent),
@@ -42,11 +42,11 @@ PasteEEPage::~PasteEEPage()
 
 void PasteEEPage::loadSettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
     QString keyToUse = s->get("PasteEEAPIKey").toString();
-    if(keyToUse == "multimc")
+    if(keyToUse == "multiservermc")
     {
-        ui->multimcButton->setChecked(true);
+        ui->multiservermcButton->setChecked(true);
     }
     else
     {
@@ -57,14 +57,14 @@ void PasteEEPage::loadSettings()
 
 void PasteEEPage::applySettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
 
     QString pasteKeyToUse;
     if (ui->customButton->isChecked())
         pasteKeyToUse = ui->customAPIkeyEdit->text();
     else
     {
-        pasteKeyToUse =  "multimc";
+        pasteKeyToUse =  "multiservermc";
     }
     s->set("PasteEEAPIKey", pasteKeyToUse);
 }

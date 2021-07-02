@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 #include <QList>
 #include <memory>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 #include "ModDetails.h"
 
 
 
-class MULTIMC_LOGIC_EXPORT Mod
+class MULTISERVERMC_LOGIC_EXPORT Mod
 {
 public:
     enum ModType
@@ -44,9 +44,9 @@ public:
     {
         return m_file;
     }
-    QString mmc_id() const
+    QString msmc_id() const
     {
-        return m_mmc_id;
+        return m_msmc_id;
     }
     ModType type() const
     {
@@ -106,7 +106,7 @@ public:
 protected:
     QFileInfo m_file;
     QDateTime m_changedDateTime;
-    QString m_mmc_id;
+    QString m_msmc_id;
     QString m_name;
     bool m_enabled = true;
     bool m_resolving = false;

@@ -3,14 +3,14 @@
 #include "BaseExternalTool.h"
 #include "QObjectPtr.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class BaseInstance;
 class SettingsObject;
 class LaunchTask;
 class QProcess;
 
-class MULTIMC_LOGIC_EXPORT BaseProfiler : public BaseExternalTool
+class MULTISERVERMC_LOGIC_EXPORT BaseProfiler : public BaseExternalTool
 {
     Q_OBJECT
 public:
@@ -32,7 +32,7 @@ signals:
     void abortLaunch(const QString &message);
 };
 
-class MULTIMC_LOGIC_EXPORT BaseProfilerFactory : public BaseExternalToolFactory
+class MULTISERVERMC_LOGIC_EXPORT BaseProfilerFactory : public BaseExternalToolFactory
 {
 public:
     virtual BaseProfiler *createProfiler(InstancePtr instance, QObject *parent = 0);

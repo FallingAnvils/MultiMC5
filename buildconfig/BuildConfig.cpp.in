@@ -6,17 +6,17 @@ const Config BuildConfig;
 Config::Config()
 {
     // Version information
-    VERSION_MAJOR = @MultiMC_VERSION_MAJOR@;
-    VERSION_MINOR = @MultiMC_VERSION_MINOR@;
-    VERSION_HOTFIX = @MultiMC_VERSION_HOTFIX@;
-    VERSION_BUILD = @MultiMC_VERSION_BUILD@;
+    VERSION_MAJOR = @MultiServerMC_VERSION_MAJOR@;
+    VERSION_MINOR = @MultiServerMC_VERSION_MINOR@;
+    VERSION_HOTFIX = @MultiServerMC_VERSION_HOTFIX@;
+    VERSION_BUILD = @MultiServerMC_VERSION_BUILD@;
 
-    BUILD_PLATFORM = "@MultiMC_BUILD_PLATFORM@";
-    CHANLIST_URL = "@MultiMC_CHANLIST_URL@";
-    FULL_VERSION_STR = "@MultiMC_VERSION_MAJOR@.@MultiMC_VERSION_MINOR@.@MultiMC_VERSION_BUILD@";
+    BUILD_PLATFORM = "@MultiServerMC_BUILD_PLATFORM@";
+    CHANLIST_URL = "@MultiServerMC_CHANLIST_URL@";
+    FULL_VERSION_STR = "@MultiServerMC_VERSION_MAJOR@.@MultiServerMC_VERSION_MINOR@.@MultiServerMC_VERSION_BUILD@";
 
-    GIT_COMMIT = "@MultiMC_GIT_COMMIT@";
-    GIT_REFSPEC = "@MultiMC_GIT_REFSPEC@";
+    GIT_COMMIT = "@MultiServerMC_GIT_COMMIT@";
+    GIT_REFSPEC = "@MultiServerMC_GIT_REFSPEC@";
     if(GIT_REFSPEC.startsWith("refs/heads/") && !CHANLIST_URL.isEmpty() && VERSION_BUILD >= 0)
     {
         VERSION_CHANNEL = GIT_REFSPEC;
@@ -28,13 +28,13 @@ Config::Config()
         VERSION_CHANNEL = QObject::tr("custom");
     }
 
-    VERSION_STR = "@MultiMC_VERSION_STRING@";
-    PASTE_EE_KEY = "@MultiMC_PASTE_EE_API_KEY@";
-    META_URL = "@MultiMC_META_URL@";
+    VERSION_STR = "@MultiServerMC_VERSION_STRING@";
+    PASTE_EE_KEY = "@MultiServerMC_PASTE_EE_API_KEY@";
+    META_URL = "@MultiServerMC_META_URL@";
 
-    BUG_TRACKER_URL = "@MultiMC_BUG_TRACKER_URL@";
-    DISCORD_URL = "@MultiMC_DISCORD_URL@";
-    SUBREDDIT_URL = "@MultiMC_SUBREDDIT_URL@";
+    BUG_TRACKER_URL = "@MultiServerMC_BUG_TRACKER_URL@";
+    DISCORD_URL = "@MultiServerMC_DISCORD_URL@";
+    SUBREDDIT_URL = "@MultiServerMC_SUBREDDIT_URL@";
 }
 
 QString Config::printableVersionString() const

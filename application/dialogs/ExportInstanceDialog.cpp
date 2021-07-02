@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #include "ExportInstanceDialog.h"
 #include "ui_ExportInstanceDialog.h"
 #include <BaseInstance.h>
-#include <MMCZip.h>
+#include <MSMCZip.h>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <qfilesystemmodel.h>
@@ -25,9 +25,9 @@
 #include <QDebug>
 #include <qstack.h>
 #include <QSaveFile>
-#include "MMCStrings.h"
+#include "MSMCStrings.h"
 #include "SeparatorPrefixTree.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include <icons/IconList.h>
 #include <FileSystem.h>
 
@@ -341,18 +341,18 @@ ExportInstanceDialog::~ExportInstanceDialog()
 void SaveIcon(InstancePtr m_instance)
 {
     auto iconKey = m_instance->iconKey();
-    auto iconList = MMC->icons();
-    auto mmcIcon = iconList->icon(iconKey);
-    if(!mmcIcon || mmcIcon->isBuiltIn()) {
+    auto iconList = MSMC->icons();
+    auto msmcIcon = iconList->icon(iconKey);
+    if(!msmcIcon || msmcIcon->isBuiltIn()) {
         return;
     }
-    auto path = mmcIcon->getFilePath();
+    auto path = msmcIcon->getFilePath();
     if(!path.isNull()) {
         QFileInfo inInfo (path);
         FS::copy(path, FS::PathCombine(m_instance->instanceRoot(), inInfo.fileName())) ();
         return;
     }
-    auto & image = mmcIcon->m_images[mmcIcon->type()];
+    auto & image = msmcIcon->m_images[msmcIcon->type()];
     auto & icon = image.icon;
     auto sizes = icon.availableSizes();
     if(sizes.size() == 0)

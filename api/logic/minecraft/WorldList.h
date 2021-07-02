@@ -1,4 +1,4 @@
-/* Copyright 2015-2021 MultiMC Contributors
+/* Copyright 2015-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@
 #include <QMimeData>
 #include "minecraft/World.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class QFileSystemWatcher;
 
-class MULTIMC_LOGIC_EXPORT WorldList : public QAbstractListModel
+class MULTISERVERMC_LOGIC_EXPORT WorldList : public QAbstractListModel
 {
     Q_OBJECT
 public:

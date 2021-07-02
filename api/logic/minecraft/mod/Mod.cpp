@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ void Mod::repath(const QFileInfo &file)
 
     m_type = Mod::MOD_UNKNOWN;
 
-    m_mmc_id = name_base;
+    m_msmc_id = name_base;
 
     if (m_file.isDir())
     {

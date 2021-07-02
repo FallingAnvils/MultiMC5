@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 #include <QTabBar>
 
 #include "settings/SettingsObject.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 
 MinecraftPage::MinecraftPage(QWidget *parent) : QWidget(parent), ui(new Ui::MinecraftPage)
 {
@@ -49,7 +49,7 @@ void MinecraftPage::on_maximizedCheckBox_clicked(bool checked)
 
 void MinecraftPage::applySettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
 
     // Game time
     s->set("ShowGameTime", ui->showGameTime->isChecked());
@@ -58,7 +58,7 @@ void MinecraftPage::applySettings()
 
 void MinecraftPage::loadSettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
 
     ui->showGameTime->setChecked(s->get("ShowGameTime").toBool());
     ui->recordGameTime->setChecked(s->get("RecordGameTime").toBool());

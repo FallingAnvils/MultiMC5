@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@
 #include <QVariant>
 #include <QIODevice>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 // Sectionless INI parser (for instance config files)
-class MULTIMC_LOGIC_EXPORT INIFile : public QMap<QString, QVariant>
+class MULTISERVERMC_LOGIC_EXPORT INIFile : public QMap<QString, QVariant>
 {
 public:
     explicit INIFile();

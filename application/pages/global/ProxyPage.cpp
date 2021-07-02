@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 #include <QTabBar>
 
 #include "settings/SettingsObject.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "Env.h"
 
 ProxyPage::ProxyPage(QWidget *parent) : QWidget(parent), ui(new Ui::ProxyPage)
@@ -58,7 +58,7 @@ void ProxyPage::proxyChanged(int)
 
 void ProxyPage::applySettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
 
     // Proxy
     QString proxyType = "None";
@@ -82,7 +82,7 @@ void ProxyPage::applySettings()
 }
 void ProxyPage::loadSettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
     // Proxy
     QString proxyType = s->get("ProxyType").toString();
     if (proxyType == "Default")

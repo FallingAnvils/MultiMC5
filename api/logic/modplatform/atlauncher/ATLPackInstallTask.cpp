@@ -1,7 +1,7 @@
 #include <Env.h>
 #include <quazip.h>
 #include <QtConcurrent/QtConcurrent>
-#include <MMCZip.h>
+#include <MSMCZip.h>
 #include <minecraft/OneSixVersionFormat.h>
 #include <Version.h>
 #include <net/ChecksumValidator.h>
@@ -235,7 +235,7 @@ QString PackInstallTask::detectLibrary(VersionLibrary library)
         }
     }
 
-    return "org.multimc.atlauncher:" + library.md5 + ":1";
+    return "org.multiservermc.atlauncher:" + library.md5 + ":1";
 }
 
 bool PackInstallTask::createLibrariesComponent(QString instanceRoot, std::shared_ptr<PackProfile> profile)
@@ -263,7 +263,7 @@ bool PackInstallTask::createLibrariesComponent(QString instanceRoot, std::shared
 
     auto uuid = QUuid::createUuid();
     auto id = uuid.toString().remove('{').remove('}');
-    auto target_id = "org.multimc.atlauncher." + id;
+    auto target_id = "org.multiservermc.atlauncher." + id;
 
     auto patchDir = FS::PathCombine(instanceRoot, "patches");
     if(!FS::ensureFolderPathExists(patchDir))
@@ -333,7 +333,7 @@ bool PackInstallTask::createPackComponent(QString instanceRoot, std::shared_ptr<
 
     auto uuid = QUuid::createUuid();
     auto id = uuid.toString().remove('{').remove('}');
-    auto target_id = "org.multimc.atlauncher." + id;
+    auto target_id = "org.multiservermc.atlauncher." + id;
 
     auto patchDir = FS::PathCombine(instanceRoot, "patches");
     if(!FS::ensureFolderPathExists(patchDir))
@@ -442,7 +442,7 @@ void PackInstallTask::extractConfigs()
         return;
     }
 
-    m_extractFuture = QtConcurrent::run(QThreadPool::globalInstance(), MMCZip::extractDir, archivePath, extractDir.absolutePath() + "/minecraft");
+    m_extractFuture = QtConcurrent::run(QThreadPool::globalInstance(), MSMCZip::extractDir, archivePath, extractDir.absolutePath() + "/minecraft");
     connect(&m_extractFutureWatcher, &QFutureWatcher<QStringList>::finished, this, [&]()
     {
         downloadMods();
@@ -642,7 +642,7 @@ bool PackInstallTask::extractMods(
         }
 
         qDebug() << "Extracting " + mod.file + " to " + extractToDir;
-        if(!MMCZip::extractDir(modPath, folderToExtract, extractToPath)) {
+        if(!MSMCZip::extractDir(modPath, folderToExtract, extractToPath)) {
             // assume error
             return false;
         }
@@ -657,7 +657,7 @@ bool PackInstallTask::extractMods(
         auto extractToPath = FS::PathCombine(extractDir.absolutePath(), "minecraft", extractToDir, mod.decompFile);
 
         qDebug() << "Extracting " + mod.decompFile + " to " + extractToDir;
-        if(!MMCZip::extractFile(modPath, mod.decompFile, extractToPath)) {
+        if(!MSMCZip::extractFile(modPath, mod.decompFile, extractToPath)) {
             qWarning() << "Failed to extract" << mod.decompFile;
             return false;
         }

@@ -1,5 +1,5 @@
 #include "JavaVersion.h"
-#include <MMCStrings.h>
+#include <MSMCStrings.h>
 
 #include <QRegularExpression>
 #include <QString>

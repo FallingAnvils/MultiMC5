@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 #include <QWidget>
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "pages/BasePage.h"
 #include "tasks/Task.h"
 
@@ -44,7 +44,7 @@ public:
     }
     virtual QIcon icon() const override
     {
-        return MMC->getThemedIcon("ftb_logo");
+        return MSMC->getThemedIcon("ftb_logo");
     }
     virtual QString id() const override
     {

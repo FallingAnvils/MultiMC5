@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 #include <LoggedProcess.h>
 #include <java/JavaChecker.h>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 /*
  * FIXME: maybe do not export
  */
 
-class MULTIMC_LOGIC_EXPORT TextPrint: public LaunchStep
+class MULTISERVERMC_LOGIC_EXPORT TextPrint: public LaunchStep
 {
     Q_OBJECT
 public:

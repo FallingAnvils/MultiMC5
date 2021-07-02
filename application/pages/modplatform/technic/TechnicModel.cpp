@@ -1,4 +1,4 @@
-/* Copyright 2020-2021 MultiMC Contributors
+/* Copyright 2020-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 #include "TechnicModel.h"
 #include "Env.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "Json.h"
 
 #include <QIcon>
@@ -47,7 +47,7 @@ QVariant Technic::ListModel::data(const QModelIndex& index, int role) const
         {
             return (m_logoMap.value(pack.logoName));
         }
-        QIcon icon = MMC->getThemedIcon("screenshot-placeholder");
+        QIcon icon = MSMC->getThemedIcon("screenshot-placeholder");
         ((ListModel *)this)->requestLogo(pack.logoName, pack.logoUrl);
         return icon;
     }
@@ -96,13 +96,13 @@ void Technic::ListModel::performSearch()
     QString searchUrl = "";
     if (currentSearchTerm.isEmpty()) {
         searchUrl = QString(
-            "https://api.technicpack.net/trending?build=multimc"
+            "https://api.technicpack.net/trending?build=multiservermc"
         ).arg(currentSearchTerm);
     }
     else
     {
         searchUrl = QString(
-            "https://api.technicpack.net/search?build=multimc&q=%1"
+            "https://api.technicpack.net/search?build=multiservermc&q=%1"
         ).arg(currentSearchTerm);
     }
     netJob->addNetAction(Net::Download::makeByteArray(QUrl(searchUrl), &response));

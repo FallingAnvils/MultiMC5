@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Authors: Orochimarufan <orochimarufan.x3@gmail.com>
  *
@@ -25,7 +25,7 @@
 #include <QHash>
 #include <QStringList>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 /**
  * @file libutil/include/cmdutils.h
@@ -40,7 +40,7 @@ namespace Commandline
  * @param args the argument string
  * @return a QStringList containing all arguments
  */
-MULTIMC_LOGIC_EXPORT QStringList splitArgs(QString args);
+MULTISERVERMC_LOGIC_EXPORT QStringList splitArgs(QString args);
 
 /**
  * @brief The FlagStyle enum
@@ -83,7 +83,7 @@ enum Enum
 /**
  * @brief The ParsingError class
  */
-class MULTIMC_LOGIC_EXPORT ParsingError : public std::runtime_error
+class MULTISERVERMC_LOGIC_EXPORT ParsingError : public std::runtime_error
 {
 public:
     ParsingError(const QString &what);
@@ -92,7 +92,7 @@ public:
 /**
  * @brief The Parser class
  */
-class MULTIMC_LOGIC_EXPORT Parser
+class MULTISERVERMC_LOGIC_EXPORT Parser
 {
 public:
     /**

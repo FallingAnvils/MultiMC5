@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@
 
 #include "settings/SettingsObject.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 /*!
  * \brief A settings object that stores its settings in an INIFile.
  */
-class MULTIMC_LOGIC_EXPORT INISettingsObject : public SettingsObject
+class MULTISERVERMC_LOGIC_EXPORT INISettingsObject : public SettingsObject
 {
     Q_OBJECT
 public:

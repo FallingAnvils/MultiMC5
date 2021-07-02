@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -247,7 +247,7 @@ void PackProfile::scheduleSave()
 
 QString PackProfile::componentsFilePath() const
 {
-    return FS::PathCombine(d->m_instance->instanceRoot(), "mmc-pack.json");
+    return FS::PathCombine(d->m_instance->instanceRoot(), "msmc-pack.json");
 }
 
 QString PackProfile::patchesPattern() const
@@ -433,7 +433,7 @@ static void upgradeDeprecatedFiles(QString root, QString instanceName)
  */
 bool PackProfile::migratePreComponentConfig()
 {
-    // upgrade the very old files from the beginnings of MultiMC 5
+    // upgrade the very old files from the beginnings of MultiServerMC 5
     upgradeDeprecatedFiles(d->m_instance->instanceRoot(), d->m_instance->name());
 
     QList<ComponentPtr> components;
@@ -1042,7 +1042,7 @@ bool PackProfile::installJarMods_internal(QStringList filepaths)
         auto uuid = QUuid::createUuid();
         QString id = uuid.toString().remove('{').remove('}');
         QString target_filename = id + ".jar";
-        QString target_id = "org.multimc.jarmod." + id;
+        QString target_id = "org.multiservermc.jarmod." + id;
         QString target_name = sourceInfo.completeBaseName() + " (jar mod)";
         QString finalPath = FS::PathCombine(d->m_instance->jarModsDir(), target_filename);
 
@@ -1059,7 +1059,7 @@ bool PackProfile::installJarMods_internal(QStringList filepaths)
 
         auto f = std::make_shared<VersionFile>();
         auto jarMod = std::make_shared<Library>();
-        jarMod->setRawName(GradleSpecifier("org.multimc.jarmods:" + id + ":1"));
+        jarMod->setRawName(GradleSpecifier("org.multiservermc.jarmods:" + id + ":1"));
         jarMod->setFilename(target_filename);
         jarMod->setDisplayName(sourceInfo.completeBaseName());
         jarMod->setHint("local");
@@ -1099,7 +1099,7 @@ bool PackProfile::installCustomJar_internal(QString filepath)
         return false;
     }
 
-    auto specifier = GradleSpecifier("org.multimc:customjar:1");
+    auto specifier = GradleSpecifier("org.multiservermc:customjar:1");
     QFileInfo sourceInfo(filepath);
     QString target_filename = specifier.getFileName();
     QString target_id = specifier.artifactId();

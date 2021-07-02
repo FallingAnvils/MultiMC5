@@ -1,4 +1,4 @@
-/* Copyright 2015-2021 MultiMC Contributors
+/* Copyright 2015-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 #include <QInputDialog>
 #include <tools/MCEditTool.h>
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include <GuiUtil.h>
 #include <QProcess>
 #include <FileSystem.h>
@@ -48,7 +48,7 @@ public:
             auto iconFile = worlds->data(sourceIndex, WorldList::IconFileRole).toString();
             if(iconFile.isNull()) {
                 // NOTE: Minecraft uses the same placeholder for servers AND worlds
-                return MMC->getThemedIcon("unknown_server");
+                return MSMC->getThemedIcon("unknown_server");
             }
             return QIcon(iconFile);
         }
@@ -218,7 +218,7 @@ void WorldListPage::on_actionCopy_Seed_triggered()
         return;
     }
     int64_t seed = m_worlds->data(index, WorldList::SeedRole).toLongLong();
-    MMC->clipboard()->setText(QString::number(seed));
+    MSMC->clipboard()->setText(QString::number(seed));
 }
 
 void WorldListPage::on_actionMCEdit_triggered()
@@ -226,7 +226,7 @@ void WorldListPage::on_actionMCEdit_triggered()
     if(m_mceditStarting)
         return;
 
-    auto mcedit = MMC->mcedit();
+    auto mcedit = MSMC->mcedit();
 
     const QString mceditPath = mcedit->path();
 

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 #include "ModMinecraftJar.h"
 #include "launch/LaunchTask.h"
-#include "MMCZip.h"
+#include "MSMCZip.h"
 #include "minecraft/OpSys.h"
 #include "FileSystem.h"
 #include "minecraft/MinecraftInstance.h"
@@ -52,7 +52,7 @@ void ModMinecraftJar::executeTask()
         QStringList jars, temp1, temp2, temp3, temp4;
         mainJar->getApplicableFiles(currentSystem, jars, temp1, temp2, temp3, m_inst->getLocalLibraryPath());
         auto sourceJarPath = jars[0];
-        if(!MMCZip::createModdedJar(sourceJarPath, finalJarPath, jarMods))
+        if(!MSMCZip::createModdedJar(sourceJarPath, finalJarPath, jarMods))
         {
             emitFailed(tr("Failed to create the custom Minecraft jar file."));
             return;

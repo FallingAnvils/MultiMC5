@@ -49,7 +49,7 @@ public:
     QString PASTE_EE_KEY;
 
     /**
-     * MultiMC Metadata repository URL prefix
+     * MultiServerMC Metadata repository URL prefix
      */
     QString META_URL;
 

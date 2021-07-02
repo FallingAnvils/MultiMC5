@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,9 +129,9 @@ void OtherLogsPage::on_btnReload_clicked()
     {
         auto setPlainText = [&](const QString & text)
         {
-            QString fontFamily = MMC->settings()->get("ConsoleFont").toString();
+            QString fontFamily = MSMC->settings()->get("ConsoleFont").toString();
             bool conversionOk = false;
-            int fontSize = MMC->settings()->get("ConsoleFontSize").toInt(&conversionOk);
+            int fontSize = MSMC->settings()->get("ConsoleFontSize").toInt(&conversionOk);
             if(!conversionOk)
             {
                 fontSize = 11;

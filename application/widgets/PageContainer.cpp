@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@
 #include <QDialogButtonBox>
 #include <QGridLayout>
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "settings/SettingsObject.h"
 #include "widgets/IconLabel.h"
 #include "PageContainer_p.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 #include <DesktopServices.h>
 
 class PageEntryFilterModel : public QSortFilterProxyModel
@@ -139,12 +139,12 @@ void PageContainer::createUI()
     m_header->setFont(headerLabelFont);
 
     QHBoxLayout *headerHLayout = new QHBoxLayout;
-    const int leftMargin = MMC->style()->pixelMetric(QStyle::PM_LayoutLeftMargin);
+    const int leftMargin = MSMC->style()->pixelMetric(QStyle::PM_LayoutLeftMargin);
     headerHLayout->addSpacerItem(new QSpacerItem(leftMargin, 0, QSizePolicy::Fixed, QSizePolicy::Ignored));
     headerHLayout->addWidget(m_header);
     headerHLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Ignored));
     headerHLayout->addWidget(m_iconHeader);
-    const int rightMargin = MMC->style()->pixelMetric(QStyle::PM_LayoutRightMargin);
+    const int rightMargin = MSMC->style()->pixelMetric(QStyle::PM_LayoutRightMargin);
     headerHLayout->addSpacerItem(new QSpacerItem(rightMargin, 0, QSizePolicy::Fixed, QSizePolicy::Ignored));
     headerHLayout->setContentsMargins(0, 6, 0, 0);
 
@@ -195,7 +195,7 @@ void PageContainer::showPage(int row)
     {
         m_pageStack->setCurrentIndex(0);
         m_header->setText(QString());
-        m_iconHeader->setIcon(MMC->getThemedIcon("bug"));
+        m_iconHeader->setIcon(MSMC->getThemedIcon("bug"));
     }
 }
 
@@ -206,7 +206,7 @@ void PageContainer::help()
         QString pageId = m_currentPage->helpPage();
         if (pageId.isEmpty())
             return;
-        DesktopServices::openUrl(QUrl("https://github.com/MultiMC/MultiMC5/wiki/" + pageId));
+        DesktopServices::openUrl(QUrl("https://github.com/MultiServerMC/MultiServerMC5/wiki/" + pageId));
     }
 }
 

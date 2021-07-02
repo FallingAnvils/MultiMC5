@@ -1,4 +1,4 @@
-/* Copyright 2018-2021 MultiMC Contributors
+/* Copyright 2018-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 #include <QDialog>
 
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 #include "widgets/CustomCommands.h"
 
 class CustomCommandsPage : public QWidget, public BasePage
@@ -36,7 +36,7 @@ public:
     }
     QIcon icon() const override
     {
-        return MMC->getThemedIcon("custom-commands");
+        return MSMC->getThemedIcon("custom-commands");
     }
     QString id() const override
     {

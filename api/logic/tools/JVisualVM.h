@@ -2,9 +2,9 @@
 
 #include "BaseProfiler.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT JVisualVMFactory : public BaseProfilerFactory
+class MULTISERVERMC_LOGIC_EXPORT JVisualVMFactory : public BaseProfilerFactory
 {
 public:
     QString name() const override { return "JVisualVM"; }

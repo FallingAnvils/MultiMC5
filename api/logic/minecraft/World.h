@@ -1,4 +1,4 @@
-/* Copyright 2015-2021 MultiMC Contributors
+/* Copyright 2015-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
 #include <QDateTime>
 #include <nonstd/optional>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
-struct MULTIMC_LOGIC_EXPORT GameType {
+struct MULTISERVERMC_LOGIC_EXPORT GameType {
     GameType() = default;
     GameType (nonstd::optional<int> original);
 
@@ -38,7 +38,7 @@ struct MULTIMC_LOGIC_EXPORT GameType {
     nonstd::optional<int> original;
 };
 
-class MULTIMC_LOGIC_EXPORT World
+class MULTISERVERMC_LOGIC_EXPORT World
 {
 public:
     World(const QFileInfo &file);

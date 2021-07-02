@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@
 
 #include "settings/SettingsObject.h"
 #include <FileSystem.h>
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include <sys.h>
 
 JavaPage::JavaPage(QWidget *parent) : QWidget(parent), ui(new Ui::JavaPage)
@@ -55,7 +55,7 @@ bool JavaPage::apply()
 
 void JavaPage::applySettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
 
     // Memory
     int min = ui->minMemSpinBox->value();
@@ -79,7 +79,7 @@ void JavaPage::applySettings()
 }
 void JavaPage::loadSettings()
 {
-    auto s = MMC->settings();
+    auto s = MSMC->settings();
     // Memory
     int min = s->get("MinMemAlloc").toInt();
     int max = s->get("MaxMemAlloc").toInt();
@@ -104,7 +104,7 @@ void JavaPage::on_javaDetectBtn_clicked()
 {
     JavaInstallPtr java;
 
-    VersionSelectDialog vselect(MMC->javalist().get(), tr("Select a Java version"), this, true);
+    VersionSelectDialog vselect(MSMC->javalist().get(), tr("Select a Java version"), this, true);
     vselect.setResizeOn(2);
     vselect.exec();
 

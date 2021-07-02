@@ -5,7 +5,7 @@
 #include <QString>
 #include <QVector>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 namespace Flame {
 
@@ -36,8 +36,8 @@ struct IndexedPack
     QVector<IndexedVersion> versions;
 };
 
-MULTIMC_LOGIC_EXPORT void loadIndexedPack(IndexedPack & m, QJsonObject & obj);
-MULTIMC_LOGIC_EXPORT void loadIndexedPackVersions(IndexedPack & m, QJsonArray & arr);
+MULTISERVERMC_LOGIC_EXPORT void loadIndexedPack(IndexedPack & m, QJsonObject & obj);
+MULTISERVERMC_LOGIC_EXPORT void loadIndexedPackVersions(IndexedPack & m, QJsonArray & arr);
 }
 
 Q_DECLARE_METATYPE(Flame::IndexedPack)

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@
 #include "tasks/Task.h"
 #include "QObjectPtr.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class NetJob;
 typedef shared_qobject_ptr<NetJob> NetJobPtr;
 
-class MULTIMC_LOGIC_EXPORT NetJob : public Task
+class MULTISERVERMC_LOGIC_EXPORT NetJob : public Task
 {
     Q_OBJECT
 public:

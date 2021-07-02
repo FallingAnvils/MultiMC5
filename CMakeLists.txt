@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.1)
 
 string(COMPARE EQUAL "${CMAKE_SOURCE_DIR}" "${CMAKE_BUILD_DIR}" IS_IN_SOURCE_BUILD)
 if(IS_IN_SOURCE_BUILD)
-    message(FATAL_ERROR "You are building MultiMC in-source. Please separate the build tree from the source tree.")
+    message(FATAL_ERROR "You are building MultiServerMC in-source. Please separate the build tree from the source tree.")
 endif()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(CMAKE_HOST_SYSTEM_VERSION MATCHES ".*[Mm]icrosoft.*" OR
         CMAKE_HOST_SYSTEM_VERSION MATCHES ".*WSL.*"
     )
-        message(FATAL_ERROR "Building MultiMC is not supported in Linux-on-Windows distributions.")
+        message(FATAL_ERROR "Building MultiServerMC is not supported in Linux-on-Windows distributions.")
     endif()
 endif()
 
@@ -18,7 +18,7 @@ if(WIN32)
     cmake_policy(SET CMP0020 OLD)
 endif()
 
-project(MultiMC)
+project(MultiServerMC)
 enable_testing()
 
 
@@ -51,46 +51,46 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror=return-type")
 
 
 ######## Set version numbers ########
-set(MultiMC_VERSION_MAJOR    0)
-set(MultiMC_VERSION_MINOR    6)
-set(MultiMC_VERSION_HOTFIX   12)
+set(MultiServerMC_VERSION_MAJOR    0)
+set(MultiServerMC_VERSION_MINOR    6)
+set(MultiServerMC_VERSION_HOTFIX   12)
 
 # Build number
-set(MultiMC_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
+set(MultiServerMC_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
 
 # Build platform.
-set(MultiMC_BUILD_PLATFORM "" CACHE STRING "A short string identifying the platform that this build was built for. Only used by the notification system and to display in the about dialog.")
+set(MultiServerMC_BUILD_PLATFORM "" CACHE STRING "A short string identifying the platform that this build was built for. Only used by the notification system and to display in the about dialog.")
 
 # Channel list URL
-set(MultiMC_CHANLIST_URL "" CACHE STRING "URL for the channel list.")
+set(MultiServerMC_CHANLIST_URL "" CACHE STRING "URL for the channel list.")
 
 # The metadata server
-set(MultiMC_META_URL "https://meta.multimc.org/v1/" CACHE STRING "URL to fetch MultiMC's meta files from.")
+set(MultiServerMC_META_URL "https://meta.multimc.org/v1/" CACHE STRING "URL to fetch MultiServerMC's meta files from.")
 
 # paste.ee API key
-set(MultiMC_PASTE_EE_API_KEY "utLvciUouSURFzfjPxLBf5W4ISsUX4pwBDF7N1AfZ" CACHE STRING "API key you can get from paste.ee when you register an account")
+set(MultiServerMC_PASTE_EE_API_KEY "utLvciUouSURFzfjPxLBf5W4ISsUX4pwBDF7N1AfZ" CACHE STRING "API key you can get from paste.ee when you register an account")
 
 # Bug tracker URL
-set(MultiMC_BUG_TRACKER_URL "" CACHE STRING "URL for the bug tracker.")
+set(MultiServerMC_BUG_TRACKER_URL "" CACHE STRING "URL for the bug tracker.")
 
 # Discord URL
-set(MultiMC_DISCORD_URL "" CACHE STRING "URL for the Discord guild.")
+set(MultiServerMC_DISCORD_URL "" CACHE STRING "URL for the Discord guild.")
 
 # Subreddit URL
-set(MultiMC_SUBREDDIT_URL "" CACHE STRING "URL for the subreddit.")
+set(MultiServerMC_SUBREDDIT_URL "" CACHE STRING "URL for the subreddit.")
 
 #### Check the current Git commit and branch
 include(GetGitRevisionDescription)
-get_git_head_revision(MultiMC_GIT_REFSPEC MultiMC_GIT_COMMIT)
+get_git_head_revision(MultiServerMC_GIT_REFSPEC MultiServerMC_GIT_COMMIT)
 
-message(STATUS "Git commit: ${MultiMC_GIT_COMMIT}")
-message(STATUS "Git refspec: ${MultiMC_GIT_REFSPEC}")
+message(STATUS "Git commit: ${MultiServerMC_GIT_COMMIT}")
+message(STATUS "Git refspec: ${MultiServerMC_GIT_REFSPEC}")
 
-set(MultiMC_RELEASE_VERSION_NAME "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}")
+set(MultiServerMC_RELEASE_VERSION_NAME "${MultiServerMC_VERSION_MAJOR}.${MultiServerMC_VERSION_MINOR}.${MultiServerMC_VERSION_HOTFIX}")
 
 #### Custom target to just print the version.
-add_custom_target(version echo "Version: ${MultiMC_RELEASE_VERSION_NAME}")
-add_custom_target(tcversion echo "\\#\\#teamcity[setParameter name=\\'env.MULTIMC_VERSION\\' value=\\'${MultiMC_RELEASE_VERSION_NAME}\\']")
+add_custom_target(version echo "Version: ${MultiServerMC_RELEASE_VERSION_NAME}")
+add_custom_target(tcversion echo "\\#\\#teamcity[setParameter name=\\'env.MULTISERVERMC_VERSION\\' value=\\'${MultiServerMC_RELEASE_VERSION_NAME}\\']")
 
 ################################ 3rd Party Libs ################################
 
@@ -118,44 +118,44 @@ endif()
 ####################################### Install layout #######################################
 
 # How to install the build results
-set(MultiMC_LAYOUT "auto" CACHE STRING "The layout for MultiMC installation (auto, win-bundle, lin-bundle, lin-nodeps, lin-system, mac-bundle)")
-set_property(CACHE MultiMC_LAYOUT PROPERTY STRINGS auto win-bundle lin-bundle lin-nodeps lin-system mac-bundle)
+set(MultiServerMC_LAYOUT "auto" CACHE STRING "The layout for MultiServerMC installation (auto, win-bundle, lin-bundle, lin-nodeps, lin-system, mac-bundle)")
+set_property(CACHE MultiServerMC_LAYOUT PROPERTY STRINGS auto win-bundle lin-bundle lin-nodeps lin-system mac-bundle)
 
-if(MultiMC_LAYOUT STREQUAL "auto")
+if(MultiServerMC_LAYOUT STREQUAL "auto")
     if(UNIX AND APPLE)
-        set(MultiMC_LAYOUT_REAL "mac-bundle")
+        set(MultiServerMC_LAYOUT_REAL "mac-bundle")
     elseif(UNIX)
-        set(MultiMC_LAYOUT_REAL "lin-nodeps")
+        set(MultiServerMC_LAYOUT_REAL "lin-nodeps")
     elseif(WIN32)
-        set(MultiMC_LAYOUT_REAL "win-bundle")
+        set(MultiServerMC_LAYOUT_REAL "win-bundle")
     else()
         message(FATAL_ERROR "Cannot choose a sensible install layout for your platform.")
     endif()
 else()
-    set(MultiMC_LAYOUT_REAL ${MultiMC_LAYOUT})
+    set(MultiServerMC_LAYOUT_REAL ${MultiServerMC_LAYOUT})
 endif()
 
-if(MultiMC_LAYOUT_REAL STREQUAL "mac-bundle")
-    set(BINARY_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(LIBRARY_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(PLUGIN_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(RESOURCES_DEST_DIR "MultiMC.app/Contents/Resources")
-    set(JARS_DEST_DIR "MultiMC.app/Contents/MacOS/jars")
+if(MultiServerMC_LAYOUT_REAL STREQUAL "mac-bundle")
+    set(BINARY_DEST_DIR "MultiServerMC.app/Contents/MacOS")
+    set(LIBRARY_DEST_DIR "MultiServerMC.app/Contents/MacOS")
+    set(PLUGIN_DEST_DIR "MultiServerMC.app/Contents/MacOS")
+    set(RESOURCES_DEST_DIR "MultiServerMC.app/Contents/Resources")
+    set(JARS_DEST_DIR "MultiServerMC.app/Contents/MacOS/jars")
 
     set(BUNDLE_DEST_DIR ".")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiMC.app")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiServerMC.app")
 
     # Mac bundle settings
-    set(MACOSX_BUNDLE_BUNDLE_NAME "MultiMC")
-    set(MACOSX_BUNDLE_INFO_STRING "MultiMC Minecraft launcher and management utility.")
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.multimc.MultiMC5")
-    set(MACOSX_BUNDLE_BUNDLE_VERSION "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_LONG_VERSION_STRING "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_ICON_FILE MultiMC.icns)
-    set(MACOSX_BUNDLE_COPYRIGHT "Copyright 2015-2021 MultiMC Contributors")
+    set(MACOSX_BUNDLE_BUNDLE_NAME "MultiServerMC")
+    set(MACOSX_BUNDLE_INFO_STRING "MultiServerMC Minecraft launcher and management utility.")
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.multiservermc.MultiServerMC5")
+    set(MACOSX_BUNDLE_BUNDLE_VERSION "${MultiServerMC_VERSION_MAJOR}.${MultiServerMC_VERSION_MINOR}.${MultiServerMC_VERSION_HOTFIX}.${MultiServerMC_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${MultiServerMC_VERSION_MAJOR}.${MultiServerMC_VERSION_MINOR}.${MultiServerMC_VERSION_HOTFIX}.${MultiServerMC_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_LONG_VERSION_STRING "${MultiServerMC_VERSION_MAJOR}.${MultiServerMC_VERSION_MINOR}.${MultiServerMC_VERSION_HOTFIX}.${MultiServerMC_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_ICON_FILE MultiServerMC.icns)
+    set(MACOSX_BUNDLE_COPYRIGHT "Copyright 2015-2021 MultiServerMC Contributors")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -164,9 +164,9 @@ if(MultiMC_LAYOUT_REAL STREQUAL "mac-bundle")
     set(INSTALL_BUNDLE "full")
 
     # Add the icon
-    install(FILES application/resources/MultiMC.icns DESTINATION ${RESOURCES_DEST_DIR})
+    install(FILES application/resources/MultiServerMC.icns DESTINATION ${RESOURCES_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
+elseif(MultiServerMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(BINARY_DEST_DIR "bin")
     set(LIBRARY_DEST_DIR "bin")
     set(PLUGIN_DEST_DIR "plugins")
@@ -175,7 +175,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(JARS_DEST_DIR "bin/jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/MultiMC")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/MultiServerMC")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -184,12 +184,12 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(INSTALL_BUNDLE "full")
 
     # Set RPATH
-    SET(MultiMC_BINARY_RPATH "$ORIGIN/")
+    SET(MultiServerMC_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/MultiServerMC DESTINATION ${BUNDLE_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
+elseif(MultiServerMC_LAYOUT_REAL STREQUAL "lin-nodeps")
     set(BINARY_DEST_DIR "bin")
     set(LIBRARY_DEST_DIR "bin")
     set(PLUGIN_DEST_DIR "plugins")
@@ -201,28 +201,28 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
     set(INSTALL_BUNDLE "nodeps")
 
     # Set RPATH
-    SET(MultiMC_BINARY_RPATH "$ORIGIN/")
+    SET(MultiServerMC_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/MultiServerMC DESTINATION ${BUNDLE_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-system")
-    set(MultiMC_APP_BINARY_NAME "multimc" CACHE STRING "Name of the MultiMC binary")
-    set(MultiMC_BINARY_DEST_DIR "bin" CACHE STRING "Path to the binary directory")
-    set(MultiMC_LIBRARY_DEST_DIR "lib${LIB_SUFFIX}" CACHE STRING "Path to the library directory")
-    set(MultiMC_SHARE_DEST_DIR "share/multimc" CACHE STRING "Path to the shared data directory")
-    set(JARS_DEST_DIR "${MultiMC_SHARE_DEST_DIR}/jars")
+elseif(MultiServerMC_LAYOUT_REAL STREQUAL "lin-system")
+    set(MultiServerMC_APP_BINARY_NAME "multiservermc" CACHE STRING "Name of the MultiServerMC binary")
+    set(MultiServerMC_BINARY_DEST_DIR "bin" CACHE STRING "Path to the binary directory")
+    set(MultiServerMC_LIBRARY_DEST_DIR "lib${LIB_SUFFIX}" CACHE STRING "Path to the library directory")
+    set(MultiServerMC_SHARE_DEST_DIR "share/multiservermc" CACHE STRING "Path to the shared data directory")
+    set(JARS_DEST_DIR "${MultiServerMC_SHARE_DEST_DIR}/jars")
 
-    set(BINARY_DEST_DIR ${MultiMC_BINARY_DEST_DIR})
-    set(LIBRARY_DEST_DIR ${MultiMC_LIBRARY_DEST_DIR})
+    set(BINARY_DEST_DIR ${MultiServerMC_BINARY_DEST_DIR})
+    set(LIBRARY_DEST_DIR ${MultiServerMC_LIBRARY_DEST_DIR})
 
-    MESSAGE(STATUS "Compiling for linux system with ${MultiMC_SHARE_DEST_DIR} and MULTIMC_LINUX_DATADIR")
-    SET(MultiMC_APP_BINARY_DEFS "-DMULTIMC_JARS_LOCATION=${CMAKE_INSTALL_PREFIX}/${JARS_DEST_DIR}" "-DMULTIMC_LINUX_DATADIR")
+    MESSAGE(STATUS "Compiling for linux system with ${MultiServerMC_SHARE_DEST_DIR} and MULTISERVERMC_LINUX_DATADIR")
+    SET(MultiServerMC_APP_BINARY_DEFS "-DMULTISERVERMC_JARS_LOCATION=${CMAKE_INSTALL_PREFIX}/${JARS_DEST_DIR}" "-DMULTISERVERMC_LINUX_DATADIR")
 
     # install as bundle with no dependencies included
     set(INSTALL_BUNDLE "nodeps")
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "win-bundle")
+elseif(MultiServerMC_LAYOUT_REAL STREQUAL "win-bundle")
     set(BINARY_DEST_DIR ".")
     set(LIBRARY_DEST_DIR ".")
     set(PLUGIN_DEST_DIR ".")
@@ -231,7 +231,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "win-bundle")
     set(JARS_DEST_DIR "jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiMC.exe")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiServerMC.exe")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -250,7 +250,7 @@ set_directory_properties(PROPERTIES EP_BASE External)
 option(NBT_BUILD_SHARED "Build NBT shared library" ON)
 option(NBT_USE_ZLIB "Build NBT library with zlib support" OFF)
 option(NBT_BUILD_TESTS "Build NBT library tests" OFF) #FIXME: fix unit tests.
-set(NBT_NAME MultiMC_nbt++)
+set(NBT_NAME MultiServerMC_nbt++)
 set(NBT_DEST_DIR ${LIBRARY_DEST_DIR})
 add_subdirectory(libraries/libnbtplusplus)
 

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
 #include "BaseInstance.h"
 #include "launch/LaunchTask.h"
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 class ModFolderModel;
 class LegacyModList;
 class WorldList;
 class Task;
 /*
- * WHY: Legacy instances - from MultiMC 3 and 4 - are here only to provide a way to upgrade them to the current format.
+ * WHY: Legacy instances - from MultiServerMC 3 and 4 - are here only to provide a way to upgrade them to the current format.
  */
-class MULTIMC_LOGIC_EXPORT LegacyInstance : public BaseInstance
+class MULTISERVERMC_LOGIC_EXPORT LegacyInstance : public BaseInstance
 {
     Q_OBJECT
 public:

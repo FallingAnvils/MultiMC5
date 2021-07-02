@@ -7,7 +7,7 @@
 
 #include "dialogs/VersionSelectDialog.h"
 #include "JavaCommon.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 
 #include <java/JavaInstallList.h>
 #include <FileSystem.h>
@@ -22,8 +22,8 @@ InstanceSettingsPage::InstanceSettingsPage(BaseInstance *inst, QWidget *parent)
     auto sysMB = Sys::getSystemRam() / Sys::mebibyte;
     ui->maxMemSpinBox->setMaximum(sysMB);
     connect(ui->openGlobalJavaSettingsButton, &QCommandLinkButton::clicked, this, &InstanceSettingsPage::globalSettingsButtonClicked);
-    connect(MMC, &MultiMC::globalSettingsAboutToOpen, this, &InstanceSettingsPage::applySettings);
-    connect(MMC, &MultiMC::globalSettingsClosed, this, &InstanceSettingsPage::loadSettings);
+    connect(MSMC, &MultiServerMC::globalSettingsAboutToOpen, this, &InstanceSettingsPage::applySettings);
+    connect(MSMC, &MultiServerMC::globalSettingsClosed, this, &InstanceSettingsPage::loadSettings);
     loadSettings();
 }
 
@@ -41,13 +41,13 @@ void InstanceSettingsPage::globalSettingsButtonClicked(bool)
 {
     switch(ui->settingsTabs->currentIndex()) {
         case 0:
-            MMC->ShowGlobalSettings(this, "java-settings");
+            MSMC->ShowGlobalSettings(this, "java-settings");
             return;
         case 1:
-            MMC->ShowGlobalSettings(this, "minecraft-settings");
+            MSMC->ShowGlobalSettings(this, "minecraft-settings");
             return;
         case 2:
-            MMC->ShowGlobalSettings(this, "custom-commands");
+            MSMC->ShowGlobalSettings(this, "custom-commands");
             return;
     }
 }
@@ -210,7 +210,7 @@ void InstanceSettingsPage::on_javaDetectBtn_clicked()
 {
     JavaInstallPtr java;
 
-    VersionSelectDialog vselect(MMC->javalist().get(), tr("Select a Java version"), this, true);
+    VersionSelectDialog vselect(MSMC->javalist().get(), tr("Select a Java version"), this, true);
     vselect.setResizeOn(2);
     vselect.exec();
 

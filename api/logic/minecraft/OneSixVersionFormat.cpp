@@ -16,11 +16,11 @@ static void readString(const QJsonObject &root, const QString &key, QString &var
 LibraryPtr OneSixVersionFormat::libraryFromJson(ProblemContainer & problems, const QJsonObject &libObj, const QString &filename)
 {
     LibraryPtr out = MojangVersionFormat::libraryFromJson(problems, libObj, filename);
-    readString(libObj, "MMC-hint", out->m_hint);
-    readString(libObj, "MMC-absulute_url", out->m_absoluteURL);
-    readString(libObj, "MMC-absoluteUrl", out->m_absoluteURL);
-    readString(libObj, "MMC-filename", out->m_filename);
-    readString(libObj, "MMC-displayname", out->m_displayname);
+    readString(libObj, "MSMC-hint", out->m_hint);
+    readString(libObj, "MSMC-absulute_url", out->m_absoluteURL);
+    readString(libObj, "MSMC-absoluteUrl", out->m_absoluteURL);
+    readString(libObj, "MSMC-filename", out->m_filename);
+    readString(libObj, "MSMC-displayname", out->m_displayname);
     return out;
 }
 
@@ -28,13 +28,13 @@ QJsonObject OneSixVersionFormat::libraryToJson(Library *library)
 {
     QJsonObject libRoot = MojangVersionFormat::libraryToJson(library);
     if (library->m_absoluteURL.size())
-        libRoot.insert("MMC-absoluteUrl", library->m_absoluteURL);
+        libRoot.insert("MSMC-absoluteUrl", library->m_absoluteURL);
     if (library->m_hint.size())
-        libRoot.insert("MMC-hint", library->m_hint);
+        libRoot.insert("MSMC-hint", library->m_hint);
     if (library->m_filename.size())
-        libRoot.insert("MMC-filename", library->m_filename);
+        libRoot.insert("MSMC-filename", library->m_filename);
     if (library->m_displayname.size())
-        libRoot.insert("MMC-displayname", library->m_displayname);
+        libRoot.insert("MSMC-displayname", library->m_displayname);
     return libRoot;
 }
 
@@ -346,7 +346,7 @@ LibraryPtr OneSixVersionFormat::plusJarModFromJson(
     // just make up something unique on the spot for the library name.
     auto uuid = QUuid::createUuid();
     QString id = uuid.toString().remove('{').remove('}');
-    out->setRawName(GradleSpecifier("org.multimc.jarmods:" + id + ":1"));
+    out->setRawName(GradleSpecifier("org.multiservermc.jarmods:" + id + ":1"));
 
     // filename override is the old name
     out->setFilename(libObj.value("name").toString());

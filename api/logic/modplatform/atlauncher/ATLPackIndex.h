@@ -6,7 +6,7 @@
 #include <QVector>
 #include <QMetaType>
 
-#include "multimc_logic_export.h"
+#include "multiservermc_logic_export.h"
 
 namespace ATLauncher
 {
@@ -30,7 +30,7 @@ struct IndexedPack
     QString safeName;
 };
 
-MULTIMC_LOGIC_EXPORT void loadIndexedPack(IndexedPack & m, QJsonObject & obj);
+MULTISERVERMC_LOGIC_EXPORT void loadIndexedPack(IndexedPack & m, QJsonObject & obj);
 }
 
 Q_DECLARE_METATYPE(ATLauncher::IndexedPack)

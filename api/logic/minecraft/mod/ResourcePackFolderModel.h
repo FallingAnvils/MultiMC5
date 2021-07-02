@@ -2,7 +2,7 @@
 
 #include "ModFolderModel.h"
 
-class MULTIMC_LOGIC_EXPORT ResourcePackFolderModel : public ModFolderModel
+class MULTISERVERMC_LOGIC_EXPORT ResourcePackFolderModel : public ModFolderModel
 {
     Q_OBJECT
 

@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 #include <QVBoxLayout>
 #include <QKeyEvent>
 
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 #include "settings/SettingsObject.h"
 #include "widgets/IconLabel.h"
 #include "widgets/PageContainer.h"
@@ -45,7 +45,7 @@ PageDialog::PageDialog(BasePageProvider *pageProvider, QString defaultId, QWidge
     connect(buttons->button(QDialogButtonBox::Close), SIGNAL(clicked()), this, SLOT(close()));
     connect(buttons->button(QDialogButtonBox::Help), SIGNAL(clicked()), m_container, SLOT(help()));
 
-    restoreGeometry(QByteArray::fromBase64(MMC->settings()->get("PagedGeometry").toByteArray()));
+    restoreGeometry(QByteArray::fromBase64(MSMC->settings()->get("PagedGeometry").toByteArray()));
 }
 
 void PageDialog::closeEvent(QCloseEvent *event)
@@ -54,7 +54,7 @@ void PageDialog::closeEvent(QCloseEvent *event)
     if (m_container->prepareToClose())
     {
         qDebug() << "Paged dialog close approved";
-        MMC->settings()->set("PagedGeometry", saveGeometry().toBase64());
+        MSMC->settings()->set("PagedGeometry", saveGeometry().toBase64());
         qDebug() << "Paged dialog geometry saved";
         QDialog::closeEvent(event);
     }

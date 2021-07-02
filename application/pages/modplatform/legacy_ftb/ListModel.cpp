@@ -1,7 +1,7 @@
 #include "ListModel.h"
-#include "MultiMC.h"
+#include "MultiServerMC.h"
 
-#include <MMCStrings.h>
+#include <MSMCStrings.h>
 #include <Version.h>
 
 #include <QtMath>
@@ -130,7 +130,7 @@ QVariant ListModel::data(const QModelIndex &index, int role) const
         {
             return (m_logoMap.value(pack.logo));
         }
-        QIcon icon = MMC->getThemedIcon("screenshot-placeholder");
+        QIcon icon = MSMC->getThemedIcon("screenshot-placeholder");
         ((ListModel *)this)->requestLogo(pack.logo);
         return icon;
     }

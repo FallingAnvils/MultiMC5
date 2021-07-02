@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 #include "java/JavaChecker.h"
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 
 class SettingsObject;
 
@@ -43,7 +43,7 @@ public:
     }
     QIcon icon() const override
     {
-        return MMC->getThemedIcon("minecraft");
+        return MSMC->getThemedIcon("minecraft");
     }
     QString id() const override
     {

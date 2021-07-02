@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 #include "BaseInstance.h"
 #include "launch/LaunchTask.h"
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <MultiServerMC.h>
 
 namespace Ui
 {
@@ -42,7 +42,7 @@ public:
     }
     virtual QIcon icon() const override
     {
-        return MMC->getThemedIcon("log");
+        return MSMC->getThemedIcon("log");
     }
     virtual QString id() const override
     {

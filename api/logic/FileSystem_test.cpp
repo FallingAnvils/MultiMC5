@@ -134,7 +134,7 @@ slots:
                               << "asdf"
                               << QString()
                          #if defined(Q_OS_LINUX)
-                              << MULTIMC_GET_TEST_FILE("data/FileSystem-test_createShortcut-unix")
+                              << MULTISERVERMC_GET_TEST_FILE("data/FileSystem-test_createShortcut-unix")
                          #elif defined(Q_OS_WIN)
                               << QByteArray()
                          #endif

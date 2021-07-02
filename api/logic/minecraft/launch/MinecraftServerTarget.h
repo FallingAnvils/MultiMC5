@@ -1,4 +1,4 @@
-/* Copyright 2013-2021 MultiMC Contributors
+/* Copyright 2013-2021 MultiServerMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
 #include <memory>
 
 #include <QString>
-#include <multimc_logic_export.h>
+#include <multiservermc_logic_export.h>
 
 struct MinecraftServerTarget {
     QString address;
     quint16 port;
 
-    static MULTIMC_LOGIC_EXPORT MinecraftServerTarget parse(const QString &fullAddress);
+    static MULTISERVERMC_LOGIC_EXPORT MinecraftServerTarget parse(const QString &fullAddress);
 };
 
 typedef std::shared_ptr<int> MinecraftServerTargetPtr;
