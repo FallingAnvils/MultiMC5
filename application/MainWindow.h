@@ -103,12 +103,6 @@ private slots:
 
     void on_actionReportBug_triggered();
 
-    void on_actionPatreon_triggered();
-
-    void on_actionMoreNews_triggered();
-
-    void newsButtonClicked();
-
     void on_actionLaunchInstance_triggered();
 
     void on_actionLaunchInstanceOffline_triggered();

@@ -111,28 +111,10 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
     connect(ui->closeButton, SIGNAL(clicked()), SLOT(close()));
 
     connect(ui->aboutQt, &QPushButton::clicked, &QApplication::aboutQt);
-
-    loadPatronList();
 }
 
 AboutDialog::~AboutDialog()
 {
     delete ui;
-}
-
-void AboutDialog::loadPatronList()
-{
-    netJob.reset(new NetJob("Patreon Patron List"));
-    netJob->addNetAction(Net::Download::makeByteArray(QUrl("https://files.multimc.org/patrons.txt"), &dataSink));
-    connect(netJob.get(), &NetJob::succeeded, this, &AboutDialog::patronListLoaded);
-    netJob->start();
-}
-
-void AboutDialog::patronListLoaded()
-{
-    QString patronListStr(dataSink);
-    dataSink.clear();
-    QString html = getCreditsHtml(patronListStr.split("\n", QString::SkipEmptyParts));
-    ui->creditsText->setHtml(html);
 }
 
