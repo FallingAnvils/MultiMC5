@@ -54,6 +54,12 @@ void LaunchTask::prependStep(shared_qobject_ptr<LaunchStep> step)
     m_steps.prepend(step);
 }
 
+
+void LaunchTask::writeToStdin(const QByteArray &data)
+{
+    emit m_steps[currentStep]->stdinWrittenTo(data);
+}
+
 void LaunchTask::executeTask()
 {
     m_instance->setCrashed(false);

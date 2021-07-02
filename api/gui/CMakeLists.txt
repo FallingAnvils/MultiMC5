@@ -9,9 +9,6 @@ set(GUI_SOURCES
     icons/MMCIcon.cpp
     icons/IconList.h
     icons/IconList.cpp
-
-    SkinUtils.cpp
-    SkinUtils.h
 )
 ################################ COMPILE ################################
 

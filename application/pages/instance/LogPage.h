@@ -64,10 +64,8 @@ private slots:
     void on_trackLogCheckbox_clicked(bool checked);
     void on_wrapCheckbox_clicked(bool checked);
 
-    void on_findButton_clicked();
-    void findActivated();
-    void findNextActivated();
-    void findPreviousActivated();
+    void on_runCommandButton_clicked();
+    void runCommandActivated();
 
     void onInstanceLaunchTaskChanged(shared_qobject_ptr<LaunchTask> proc);
 

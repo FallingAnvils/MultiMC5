@@ -30,6 +30,10 @@ QStringList reprocess(const QByteArray & data, QString & leftover)
     return lines;
 }
 
+void LoggedProcess::writeToStdin(const QByteArray &data) {
+    this->write(data);
+}
+
 void LoggedProcess::on_stdErr()
 {
     auto lines = reprocess(readAllStandardError(), m_err_leftover);

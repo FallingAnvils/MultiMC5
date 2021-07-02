@@ -86,6 +86,8 @@ public: /* methods */
 
     shared_qobject_ptr<LogModel> getLogModel();
 
+    void writeToStdin(const QByteArray &data);
+
 public:
     QString substituteVariables(const QString &cmd) const;
     QString censorPrivateInfo(QString in);
@@ -103,6 +105,7 @@ signals:
     void requestProgress(Task *task);
 
     void requestLogging();
+
 
 public slots:
     void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);

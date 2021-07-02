@@ -171,22 +171,8 @@ set(ICONS_SOURCES
     icons/IconUtils.cpp
 )
 
-# Minecraft services status checker
-set(STATUS_SOURCES
-    # Status system
-    status/StatusChecker.h
-    status/StatusChecker.cpp
-)
-
 # Support for Minecraft instances and launch
 set(MINECRAFT_SOURCES
-    # Minecraft support
-    minecraft/auth/flows/AuthenticateTask.h
-    minecraft/auth/flows/AuthenticateTask.cpp
-    minecraft/auth/flows/RefreshTask.cpp
-    minecraft/auth/flows/RefreshTask.cpp
-    minecraft/auth/flows/ValidateTask.h
-    minecraft/auth/flows/ValidateTask.cpp
 
     minecraft/gameoptions/GameOptions.h
     minecraft/gameoptions/GameOptions.cpp

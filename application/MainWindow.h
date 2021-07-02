@@ -33,7 +33,6 @@ class QLabel;
 class MinecraftLauncher;
 class BaseProfilerFactory;
 class GroupView;
-class ServerStatus;
 class KonamiCode;
 class InstanceTask;
 
@@ -68,10 +67,6 @@ private slots:
 
     void on_actionAddInstance_triggered();
 
-    void on_actionREDDIT_triggered();
-
-    void on_actionDISCORD_triggered();
-
     void on_actionCopyInstance_triggered();
 
     void on_actionChangeInstGroup_triggered();
@@ -98,10 +93,6 @@ private slots:
 
     void on_actionSettings_triggered();
 
-    void on_actionInstanceSettings_triggered();
-
-    void on_actionReportBug_triggered();
-
     void on_actionLaunchInstance_triggered();
 
     void on_actionDeleteInstance_triggered();
@@ -121,8 +112,6 @@ private slots:
     void on_actionEditInstNotes_triggered();
 
     void on_actionWorlds_triggered();
-
-    void on_actionScreenshots_triggered();
 
     void taskEnd();
 
@@ -180,7 +169,6 @@ private:
     GroupView *view = nullptr;
     InstanceProxyModel *proxymodel = nullptr;
     QLabel *m_statusLeft = nullptr;
-    ServerStatus *m_statusRight = nullptr;
     KonamiCode * secretEventFilter = nullptr;
 
     unique_qobject_ptr<NetJob> skin_download_job;

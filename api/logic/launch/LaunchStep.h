@@ -40,6 +40,8 @@ signals:
     void readyForLaunch();
     void progressReportingRequest();
 
+    void stdinWrittenTo(const QByteArray &data);
+
 public slots:
     virtual void proceed() {};
     // called in the opposite order than the Task launch(), used to clean up or otherwise undo things after the launch ends

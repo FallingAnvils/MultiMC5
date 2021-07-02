@@ -54,7 +54,6 @@
 #include <java/JavaUtils.h>
 #include <java/JavaInstallList.h>
 #include <launch/LaunchTask.h>
-#include <SkinUtils.h>
 #include <BuildConfig.h>
 #include <net/NetJob.h>
 #include <net/Download.h>
@@ -70,7 +69,6 @@
 #include "groupview/GroupView.h"
 #include "groupview/InstanceDelegate.h"
 #include "widgets/LabeledToolButton.h"
-#include "widgets/ServerStatus.h"
 #include "dialogs/NewInstanceDialog.h"
 #include "dialogs/ProgressDialog.h"
 #include "dialogs/AboutDialog.h"
@@ -625,9 +623,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
     connect(MMC, &MultiMC::globalSettingsClosed, this, &MainWindow::globalSettingsClosed);
 
     m_statusLeft = new QLabel(tr("No instance selected"), this);
-    m_statusRight = new ServerStatus(this);
     statusBar()->addPermanentWidget(m_statusLeft, 1);
-    statusBar()->addPermanentWidget(m_statusRight, 0);
 
     if(BuildConfig.UPDATER_ENABLED)
     {
@@ -1071,16 +1067,6 @@ void MainWindow::droppedURLs(QList<QUrl> urls)
     }
 }
 
-void MainWindow::on_actionREDDIT_triggered()
-{
-    DesktopServices::openUrl(QUrl(BuildConfig.SUBREDDIT_URL));
-}
-
-void MainWindow::on_actionDISCORD_triggered()
-{
-    DesktopServices::openUrl(QUrl(BuildConfig.DISCORD_URL));
-}
-
 void MainWindow::on_actionChangeInstIcon_triggered()
 {
     if (!m_selectedInstance)
@@ -1224,11 +1210,6 @@ void MainWindow::globalSettingsClosed()
     update();
 }
 
-void MainWindow::on_actionInstanceSettings_triggered()
-{
-    MMC->showInstanceWindow(m_selectedInstance, "settings");
-}
-
 void MainWindow::on_actionEditInstNotes_triggered()
 {
     MMC->showInstanceWindow(m_selectedInstance, "notes");
@@ -1242,16 +1223,6 @@ void MainWindow::on_actionWorlds_triggered()
 void MainWindow::on_actionEditInstance_triggered()
 {
     MMC->showInstanceWindow(m_selectedInstance);
-}
-
-void MainWindow::on_actionScreenshots_triggered()
-{
-    MMC->showInstanceWindow(m_selectedInstance, "screenshots");
-}
-
-void MainWindow::on_actionReportBug_triggered()
-{
-    DesktopServices::openUrl(QUrl(BuildConfig.BUG_TRACKER_URL));
 }
 
 void MainWindow::on_actionAbout_triggered()

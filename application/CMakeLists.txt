@@ -158,8 +158,6 @@ SET(MULTIMC_SOURCES
     dialogs/NewComponentDialog.h
     dialogs/NewInstanceDialog.cpp
     dialogs/NewInstanceDialog.h
-    dialogs/NotificationDialog.cpp
-    dialogs/NotificationDialog.h
     pagedialog/PageDialog.cpp
     pagedialog/PageDialog.h
     dialogs/ProgressDialog.cpp
@@ -198,8 +196,6 @@ SET(MULTIMC_SOURCES
     widgets/PageContainer.cpp
     widgets/PageContainer.h
     widgets/PageContainer_p.h
-    widgets/ServerStatus.cpp
-    widgets/ServerStatus.h
     widgets/VersionListView.cpp
     widgets/VersionListView.h
     widgets/VersionSelectWidget.cpp
@@ -265,12 +261,9 @@ SET(MULTIMC_UIS
     dialogs/AboutDialog.ui
     dialogs/ProgressDialog.ui
     dialogs/IconPickerDialog.ui
-    dialogs/ProfileSelectDialog.ui
     dialogs/ExportInstanceDialog.ui
     dialogs/LoginDialog.ui
     dialogs/UpdateDialog.ui
-    dialogs/NotificationDialog.ui
-    dialogs/SkinUploadDialog.ui
 
     # Widgets/other
     widgets/CustomCommands.ui

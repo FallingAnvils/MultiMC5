@@ -30,7 +30,6 @@
 #include "update/FoldersTask.h"
 #include "update/LibrariesTask.h"
 #include "update/FMLLibrariesTask.h"
-#include "update/AssetUpdateTask.h"
 
 #include <meta/Index.h>
 #include <meta/Version.h>

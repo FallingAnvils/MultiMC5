@@ -12,6 +12,8 @@
 #include "GuiUtil.h"
 #include <ColorCache.h>
 
+#include <minecraft/launch/LauncherPartLaunch.h>
+
 class LogFormatProxyModel : public QIdentityProxyModel
 {
 public:
@@ -147,10 +149,10 @@ LogPage::LogPage(InstancePtr instance, QWidget *parent)
     }
 
     auto findShortcut = new QShortcut(QKeySequence(QKeySequence::Find), this);
-    connect(findShortcut, SIGNAL(activated()), SLOT(findActivated()));
+    connect(findShortcut, SIGNAL(activated()), SLOT(runCommandActivated()));
     auto findNextShortcut = new QShortcut(QKeySequence(QKeySequence::FindNext), this);
     connect(findNextShortcut, SIGNAL(activated()), SLOT(findNextActivated()));
-    connect(ui->searchBar, SIGNAL(returnPressed()), SLOT(on_findButton_clicked()));
+    connect(ui->commandBar, SIGNAL(returnPressed()), SLOT(on_runCommandButton_clicked()));
     auto findPreviousShortcut = new QShortcut(QKeySequence(QKeySequence::FindPrevious), this);
     connect(findPreviousShortcut, SIGNAL(activated()), SLOT(findPreviousActivated()));
 }
@@ -284,29 +286,17 @@ void LogPage::on_wrapCheckbox_clicked(bool checked)
     m_model->setLineWrap(checked);
 }
 
-void LogPage::on_findButton_clicked()
+void LogPage::on_runCommandButton_clicked()
 {
-    auto modifiers = QApplication::keyboardModifiers();
-    bool reverse = modifiers & Qt::ShiftModifier;
-    ui->text->findNext(ui->searchBar->text(), reverse);
+    m_process->writeToStdin(ui->commandBar->text().append("\n").toUtf8());
 }
 
-void LogPage::findNextActivated()
-{
-    ui->text->findNext(ui->searchBar->text(), false);
-}
-
-void LogPage::findPreviousActivated()
-{
-    ui->text->findNext(ui->searchBar->text(), true);
-}
-
-void LogPage::findActivated()
+void LogPage::runCommandActivated()
 {
     // focus the search bar if it doesn't have focus
-    if (!ui->searchBar->hasFocus())
+    if (!ui->commandBar->hasFocus())
     {
-        ui->searchBar->setFocus();
-        ui->searchBar->selectAll();
+        ui->commandBar->setFocus();
+        ui->commandBar->selectAll();
     }
 }

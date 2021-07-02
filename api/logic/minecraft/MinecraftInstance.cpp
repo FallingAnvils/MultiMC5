@@ -12,7 +12,6 @@
 #include <java/JavaVersion.h>
 
 #include "launch/LaunchTask.h"
-#include "launch/steps/LookupServerAddress.h"
 #include "launch/steps/PostLaunchCommand.h"
 #include "launch/steps/Update.h"
 #include "launch/steps/PreLaunchCommand.h"
@@ -404,6 +403,9 @@ QStringList MinecraftInstance::processMinecraftArgs(int serverPort) const
     {
         args_pattern += " --port " + QString::number(serverPort);
     }
+
+    // ACTUALLYFIXME: maybe don't hardcode this
+    args_pattern += " nogui";
 
     QMap<QString, QString> token_mapping;
 

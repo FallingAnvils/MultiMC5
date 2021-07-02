@@ -66,6 +66,9 @@ private slots:
     void on_error(QProcess::ProcessError error);
     void on_stateChange(QProcess::ProcessState);
 
+public slots:
+    void writeToStdin(const QByteArray &data);
+
 private:
     void changeState(LoggedProcess::State state);
 
