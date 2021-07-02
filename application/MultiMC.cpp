@@ -457,9 +457,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         m_settings->registerSetting("IconTheme", QString("multimc"));
         m_settings->registerSetting("ApplicationTheme", QString("system"));
 
-        // Notifications
-        m_settings->registerSetting("ShownNotifications", QString());
-
         // Remembered state
         m_settings->registerSetting("LastUsedGroupForNewInstance", QString());
 

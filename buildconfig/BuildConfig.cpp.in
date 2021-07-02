@@ -14,7 +14,6 @@ Config::Config()
     BUILD_PLATFORM = "@MultiMC_BUILD_PLATFORM@";
     CHANLIST_URL = "@MultiMC_CHANLIST_URL@";
     ANALYTICS_ID = "@MultiMC_ANALYTICS_ID@";
-    NOTIFICATION_URL = "@MultiMC_NOTIFICATION_URL@";
     FULL_VERSION_STR = "@MultiMC_VERSION_MAJOR@.@MultiMC_VERSION_MINOR@.@MultiMC_VERSION_BUILD@";
 
     GIT_COMMIT = "@MultiMC_GIT_COMMIT@";
@@ -31,7 +30,6 @@ Config::Config()
     }
 
     VERSION_STR = "@MultiMC_VERSION_STRING@";
-    NEWS_RSS_URL = "@MultiMC_NEWS_RSS_URL@";
     PASTE_EE_KEY = "@MultiMC_PASTE_EE_API_KEY@";
     META_URL = "@MultiMC_META_URL@";
 

@@ -34,9 +34,6 @@ public:
     /// Google analytics ID
     QString ANALYTICS_ID;
 
-    /// URL for notifications
-    QString NOTIFICATION_URL;
-
     /// Used for matching notifications
     QString FULL_VERSION_STR;
 
@@ -48,12 +45,6 @@ public:
 
     /// This is printed on start to standard output
     QString VERSION_STR;
-
-    /**
-     * This is used to fetch the news RSS feed.
-     * It defaults in CMakeLists.txt to "https://multimc.org/rss.xml"
-     */
-    QString NEWS_RSS_URL;
 
     /**
      * API key you can get from paste.ee when you register an account

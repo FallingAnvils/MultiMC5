@@ -26,8 +26,6 @@
 #include "updater/GoUpdate.h"
 
 class LaunchController;
-class NewsChecker;
-class NotificationChecker;
 class QToolButton;
 class InstanceProxyModel;
 class LabeledToolButton;
@@ -146,8 +144,6 @@ private slots:
 
     void updateToolsMenu();
 
-    void skinJobFinished();
-
     void instanceActivated(QModelIndex);
 
     void instanceChanged(const QModelIndex &current, const QModelIndex &previous);
@@ -163,10 +159,6 @@ private slots:
     void updateAvailable(GoUpdate::Status status);
 
     void updateNotAvailable();
-
-    void notificationsChanged();
-
-    void updateNewsLabel();
 
     /*!
      * Runs the DownloadTask and installs updates.
@@ -196,14 +188,11 @@ private:
     // these are managed by Qt's memory management model!
     GroupView *view = nullptr;
     InstanceProxyModel *proxymodel = nullptr;
-    QToolButton *newsLabel = nullptr;
     QLabel *m_statusLeft = nullptr;
     ServerStatus *m_statusRight = nullptr;
     KonamiCode * secretEventFilter = nullptr;
 
     unique_qobject_ptr<NetJob> skin_download_job;
-    unique_qobject_ptr<NewsChecker> m_newsChecker;
-    unique_qobject_ptr<NotificationChecker> m_notificationChecker;
 
     InstancePtr m_selectedInstance;
     QString m_currentInstIcon;

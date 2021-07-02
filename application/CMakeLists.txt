@@ -166,8 +166,6 @@ SET(MULTIMC_SOURCES
     dialogs/NewComponentDialog.h
     dialogs/NewInstanceDialog.cpp
     dialogs/NewInstanceDialog.h
-    dialogs/NotificationDialog.cpp
-    dialogs/NotificationDialog.h
     pagedialog/PageDialog.cpp
     pagedialog/PageDialog.h
     dialogs/ProgressDialog.cpp
@@ -277,7 +275,6 @@ SET(MULTIMC_UIS
     dialogs/ExportInstanceDialog.ui
     dialogs/LoginDialog.ui
     dialogs/UpdateDialog.ui
-    dialogs/NotificationDialog.ui
     dialogs/SkinUploadDialog.ui
 
     # Widgets/other

@@ -49,8 +49,6 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror=return-type")
 
 ##################################### Set Application options #####################################
 
-######## Set URLs ########
-set(MultiMC_NEWS_RSS_URL "https://multimc.org/rss.xml" CACHE STRING "URL to fetch MultiMC's news RSS feed from.")
 
 ######## Set version numbers ########
 set(MultiMC_VERSION_MAJOR    0)
@@ -65,9 +63,6 @@ set(MultiMC_BUILD_PLATFORM "" CACHE STRING "A short string identifying the platf
 
 # Channel list URL
 set(MultiMC_CHANLIST_URL "" CACHE STRING "URL for the channel list.")
-
-# Notification URL
-set(MultiMC_NOTIFICATION_URL "" CACHE STRING "URL for checking for notifications.")
 
 # The metadata server
 set(MultiMC_META_URL "https://meta.multimc.org/v1/" CACHE STRING "URL to fetch MultiMC's meta files from.")
