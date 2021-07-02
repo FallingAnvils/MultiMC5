@@ -182,7 +182,6 @@ public:
     TranslatedAction actionConfig_Folder;
     TranslatedAction actionCAT;
     TranslatedAction actionCopyInstance;
-    TranslatedAction actionLaunchInstanceOffline;
     TranslatedAction actionScreenshots;
     TranslatedAction actionExportInstance;
     QVector<TranslatedAction *> all_actions;
@@ -360,18 +359,6 @@ public:
             mainToolBar->addAction(actionCheckUpdate);
         }
 
-        mainToolBar->addSeparator();
-
-        actionCAT = TranslatedAction(MainWindow);
-        actionCAT->setObjectName(QStringLiteral("actionCAT"));
-        actionCAT->setCheckable(true);
-        actionCAT->setIcon(MMC->getThemedIcon("cat"));
-        actionCAT.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Meow"));
-        actionCAT.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "It's a fluffy kitty :3"));
-        actionCAT->setPriority(QAction::LowPriority);
-        all_actions.append(&actionCAT);
-        mainToolBar->addAction(actionCAT);
-
         all_toolbars.append(&mainToolBar);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
     }
@@ -430,13 +417,6 @@ public:
         all_actions.append(&actionLaunchInstance);
         instanceToolBar->addAction(actionLaunchInstance);
 
-        actionLaunchInstanceOffline = TranslatedAction(MainWindow);
-        actionLaunchInstanceOffline->setObjectName(QStringLiteral("actionLaunchInstanceOffline"));
-        actionLaunchInstanceOffline.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Launch Offline"));
-        actionLaunchInstanceOffline.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Launch the selected instance in offline mode."));
-        all_actions.append(&actionLaunchInstanceOffline);
-        instanceToolBar->addAction(actionLaunchInstanceOffline);
-
         instanceToolBar->addSeparator();
 
         actionEditInstance = TranslatedAction(MainWindow);
@@ -459,13 +439,6 @@ public:
         actionWorlds.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View the worlds of this instance."));
         all_actions.append(&actionWorlds);
         instanceToolBar->addAction(actionWorlds);
-
-        actionScreenshots = TranslatedAction(MainWindow);
-        actionScreenshots->setObjectName(QStringLiteral("actionScreenshots"));
-        actionScreenshots.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Manage Screenshots"));
-        actionScreenshots.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View and upload screenshots for this instance."));
-        all_actions.append(&actionScreenshots);
-        instanceToolBar->addAction(actionScreenshots);
 
         actionChangeInstGroup = TranslatedAction(MainWindow);
         actionChangeInstGroup->setObjectName(QStringLiteral("actionChangeInstGroup"));
@@ -632,14 +605,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
         connect(view, &GroupView::groupStateChanged, MMC->instances().get(), &InstanceList::on_GroupStateChanged);
         ui->horizontalLayout->addWidget(view);
     }
-    // The cat background
-    {
-        bool cat_enable = MMC->settings()->get("TheCat").toBool();
-        ui->actionCAT->setChecked(cat_enable);
-        // NOTE: calling the operator like that is an ugly hack to appease ancient gcc...
-        connect(ui->actionCAT.operator->(), SIGNAL(toggled(bool)), SLOT(onCatToggled(bool)));
-        setCatBackground(cat_enable);
-    }
+
     // start instance when double-clicked
     connect(view, &GroupView::activated, this, &MainWindow::instanceActivated);
 
@@ -785,21 +751,16 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos)
 void MainWindow::updateToolsMenu()
 {
     QToolButton *launchButton = dynamic_cast<QToolButton*>(ui->instanceToolBar->widgetForAction(ui->actionLaunchInstance));
-    QToolButton *launchOfflineButton = dynamic_cast<QToolButton*>(ui->instanceToolBar->widgetForAction(ui->actionLaunchInstanceOffline));
 
     if(!m_selectedInstance || m_selectedInstance->isRunning())
     {
         ui->actionLaunchInstance->setMenu(nullptr);
-        ui->actionLaunchInstanceOffline->setMenu(nullptr);
         launchButton->setPopupMode(QToolButton::InstantPopup);
-        launchOfflineButton->setPopupMode(QToolButton::InstantPopup);
         return;
     }
 
     QMenu *launchMenu = ui->actionLaunchInstance->menu();
-    QMenu *launchOfflineMenu = ui->actionLaunchInstanceOffline->menu();
     launchButton->setPopupMode(QToolButton::MenuButtonPopup);
-    launchOfflineButton->setPopupMode(QToolButton::MenuButtonPopup);
     if (launchMenu)
     {
         launchMenu->clear();
@@ -808,39 +769,23 @@ void MainWindow::updateToolsMenu()
     {
         launchMenu = new QMenu(this);
     }
-    if (launchOfflineMenu) {
-        launchOfflineMenu->clear();
-    }
-    else
-    {
-        launchOfflineMenu = new QMenu(this);
-    }
 
     QAction *normalLaunch = launchMenu->addAction(tr("Launch"));
-    QAction *normalLaunchOffline = launchOfflineMenu->addAction(tr("Launch Offline"));
     connect(normalLaunch, &QAction::triggered, [this]()
             {
                 MMC->launch(m_selectedInstance, true);
             });
-    connect(normalLaunchOffline, &QAction::triggered, [this]()
-            {
-                MMC->launch(m_selectedInstance, false);
-            });
     QString profilersTitle = tr("Profilers");
     launchMenu->addSeparator()->setText(profilersTitle);
-    launchOfflineMenu->addSeparator()->setText(profilersTitle);
     for (auto profiler : MMC->profilers().values())
     {
         QAction *profilerAction = launchMenu->addAction(profiler->name());
-        QAction *profilerOfflineAction = launchOfflineMenu->addAction(profiler->name());
         QString error;
         if (!profiler->check(&error))
         {
             profilerAction->setDisabled(true);
-            profilerOfflineAction->setDisabled(true);
             QString profilerToolTip = tr("Profiler not setup correctly. Go into settings, \"External Tools\".");
             profilerAction->setToolTip(profilerToolTip);
-            profilerOfflineAction->setToolTip(profilerToolTip);
         }
         else
         {
@@ -848,14 +793,9 @@ void MainWindow::updateToolsMenu()
                     {
                         MMC->launch(m_selectedInstance, true, profiler.get());
                     });
-            connect(profilerOfflineAction, &QAction::triggered, [this, profiler]()
-                    {
-                        MMC->launch(m_selectedInstance, false, profiler.get());
-                    });
         }
     }
     ui->actionLaunchInstance->setMenu(launchMenu);
-    ui->actionLaunchInstanceOffline->setMenu(launchOfflineMenu);
 }
 
 QString profileInUseFilter(const QString & profile, bool used)
@@ -994,12 +934,6 @@ void MainWindow::downloadUpdates(GoUpdate::Status status)
     }
 }
 
-void MainWindow::onCatToggled(bool state)
-{
-    setCatBackground(state);
-    MMC->settings()->set("TheCat", state);
-}
-
 namespace {
 template <typename T>
 T non_stupid_abs(T in)
@@ -1008,31 +942,6 @@ T non_stupid_abs(T in)
         return -in;
     return in;
 }
-}
-
-void MainWindow::setCatBackground(bool enabled)
-{
-    if (enabled)
-    {
-        QDateTime now = QDateTime::currentDateTime();
-        QDateTime xmas(QDate(now.date().year(), 12, 25), QTime(0, 0));
-        ;
-        QString cat = (non_stupid_abs(now.daysTo(xmas)) <= 4) ? "catmas" : "kitteh";
-        view->setStyleSheet(QString(R"(
-GroupView
-{
-    background-image: url(:/backgrounds/%1);
-    background-attachment: fixed;
-    background-clip: padding;
-    background-position: top right;
-    background-repeat: none;
-    background-color:palette(base);
-})").arg(cat));
-    }
-    else
-    {
-        view->setStyleSheet(QString());
-    }
 }
 
 void MainWindow::runModalTask(Task *task)
@@ -1464,14 +1373,6 @@ void MainWindow::activateInstance(InstancePtr instance)
     MMC->launch(instance);
 }
 
-void MainWindow::on_actionLaunchInstanceOffline_triggered()
-{
-    if (m_selectedInstance)
-    {
-        MMC->launch(m_selectedInstance, false);
-    }
-}
-
 void MainWindow::taskEnd()
 {
     QObject *sender = QObject::sender();
@@ -1511,7 +1412,6 @@ void MainWindow::instanceChanged(const QModelIndex &current, const QModelIndex &
             ui->actionLaunchInstance->setEnabled(m_selectedInstance->canLaunch());
             ui->setLaunchAction(false);
         }
-        ui->actionLaunchInstanceOffline->setEnabled(m_selectedInstance->canLaunch());
         ui->actionExportInstance->setEnabled(m_selectedInstance->canExport());
         ui->renameButton->setText(m_selectedInstance->name());
         m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());

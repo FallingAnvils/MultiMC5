@@ -63,7 +63,6 @@ protected:
     QMenu * createPopupMenu() override;
 
 private slots:
-    void onCatToggled(bool);
 
     void on_actionAbout_triggered();
 
@@ -104,8 +103,6 @@ private slots:
     void on_actionReportBug_triggered();
 
     void on_actionLaunchInstance_triggered();
-
-    void on_actionLaunchInstanceOffline_triggered();
 
     void on_actionDeleteInstance_triggered();
 

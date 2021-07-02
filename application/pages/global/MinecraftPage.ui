@@ -43,98 +43,6 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="windowSizeGroupBox">
-         <property name="title">
-          <string>Window Size</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QCheckBox" name="maximizedCheckBox">
-            <property name="text">
-             <string>Start Minecraft maximized?</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayoutWindowSize">
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelWindowHeight">
-              <property name="text">
-               <string>Window hei&amp;ght:</string>
-              </property>
-              <property name="buddy">
-               <cstring>windowHeightSpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelWindowWidth">
-              <property name="text">
-               <string>W&amp;indow width:</string>
-              </property>
-              <property name="buddy">
-               <cstring>windowWidthSpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QSpinBox" name="windowWidthSpinBox">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>65536</number>
-              </property>
-              <property name="singleStep">
-               <number>1</number>
-              </property>
-              <property name="value">
-               <number>854</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="windowHeightSpinBox">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>65536</number>
-              </property>
-              <property name="value">
-               <number>480</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="nativeLibWorkaroundGroupBox">
-         <property name="title">
-          <string>Native library workarounds</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QCheckBox" name="useNativeGLFWCheck">
-            <property name="text">
-             <string>Use system installation of GLFW</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="useNativeOpenALCheck">
-            <property name="text">
-             <string>Use system installation of OpenAL</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <widget class="QGroupBox" name="gameTimeGroupBox">
          <property name="title">
           <string>Game time</string>
@@ -178,11 +86,6 @@
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
-  <tabstop>maximizedCheckBox</tabstop>
-  <tabstop>windowWidthSpinBox</tabstop>
-  <tabstop>windowHeightSpinBox</tabstop>
-  <tabstop>useNativeGLFWCheck</tabstop>
-  <tabstop>useNativeOpenALCheck</tabstop>
  </tabstops>
  <resources/>
  <connections/>

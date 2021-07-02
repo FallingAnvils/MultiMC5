@@ -28,7 +28,6 @@ MinecraftPage::MinecraftPage(QWidget *parent) : QWidget(parent), ui(new Ui::Mine
     ui->setupUi(this);
     ui->tabWidget->tabBar()->hide();
     loadSettings();
-    updateCheckboxStuff();
 }
 
 MinecraftPage::~MinecraftPage()
@@ -42,31 +41,15 @@ bool MinecraftPage::apply()
     return true;
 }
 
-void MinecraftPage::updateCheckboxStuff()
-{
-    ui->windowWidthSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
-    ui->windowHeightSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
-}
-
 void MinecraftPage::on_maximizedCheckBox_clicked(bool checked)
 {
     Q_UNUSED(checked);
-    updateCheckboxStuff();
 }
 
 
 void MinecraftPage::applySettings()
 {
     auto s = MMC->settings();
-
-    // Window Size
-    s->set("LaunchMaximized", ui->maximizedCheckBox->isChecked());
-    s->set("MinecraftWinWidth", ui->windowWidthSpinBox->value());
-    s->set("MinecraftWinHeight", ui->windowHeightSpinBox->value());
-
-    // Native library workarounds
-    s->set("UseNativeOpenAL", ui->useNativeOpenALCheck->isChecked());
-    s->set("UseNativeGLFW", ui->useNativeGLFWCheck->isChecked());
 
     // Game time
     s->set("ShowGameTime", ui->showGameTime->isChecked());
@@ -76,14 +59,6 @@ void MinecraftPage::applySettings()
 void MinecraftPage::loadSettings()
 {
     auto s = MMC->settings();
-
-    // Window Size
-    ui->maximizedCheckBox->setChecked(s->get("LaunchMaximized").toBool());
-    ui->windowWidthSpinBox->setValue(s->get("MinecraftWinWidth").toInt());
-    ui->windowHeightSpinBox->setValue(s->get("MinecraftWinHeight").toInt());
-
-    ui->useNativeOpenALCheck->setChecked(s->get("UseNativeOpenAL").toBool());
-    ui->useNativeGLFWCheck->setChecked(s->get("UseNativeGLFW").toBool());
 
     ui->showGameTime->setChecked(s->get("ShowGameTime").toBool());
     ui->recordGameTime->setChecked(s->get("RecordGameTime").toBool());

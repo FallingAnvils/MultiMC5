@@ -278,7 +278,6 @@ SET(MULTIMC_UIS
 )
 
 set(MULTIMC_QRCS
-    resources/backgrounds/backgrounds.qrc
     resources/multimc/multimc.qrc
     resources/documents/documents.qrc
 )

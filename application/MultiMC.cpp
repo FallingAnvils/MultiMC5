@@ -546,9 +546,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         m_settings->registerSetting({"PreLaunchCommand", "PreLaunchCmd"}, "");
         m_settings->registerSetting({"PostExitCommand", "PostExitCmd"}, "");
 
-        // The cat
-        m_settings->registerSetting("TheCat", false);
-
         m_settings->registerSetting("InstSortMode", "Name");
         m_settings->registerSetting("SelectedInstance", QString());
 

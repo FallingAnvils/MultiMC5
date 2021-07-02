@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
     case MultiMC::Initialized:
     {
         Q_INIT_RESOURCE(multimc);
-        Q_INIT_RESOURCE(backgrounds);
 
         return app.exec();
     }
