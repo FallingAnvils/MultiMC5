@@ -225,7 +225,7 @@ QString LegacyInstance::getStatusbarDescription()
     return tr("Instance from previous versions.");
 }
 
-QStringList LegacyInstance::verboseDescription(AuthSessionPtr session, int serverPort)
+QStringList LegacyInstance::verboseDescription(int serverPort)
 {
     QStringList out;
 

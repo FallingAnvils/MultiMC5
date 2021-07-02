@@ -22,7 +22,6 @@
 #include <QTimer>
 
 #include "BaseInstance.h"
-#include "minecraft/auth/MojangAccount.h"
 #include "net/NetJob.h"
 #include "updater/GoUpdate.h"
 
@@ -104,8 +103,6 @@ private slots:
 
     void on_actionInstanceSettings_triggered();
 
-    void on_actionManageAccounts_triggered();
-
     void on_actionReportBug_triggered();
 
     void on_actionPatreon_triggered();
@@ -169,12 +166,6 @@ private slots:
 
     void notificationsChanged();
 
-    void activeAccountChanged();
-
-    void changeActiveAccount();
-
-    void repopulateAccountsMenu();
-
     void updateNewsLabel();
 
     /*!
@@ -208,8 +199,6 @@ private:
     QToolButton *newsLabel = nullptr;
     QLabel *m_statusLeft = nullptr;
     ServerStatus *m_statusRight = nullptr;
-    QMenu *accountMenu = nullptr;
-    QToolButton *accountMenuButton = nullptr;
     KonamiCode * secretEventFilter = nullptr;
 
     unique_qobject_ptr<NetJob> skin_download_job;

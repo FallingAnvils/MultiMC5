@@ -20,7 +20,6 @@
 #include "minecraft/launch/LauncherPartLaunch.h"
 #include "minecraft/launch/DirectJavaLaunch.h"
 #include "minecraft/launch/ModMinecraftJar.h"
-#include "minecraft/launch/ClaimAccount.h"
 #include "minecraft/launch/ReconstructAssets.h"
 #include "minecraft/launch/ScanModFolders.h"
 #include "minecraft/launch/VerifyJavaInstall.h"
@@ -406,8 +405,7 @@ static QString replaceTokensIn(QString text, QMap<QString, QString> with)
     return result;
 }
 
-QStringList MinecraftInstance::processMinecraftArgs(
-        AuthSessionPtr session, int serverPort) const
+QStringList MinecraftInstance::processMinecraftArgs(int serverPort) const
 {
     auto profile = m_components->getProfile();
     QString args_pattern = profile->getMinecraftArguments();
@@ -422,17 +420,6 @@ QStringList MinecraftInstance::processMinecraftArgs(
     }
 
     QMap<QString, QString> token_mapping;
-    // yggdrasil!
-    /*if(session)
-    {
-        token_mapping["auth_username"] = session->username;
-        token_mapping["auth_session"] = session->session;
-        token_mapping["auth_access_token"] = session->access_token;
-        token_mapping["auth_player_name"] = session->player_name;
-        token_mapping["auth_uuid"] = session->uuid;
-        token_mapping["user_properties"] = session->serializeUserProperties();
-        token_mapping["user_type"] = session->user_type;
-    }*/
 
     // blatant self-promotion.
     token_mapping["profile_name"] = token_mapping["version_name"] = "MultiMC5";
@@ -457,7 +444,7 @@ QStringList MinecraftInstance::processMinecraftArgs(
     return parts;
 }
 
-QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, int serverPort)
+QString MinecraftInstance::createLaunchScript(int serverPort)
 {
     QString launchScript;
 
@@ -485,7 +472,6 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, int server
 
     // generic minecraft params
     for (auto param : processMinecraftArgs(
-            session,
             serverPort
     ))
     {
@@ -504,13 +490,6 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, int server
         launchScript += "windowTitle " + windowTitle() + "\n";
         launchScript += "windowParams " + windowParams + "\n";
     }
-
-    // legacy auth
-    /*if(session)
-    {
-        launchScript += "userName " + session->player_name + "\n";
-        launchScript += "sess`onId " + session->session + "\n";
-    }*/
 
     // libraries and class path.
     {
@@ -537,7 +516,7 @@ QString MinecraftInstance::createLaunchScript(AuthSessionPtr session, int server
     return launchScript;
 }
 
-QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, int serverPort)
+QStringList MinecraftInstance::verboseDescription(int serverPort)
 {
     QStringList out;
     out << "Main Class:" << "  " + getMainClass() << "";
@@ -652,7 +631,7 @@ QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, int se
         out << "";
     }
 
-    auto params = processMinecraftArgs(nullptr, serverPort);
+    auto params = processMinecraftArgs(serverPort);
     out << "Params:";
     out << "  " + params.join(' ');
     out << "";
@@ -670,42 +649,6 @@ QStringList MinecraftInstance::verboseDescription(AuthSessionPtr session, int se
     }
     out << "";
     return out;
-}
-
-QMap<QString, QString> MinecraftInstance::createCensorFilterFromSession(AuthSessionPtr session)
-{
-    if(!session)
-    {
-        return QMap<QString, QString>();
-    }
-    auto & sessionRef = *session.get();
-    QMap<QString, QString> filter;
-    auto addToFilter = [&filter](QString key, QString value)
-    {
-        if(key.trimmed().size())
-        {
-            filter[key] = value;
-        }
-    };
-    if (sessionRef.session != "-")
-    {
-        addToFilter(sessionRef.session, tr("<SESSION ID>"));
-    }
-    addToFilter(sessionRef.access_token, tr("<ACCESS TOKEN>"));
-    addToFilter(sessionRef.client_token, tr("<CLIENT TOKEN>"));
-    addToFilter(sessionRef.uuid, tr("<PROFILE ID>"));
-
-    auto i = sessionRef.u.properties.begin();
-    while (i != sessionRef.u.properties.end())
-    {
-        if(i.value().length() <= 3) {
-            ++i;
-            continue;
-        }
-        addToFilter(i.value(), "<" + i.key().toUpper() + ">");
-        ++i;
-    }
-    return filter;
 }
 
 MessageLevel::Enum MinecraftInstance::guessLevel(const QString &line, MessageLevel::Enum level)
@@ -826,7 +769,7 @@ shared_qobject_ptr<Task> MinecraftInstance::createUpdateTask(Net::Mode mode)
     return nullptr;
 }
 
-shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPtr session, int serverPort)
+shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(int serverPort)
 {
     // FIXME: get rid of shared_from_this ...
     auto process = LaunchTask::create(std::dynamic_pointer_cast<MinecraftInstance>(shared_from_this()));
@@ -867,9 +810,9 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
     }
 
     // if we aren't in offline mode,.
-    if(session->status != AuthSession::PlayableOffline)
+    if(true)
     {
-        process->appendStep(new ClaimAccount(pptr, session));
+        //process->appendStep(new ClaimAccount(pptr, session));
         process->appendStep(new Update(pptr, Net::Mode::Online));
     }
     else
@@ -889,7 +832,7 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
 
     // print some instance info here...
     {
-        process->appendStep(new PrintInstanceInfo(pptr, session, serverPort));
+        process->appendStep(new PrintInstanceInfo(pptr, serverPort));
     }
 
     // extract native jars if needed
@@ -909,7 +852,6 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
         {
             auto step = new LauncherPartLaunch(pptr);
             step->setWorkingDirectory(gameRoot());
-            step->setAuthSession(session);
             if(!serverPort) serverPort = m_settings->get("ServerPort").toInt();
             step->setServerPort(serverPort);
             process->appendStep(step);
@@ -918,7 +860,6 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
         {
             auto step = new DirectJavaLaunch(pptr);
             step->setWorkingDirectory(gameRoot());
-            step->setAuthSession(session);
             if(!serverPort) serverPort = m_settings->get("ServerPort").toInt();
             step->setServerPort(serverPort);
             process->appendStep(step);
@@ -931,10 +872,6 @@ shared_qobject_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPt
         auto step = new PostLaunchCommand(pptr);
         step->setWorkingDirectory(gameRoot());
         process->appendStep(step);
-    }
-    if (session)
-    {
-        process->setCensorFilter(createCensorFilterFromSession(session));
     }
     m_launchProcess = process;
     emit launchTaskChanged(m_launchProcess);

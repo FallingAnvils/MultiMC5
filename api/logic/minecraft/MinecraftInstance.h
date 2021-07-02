@@ -77,11 +77,11 @@ public:
 
     //////  Launch stuff //////
     shared_qobject_ptr<Task> createUpdateTask(Net::Mode mode) override;
-    shared_qobject_ptr<LaunchTask> createLaunchTask(AuthSessionPtr account, int serverPort) override;
+    shared_qobject_ptr<LaunchTask> createLaunchTask(int serverPort) override;
     QStringList extraArguments() const override;
-    QStringList verboseDescription(AuthSessionPtr session, int serverPort) override;
+    QStringList verboseDescription(int serverPort) override;
     QList<Mod> getJarMods() const;
-    QString createLaunchScript(AuthSessionPtr session, int serverPort);
+    QString createLaunchScript(int serverPort);
     /// get arguments passed to java
     QStringList javaArguments() const;
 
@@ -108,12 +108,11 @@ public:
     virtual QString getMainClass() const;
 
     // FIXME: remove
-    virtual QStringList processMinecraftArgs(AuthSessionPtr account, int serverPort) const;
+    virtual QStringList processMinecraftArgs(int serverPort) const;
 
     virtual JavaVersion getJavaVersion() const;
 
 protected:
-    QMap<QString, QString> createCensorFilterFromSession(AuthSessionPtr session);
     QStringList validLaunchMethods();
     QString launchMethod();
 

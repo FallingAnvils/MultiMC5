@@ -54,7 +54,6 @@
 #include <java/JavaUtils.h>
 #include <java/JavaInstallList.h>
 #include <launch/LaunchTask.h>
-#include <minecraft/auth/MojangAccountList.h>
 #include <SkinUtils.h>
 #include <BuildConfig.h>
 #include <net/NetJob.h>
@@ -82,7 +81,6 @@
 #include "dialogs/IconPickerDialog.h"
 #include "dialogs/CopyInstanceDialog.h"
 #include "dialogs/UpdateDialog.h"
-#include "dialogs/EditAccountDialog.h"
 #include "dialogs/NotificationDialog.h"
 #include "dialogs/ExportInstanceDialog.h"
 #include <InstanceImportTask.h>
@@ -176,7 +174,6 @@ public:
     TranslatedAction actionSettings;
     TranslatedAction actionPatreon;
     TranslatedAction actionMoreNews;
-    TranslatedAction actionManageAccounts;
     TranslatedAction actionLaunchInstance;
     TranslatedAction actionRenameInstance;
     TranslatedAction actionChangeInstGroup;
@@ -388,15 +385,6 @@ public:
         actionCAT->setPriority(QAction::LowPriority);
         all_actions.append(&actionCAT);
         mainToolBar->addAction(actionCAT);
-
-        // profile menu and its actions
-        actionManageAccounts = TranslatedAction(MainWindow);
-        actionManageAccounts->setObjectName(QStringLiteral("actionManageAccounts"));
-        actionManageAccounts.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Manage Accounts"));
-        // FIXME: no tooltip!
-        actionManageAccounts->setCheckable(false);
-        actionManageAccounts->setIcon(MMC->getThemedIcon("accounts"));
-        all_actions.append(&actionManageAccounts);
 
         all_toolbars.append(&mainToolBar);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
@@ -728,73 +716,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
     statusBar()->addPermanentWidget(m_statusLeft, 1);
     statusBar()->addPermanentWidget(m_statusRight, 0);
 
-    // Add "manage accounts" button, right align
-    QWidget *spacer = new QWidget();
-    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    ui->mainToolBar->addWidget(spacer);
-
-    accountMenu = new QMenu(this);
-
-    repopulateAccountsMenu();
-
-    accountMenuButton = new QToolButton(this);
-    accountMenuButton->setMenu(accountMenu);
-    accountMenuButton->setPopupMode(QToolButton::InstantPopup);
-    accountMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    accountMenuButton->setIcon(MMC->getThemedIcon("noaccount"));
-
-    QWidgetAction *accountMenuButtonAction = new QWidgetAction(this);
-    accountMenuButtonAction->setDefaultWidget(accountMenuButton);
-
-    ui->mainToolBar->addAction(accountMenuButtonAction);
-
-    // Update the menu when the active account changes.
-    // Shouldn't have to use lambdas here like this, but if I don't, the compiler throws a fit.
-    // Template hell sucks...
-    connect(MMC->accounts().get(), &MojangAccountList::activeAccountChanged, [this]
-            {
-                activeAccountChanged();
-            });
-    connect(MMC->accounts().get(), &MojangAccountList::listChanged, [this]
-            {
-                repopulateAccountsMenu();
-            });
-
-    // Show initial account
-    activeAccountChanged();
-
-    auto accounts = MMC->accounts();
-
-    QList<Net::Download::Ptr> skin_dls;
-    for (int i = 0; i < accounts->count(); i++)
-    {
-        auto account = accounts->at(i);
-        if (!account)
-        {
-            qWarning() << "Null account at index" << i;
-            continue;
-        }
-        for (auto profile : account->profiles())
-        {
-            auto meta = Env::getInstance().metacache()->resolveEntry("skins", profile.id + ".png");
-            auto action = Net::Download::makeCached(QUrl(BuildConfig.SKINS_BASE + profile.id + ".png"), meta);
-            skin_dls.append(action);
-            meta->setStale(true);
-        }
-    }
-    if (!skin_dls.isEmpty())
-    {
-        auto job = new NetJob("Startup player skins download");
-        connect(job, &NetJob::succeeded, this, &MainWindow::skinJobFinished);
-        connect(job, &NetJob::failed, this, &MainWindow::skinJobFinished);
-        for (auto action : skin_dls)
-        {
-            job->addNetAction(action);
-        }
-        skin_download_job.reset(job);
-        job->start();
-    }
-
     // load the news
     {
         m_newsChecker->reloadNews();
@@ -842,8 +763,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
 
 void MainWindow::retranslateUi()
 {
-    accountMenuButton->setText(tr("Profiles"));
-
     if (m_selectedInstance) {
         m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
     } else {
@@ -868,12 +787,6 @@ void MainWindow::konamiTriggered()
 {
     // ENV.enableFeature("NewModsPage");
     qDebug() << "Super Secret Mode ACTIVATED!";
-}
-
-void MainWindow::skinJobFinished()
-{
-    activeAccountChanged();
-    skin_download_job.reset();
 }
 
 void MainWindow::showInstanceContextMenu(const QPoint &pos)
@@ -1028,73 +941,7 @@ QString profileInUseFilter(const QString & profile, bool used)
     }
 }
 
-void MainWindow::repopulateAccountsMenu()
-{
-    accountMenu->clear();
 
-    std::shared_ptr<MojangAccountList> accounts = MMC->accounts();
-    MojangAccountPtr active_account = accounts->activeAccount();
-
-    QString active_username = "";
-    if (active_account != nullptr)
-    {
-        active_username = active_account->username();
-        const AccountProfile *profile = active_account->currentProfile();
-        // this can be called before accountMenuButton exists
-        if (profile != nullptr && accountMenuButton)
-        {
-            auto profileLabel = profileInUseFilter(profile->name, active_account->isInUse());
-            accountMenuButton->setText(profileLabel);
-        }
-    }
-
-    if (accounts->count() <= 0)
-    {
-        QAction *action = new QAction(tr("No accounts added!"), this);
-        action->setEnabled(false);
-        accountMenu->addAction(action);
-    }
-    else
-    {
-        // TODO: Nicer way to iterate?
-        for (int i = 0; i < accounts->count(); i++)
-        {
-            MojangAccountPtr account = accounts->at(i);
-            for (auto profile : account->profiles())
-            {
-                auto profileLabel = profileInUseFilter(profile.name, account->isInUse());
-                QAction *action = new QAction(profileLabel, this);
-                action->setData(account->username());
-                action->setCheckable(true);
-                if (active_username == account->username())
-                {
-                    action->setChecked(true);
-                }
-
-                action->setIcon(SkinUtils::getFaceFromCache(profile.id));
-                accountMenu->addAction(action);
-                connect(action, SIGNAL(triggered(bool)), SLOT(changeActiveAccount()));
-            }
-        }
-    }
-
-    accountMenu->addSeparator();
-
-    QAction *action = new QAction(tr("No Default Account"), this);
-    action->setCheckable(true);
-    action->setIcon(MMC->getThemedIcon("noaccount"));
-    action->setData("");
-    if (active_username.isEmpty())
-    {
-        action->setChecked(true);
-    }
-
-    accountMenu->addAction(action);
-    connect(action, SIGNAL(triggered(bool)), SLOT(changeActiveAccount()));
-
-    accountMenu->addSeparator();
-    accountMenu->addAction(ui->actionManageAccounts);
-}
 
 void MainWindow::updatesAllowedChanged(bool allowed)
 {
@@ -1103,52 +950,6 @@ void MainWindow::updatesAllowedChanged(bool allowed)
         return;
     }
     ui->actionCheckUpdate->setEnabled(allowed);
-}
-
-/*
- * Assumes the sender is a QAction
- */
-void MainWindow::changeActiveAccount()
-{
-    QAction *sAction = (QAction *)sender();
-    // Profile's associated Mojang username
-    // Will need to change when profiles are properly implemented
-    if (sAction->data().type() != QVariant::Type::String)
-        return;
-
-    QVariant data = sAction->data();
-    QString id = "";
-    if (!data.isNull())
-    {
-        id = data.toString();
-    }
-
-    MMC->accounts()->setActiveAccount(id);
-
-    activeAccountChanged();
-}
-
-void MainWindow::activeAccountChanged()
-{
-    repopulateAccountsMenu();
-
-    MojangAccountPtr account = MMC->accounts()->activeAccount();
-
-    if (account != nullptr && account->username() != "")
-    {
-        const AccountProfile *profile = account->currentProfile();
-        if (profile != nullptr)
-        {
-            auto profileLabel = profileInUseFilter(profile->name, account->isInUse());
-            accountMenuButton->setIcon(SkinUtils::getFaceFromCache(profile->id));
-            accountMenuButton->setText(profileLabel);
-            return;
-        }
-    }
-
-    // Set the icon to the "no account" icon.
-    accountMenuButton->setIcon(MMC->getThemedIcon("noaccount"));
-    accountMenuButton->setText(tr("Profiles"));
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
@@ -1392,7 +1193,7 @@ void MainWindow::finalizeInstance(InstancePtr inst)
 {
     view->updateGeometries();
     setSelectedInstanceById(inst->id());
-    if (MMC->accounts()->anyAccountIsValid())
+    if (true)
     {
         ProgressDialog loadDialog(this);
         auto update = inst->createUpdateTask(Net::Mode::Online);
@@ -1649,11 +1450,6 @@ void MainWindow::on_actionEditInstance_triggered()
 void MainWindow::on_actionScreenshots_triggered()
 {
     MMC->showInstanceWindow(m_selectedInstance, "screenshots");
-}
-
-void MainWindow::on_actionManageAccounts_triggered()
-{
-    MMC->ShowGlobalSettings(this, "accounts");
 }
 
 void MainWindow::on_actionReportBug_triggered()

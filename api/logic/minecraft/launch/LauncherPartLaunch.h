@@ -17,7 +17,6 @@
 
 #include <launch/LaunchStep.h>
 #include <LoggedProcess.h>
-#include <minecraft/auth/AuthSession.h>
 
 #include "MinecraftServerTarget.h"
 
@@ -36,10 +35,6 @@ public:
         return true;
     }
     void setWorkingDirectory(const QString &wd);
-    void setAuthSession(AuthSessionPtr session)
-    {
-        m_session = session;
-    }
 
     void setServerPort(int serverPort)
     {
@@ -52,7 +47,6 @@ private slots:
 private:
     LoggedProcess m_process;
     QString m_command;
-    AuthSessionPtr m_session;
     QString m_launchScript;
     int m_serverPort;
 

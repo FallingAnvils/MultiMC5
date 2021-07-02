@@ -197,14 +197,6 @@ set(STATUS_SOURCES
 # Support for Minecraft instances and launch
 set(MINECRAFT_SOURCES
     # Minecraft support
-    minecraft/auth/AuthSession.h
-    minecraft/auth/AuthSession.cpp
-    minecraft/auth/MojangAccountList.h
-    minecraft/auth/MojangAccountList.cpp
-    minecraft/auth/MojangAccount.h
-    minecraft/auth/MojangAccount.cpp
-    minecraft/auth/YggdrasilTask.h
-    minecraft/auth/YggdrasilTask.cpp
     minecraft/auth/flows/AuthenticateTask.h
     minecraft/auth/flows/AuthenticateTask.cpp
     minecraft/auth/flows/RefreshTask.cpp
@@ -224,8 +216,6 @@ set(MINECRAFT_SOURCES
     minecraft/update/LibrariesTask.cpp
     minecraft/update/LibrariesTask.h
 
-    minecraft/launch/ClaimAccount.cpp
-    minecraft/launch/ClaimAccount.h
     minecraft/launch/CreateGameFolders.cpp
     minecraft/launch/CreateGameFolders.h
     minecraft/launch/ModMinecraftJar.cpp

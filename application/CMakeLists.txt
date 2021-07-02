@@ -102,8 +102,6 @@ SET(MULTIMC_SOURCES
     pages/instance/WorldListPage.h
 
     # GUI - global settings pages
-    pages/global/AccountListPage.cpp
-    pages/global/AccountListPage.h
     pages/global/CustomCommandsPage.cpp
     pages/global/CustomCommandsPage.h
     pages/global/ExternalToolsPage.cpp
@@ -168,8 +166,6 @@ SET(MULTIMC_SOURCES
     dialogs/CopyInstanceDialog.h
     dialogs/CustomMessageBox.cpp
     dialogs/CustomMessageBox.h
-    dialogs/EditAccountDialog.cpp
-    dialogs/EditAccountDialog.h
     dialogs/ExportInstanceDialog.cpp
     dialogs/ExportInstanceDialog.h
     dialogs/IconPickerDialog.cpp
@@ -263,7 +259,6 @@ SET(MULTIMC_UIS
     pages/instance/WorldListPage.ui
 
     # Global settings pages
-    pages/global/AccountListPage.ui
     pages/global/ExternalToolsPage.ui
     pages/global/JavaPage.ui
     pages/global/MinecraftPage.ui
@@ -291,7 +286,6 @@ SET(MULTIMC_UIS
     dialogs/ProgressDialog.ui
     dialogs/IconPickerDialog.ui
     dialogs/ProfileSelectDialog.ui
-    dialogs/EditAccountDialog.ui
     dialogs/ExportInstanceDialog.ui
     dialogs/LoginDialog.ui
     dialogs/UpdateDialog.ui

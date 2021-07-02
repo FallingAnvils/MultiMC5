@@ -38,7 +38,6 @@
 #include <QUrl>
 
 #include "minecraft/PackProfile.h"
-#include "minecraft/auth/MojangAccountList.h"
 #include "minecraft/mod/Mod.h"
 #include "icons/IconList.h"
 #include "Exception.h"
@@ -391,7 +390,7 @@ void VersionPage::on_actionChange_version_triggered()
 
 void VersionPage::on_actionDownload_All_triggered()
 {
-    if (!MMC->accounts()->anyAccountIsValid())
+    if (true)
     {
         CustomMessageBox::selectable(
             this, tr("Error"),

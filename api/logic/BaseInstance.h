@@ -26,7 +26,6 @@
 
 #include "settings/INIFile.h"
 #include "BaseVersionList.h"
-#include "minecraft/auth/MojangAccount.h"
 #include "MessageLevel.h"
 #include "pathmatcher/IPathMatcher.h"
 
@@ -147,8 +146,7 @@ public:
     virtual shared_qobject_ptr<Task> createUpdateTask(Net::Mode mode) = 0;
 
     /// returns a valid launcher (task container)
-    virtual shared_qobject_ptr<LaunchTask> createLaunchTask(
-            AuthSessionPtr account, int serverPort) = 0;
+    virtual shared_qobject_ptr<LaunchTask> createLaunchTask(int serverPort) = 0;
 
     /// returns the current launch task (if any)
     shared_qobject_ptr<LaunchTask> getLaunchTask();
@@ -226,7 +224,7 @@ public:
     /**
      * 'print' a verbose description of the instance into a QStringList
      */
-    virtual QStringList verboseDescription(AuthSessionPtr session, int serverPort) = 0;
+    virtual QStringList verboseDescription(int serverPort) = 0;
 
     Status currentStatus() const;
 

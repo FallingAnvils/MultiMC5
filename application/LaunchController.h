@@ -62,7 +62,6 @@ private:
     InstancePtr m_instance;
     QWidget * m_parentWidget = nullptr;
     InstanceWindow *m_console = nullptr;
-    AuthSessionPtr m_session;
     shared_qobject_ptr<LaunchTask> m_launcher;
     int m_serverPort;
 };

@@ -17,7 +17,6 @@
 
 #include <launch/LaunchStep.h>
 #include <LoggedProcess.h>
-#include <minecraft/auth/AuthSession.h>
 
 // Create the main .minecraft for the instance and any other necessary folders
 class CreateGameFolders: public LaunchStep

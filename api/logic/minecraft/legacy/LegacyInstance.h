@@ -111,8 +111,7 @@ public:
     {
         return false;
     }
-    shared_qobject_ptr<LaunchTask> createLaunchTask(
-            AuthSessionPtr account, int serverPort) override
+    shared_qobject_ptr<LaunchTask> createLaunchTask(int serverPort) override
     {
         return nullptr;
     }
@@ -126,7 +125,7 @@ public:
     }
 
     QString getStatusbarDescription() override;
-    QStringList verboseDescription(AuthSessionPtr session, int serverPort) override;
+    QStringList verboseDescription(int serverPort) override;
 
     QProcessEnvironment createEnvironment() override
     {

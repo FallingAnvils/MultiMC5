@@ -13,7 +13,6 @@
 #include "pages/global/LanguagePage.h"
 #include "pages/global/ProxyPage.h"
 #include "pages/global/ExternalToolsPage.h"
-#include "pages/global/AccountListPage.h"
 #include "pages/global/PasteEEPage.h"
 #include "pages/global/CustomCommandsPage.h"
 
@@ -42,7 +41,6 @@
 #include "dialogs/CustomMessageBox.h"
 #include "InstanceList.h"
 
-#include <minecraft/auth/MojangAccountList.h>
 #include "icons/IconList.h"
 #include "net/HttpMetaCache.h"
 #include "Env.h"
@@ -595,7 +593,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
             m_globalSettingsProvider->addPage<CustomCommandsPage>();
             m_globalSettingsProvider->addPage<ProxyPage>();
             m_globalSettingsProvider->addPage<ExternalToolsPage>();
-            m_globalSettingsProvider->addPage<AccountListPage>();
             m_globalSettingsProvider->addPage<PasteEEPage>();
         }
         qDebug() << "<> Settings loaded.";
@@ -680,15 +677,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         qDebug() << "Loading Instances...";
         m_instances->loadList();
         qDebug() << "<> Instances loaded.";
-    }
-
-    // and accounts
-    {
-        m_accounts.reset(new MojangAccountList(this));
-        qDebug() << "Loading accounts...";
-        m_accounts->setListFilePath("accounts.json", true);
-        m_accounts->loadList();
-        qDebug() << "<> Accounts loaded.";
     }
 
     // init the http meta cache

@@ -26,6 +26,7 @@
 #include <QUuid>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QJsonObject>
 
 #include "InstanceList.h"
 #include "BaseInstance.h"
