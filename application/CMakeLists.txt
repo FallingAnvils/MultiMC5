@@ -46,12 +46,6 @@ SET(MULTIMC_SOURCES
     # GUI - themes
     themes/FusionTheme.cpp
     themes/FusionTheme.h
-    themes/BrightTheme.cpp
-    themes/BrightTheme.h
-    themes/CustomTheme.cpp
-    themes/CustomTheme.h
-    themes/DarkTheme.cpp
-    themes/DarkTheme.h
     themes/ITheme.cpp
     themes/ITheme.h
     themes/SystemTheme.cpp
@@ -286,13 +280,6 @@ SET(MULTIMC_UIS
 set(MULTIMC_QRCS
     resources/backgrounds/backgrounds.qrc
     resources/multimc/multimc.qrc
-    resources/pe_dark/pe_dark.qrc
-    resources/pe_light/pe_light.qrc
-    resources/pe_colored/pe_colored.qrc
-    resources/pe_blue/pe_blue.qrc
-    resources/OSX/OSX.qrc
-    resources/iOS/iOS.qrc
-    resources/flat/flat.qrc
     resources/documents/documents.qrc
 )
 

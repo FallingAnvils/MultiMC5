@@ -18,9 +18,6 @@
 
 #include "themes/ITheme.h"
 #include "themes/SystemTheme.h"
-#include "themes/DarkTheme.h"
-#include "themes/BrightTheme.h"
-#include "themes/CustomTheme.h"
 
 #include "setupwizard/SetupWizard.h"
 #include "setupwizard/LanguageWizardPage.h"
@@ -643,11 +640,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         {
             m_themes.insert(std::make_pair(theme->id(), std::unique_ptr<ITheme>(theme)));
         };
-        auto darkTheme = new DarkTheme();
         insertTheme(new SystemTheme());
-        insertTheme(darkTheme);
-        insertTheme(new BrightTheme());
-        insertTheme(new CustomTheme(darkTheme, "custom"));
         qDebug() << "<> Widget themes initialized.";
     }
 
