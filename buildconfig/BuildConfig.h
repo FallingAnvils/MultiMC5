@@ -31,9 +31,6 @@ public:
     /// URL for the updater's channel
     QString CHANLIST_URL;
 
-    /// Google analytics ID
-    QString ANALYTICS_ID;
-
     /// Used for matching notifications
     QString FULL_VERSION_STR;
 

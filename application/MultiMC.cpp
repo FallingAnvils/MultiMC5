@@ -25,7 +25,6 @@
 #include "setupwizard/SetupWizard.h"
 #include "setupwizard/LanguageWizardPage.h"
 #include "setupwizard/JavaWizardPage.h"
-#include "setupwizard/AnalyticsWizardPage.h"
 
 #include <iostream>
 #include <QDir>
@@ -64,7 +63,6 @@
 #include <DesktopServices.h>
 #include <LocalPeer.h>
 
-#include <ganalytics.h>
 #include <sys.h>
 
 #include "pagedialog/PageDialog.h"
@@ -457,6 +455,9 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         m_settings->registerSetting("IconTheme", QString("multimc"));
         m_settings->registerSetting("ApplicationTheme", QString("system"));
 
+        // Notifications
+        m_settings->registerSetting("ShownNotifications", QString());
+
         // Remembered state
         m_settings->registerSetting("LastUsedGroupForNewInstance", QString());
 
@@ -571,14 +572,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
 
         // paste.ee API key
         m_settings->registerSetting("PasteEEAPIKey", "multimc");
-
-        if(!BuildConfig.ANALYTICS_ID.isEmpty())
-        {
-            // Analytics
-            m_settings->registerSetting("Analytics", true);
-            m_settings->registerSetting("AnalyticsSeen", 0);
-            m_settings->registerSetting("AnalyticsClientID", QString());
-        }
 
         // Init page provider
         {
@@ -729,45 +722,6 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         qDebug() << "<> Application theme set.";
     }
 
-    // Initialize analytics
-    [this]()
-    {
-        const int analyticsVersion = 2;
-        if(BuildConfig.ANALYTICS_ID.isEmpty())
-        {
-            return;
-        }
-
-        auto analyticsSetting = m_settings->getSetting("Analytics");
-        connect(analyticsSetting.get(), &Setting::SettingChanged, this, &MultiMC::analyticsSettingChanged);
-        QString clientID = m_settings->get("AnalyticsClientID").toString();
-        if(clientID.isEmpty())
-        {
-            clientID = QUuid::createUuid().toString();
-            clientID.remove(QLatin1Char('{'));
-            clientID.remove(QLatin1Char('}'));
-            m_settings->set("AnalyticsClientID", clientID);
-        }
-        m_analytics = new GAnalytics(BuildConfig.ANALYTICS_ID, clientID, analyticsVersion, this);
-        m_analytics->setLogLevel(GAnalytics::Debug);
-        m_analytics->setAnonymizeIPs(true);
-        m_analytics->setNetworkAccessManager(&ENV.qnam());
-
-        if(m_settings->get("AnalyticsSeen").toInt() < m_analytics->version())
-        {
-            qDebug() << "Analytics info not seen by user yet (or old version).";
-            return;
-        }
-        if(!m_settings->get("Analytics").toBool())
-        {
-            qDebug() << "Analytics disabled by user.";
-            return;
-        }
-
-        m_analytics->enable();
-        qDebug() << "<> Initialized analytics with tid" << BuildConfig.ANALYTICS_ID;
-    }();
-
     if(createSetupWizard())
     {
         return;
@@ -794,29 +748,13 @@ bool MultiMC::createSetupWizard()
         }
         return false;
     }();
-    bool analyticsRequired = [&]()
-    {
-        if(BuildConfig.ANALYTICS_ID.isEmpty())
-        {
-            return false;
-        }
-        if (!settings()->get("Analytics").toBool())
-        {
-            return false;
-        }
-        if (settings()->get("AnalyticsSeen").toInt() < analytics()->version())
-        {
-            return true;
-        }
-        return false;
-    }();
     bool languageRequired = [&]()
     {
         if (settings()->get("Language").toString().isEmpty())
             return true;
         return false;
     }();
-    bool wizardRequired = javaRequired || analyticsRequired || languageRequired;
+    bool wizardRequired = javaRequired || languageRequired;
 
     if(wizardRequired)
     {
@@ -828,10 +766,6 @@ bool MultiMC::createSetupWizard()
         if (javaRequired)
         {
             m_setupWizard->addPage(new JavaWizardPage(m_setupWizard));
-        }
-        if(analyticsRequired)
-        {
-            m_setupWizard->addPage(new AnalyticsWizardPage(m_setupWizard));
         }
         connect(m_setupWizard, &QDialog::finished, this, &MultiMC::setupWizardFinished);
         m_setupWizard->show();
@@ -974,22 +908,6 @@ void MultiMC::messageReceived(const QString& message)
     {
         qWarning() << "Received invalid message" << message;
     }
-}
-
-void MultiMC::analyticsSettingChanged(const Setting&, QVariant value)
-{
-    if(!m_analytics)
-        return;
-    bool enabled = value.toBool();
-    if(enabled)
-    {
-        qDebug() << "Analytics enabled by user.";
-    }
-    else
-    {
-        qDebug() << "Analytics disabled by user.";
-    }
-    m_analytics->enable(enabled);
 }
 
 std::shared_ptr<TranslationsModel> MultiMC::translations()
@@ -1255,60 +1173,6 @@ MainWindow* MultiMC::showMainWindow(bool minimized)
         connect(this, &MultiMC::updateAllowedChanged, m_mainWindow, &MainWindow::updatesAllowedChanged);
         connect(m_mainWindow, &MainWindow::isClosing, this, &MultiMC::on_windowClose);
         m_openWindows++;
-    }
-    // FIXME: move this somewhere else...
-    if(m_analytics)
-    {
-        auto windowSize = m_mainWindow->size();
-        auto sizeString = QString("%1x%2").arg(windowSize.width()).arg(windowSize.height());
-        qDebug() << "Viewport size" << sizeString;
-        m_analytics->setViewportSize(sizeString);
-        /*
-         * cm1 = java min heap [MB]
-         * cm2 = java max heap [MB]
-         * cm3 = system RAM [MB]
-         *
-         * cd1 = java version
-         * cd2 = java architecture
-         * cd3 = system architecture
-         * cd4 = CPU architecture
-         */
-        QVariantMap customValues;
-        int min = m_settings->get("MinMemAlloc").toInt();
-        int max = m_settings->get("MaxMemAlloc").toInt();
-        if(min < max)
-        {
-            customValues["cm1"] = min;
-            customValues["cm2"] = max;
-        }
-        else
-        {
-            customValues["cm1"] = max;
-            customValues["cm2"] = min;
-        }
-
-        constexpr uint64_t Mega = 1024ull * 1024ull;
-        int ramSize = int(Sys::getSystemRam() / Mega);
-        qDebug() << "RAM size is" << ramSize << "MB";
-        customValues["cm3"] = ramSize;
-
-        customValues["cd1"] = m_settings->get("JavaVersion");
-        customValues["cd2"] = m_settings->get("JavaArchitecture");
-        customValues["cd3"] = Sys::isSystem64bit() ? "64":"32";
-        customValues["cd4"] = Sys::isCPU64bit() ? "64":"32";
-        auto kernelInfo = Sys::getKernelInfo();
-        customValues["cd5"] = kernelInfo.kernelName;
-        customValues["cd6"] = kernelInfo.kernelVersion;
-        auto distInfo = Sys::getDistributionInfo();
-        if(!distInfo.distributionName.isEmpty())
-        {
-            customValues["cd7"] = distInfo.distributionName;
-        }
-        if(!distInfo.distributionVersion.isEmpty())
-        {
-            customValues["cd8"] = distInfo.distributionVersion;
-        }
-        m_analytics->sendScreenView("Main Window", customValues);
     }
     return m_mainWindow;
 }

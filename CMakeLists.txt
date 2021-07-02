@@ -70,9 +70,6 @@ set(MultiMC_META_URL "https://meta.multimc.org/v1/" CACHE STRING "URL to fetch M
 # paste.ee API key
 set(MultiMC_PASTE_EE_API_KEY "utLvciUouSURFzfjPxLBf5W4ISsUX4pwBDF7N1AfZ" CACHE STRING "API key you can get from paste.ee when you register an account")
 
-# Google analytics ID
-set(MultiMC_ANALYTICS_ID "UA-87731965-2" CACHE STRING "ID you can get from Google analytics")
-
 # Bug tracker URL
 set(MultiMC_BUG_TRACKER_URL "" CACHE STRING "URL for the bug tracker.")
 
@@ -257,7 +254,6 @@ set(NBT_NAME MultiMC_nbt++)
 set(NBT_DEST_DIR ${LIBRARY_DEST_DIR})
 add_subdirectory(libraries/libnbtplusplus)
 
-add_subdirectory(libraries/ganalytics) # google analytics library
 add_subdirectory(libraries/systeminfo) # system information library
 add_subdirectory(libraries/hoedown) # markdown parser
 add_subdirectory(libraries/launcher) # java based launcher part for Minecraft
@@ -267,7 +263,7 @@ add_subdirectory(libraries/quazip) # zip manipulation library
 add_subdirectory(libraries/rainbow) # Qt extension for colors
 add_subdirectory(libraries/iconfix) # fork of Qt's QIcon loader
 add_subdirectory(libraries/LocalPeer) # fork of a library from Qt solutions
-add_subdirectory(libraries/classparser) # google analytics library
+add_subdirectory(libraries/classparser)
 add_subdirectory(libraries/optional-bare)
 add_subdirectory(libraries/tomlc99) # toml parser
 

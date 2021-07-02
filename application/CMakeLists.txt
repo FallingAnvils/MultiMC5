@@ -37,8 +37,6 @@ SET(MULTIMC_SOURCES
     # GUI - setup wizard
     setupwizard/SetupWizard.h
     setupwizard/SetupWizard.cpp
-    setupwizard/AnalyticsWizardPage.cpp
-    setupwizard/AnalyticsWizardPage.h
     setupwizard/BaseWizardPage.h
     setupwizard/JavaWizardPage.cpp
     setupwizard/JavaWizardPage.h
@@ -166,6 +164,8 @@ SET(MULTIMC_SOURCES
     dialogs/NewComponentDialog.h
     dialogs/NewInstanceDialog.cpp
     dialogs/NewInstanceDialog.h
+    dialogs/NotificationDialog.cpp
+    dialogs/NotificationDialog.h
     pagedialog/PageDialog.cpp
     pagedialog/PageDialog.h
     dialogs/ProgressDialog.cpp
@@ -275,6 +275,7 @@ SET(MULTIMC_UIS
     dialogs/ExportInstanceDialog.ui
     dialogs/LoginDialog.ui
     dialogs/UpdateDialog.ui
+    dialogs/NotificationDialog.ui
     dialogs/SkinUploadDialog.ui
 
     # Widgets/other
@@ -306,7 +307,7 @@ qt5_add_resources(MULTIMC_RESOURCES ${MULTIMC_QRCS})
 
 # Add executable
 add_executable(MultiMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
-target_link_libraries(MultiMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer ganalytics)
+target_link_libraries(MultiMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer)
 if(DEFINED MultiMC_APP_BINARY_NAME)
     set_target_properties(MultiMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
 endif()
