@@ -38,4 +38,4 @@ add_definitions(-DCLASSPARSER_LIBRARY)
 
 add_library(MultiServerMC_classparser STATIC ${CLASSPARSER_SOURCES} ${CLASSPARSER_HEADERS})
 target_include_directories(MultiServerMC_classparser PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(MultiServerMC_classparser MultiServerMC_quazip Qt5::Core)
+target_link_libraries(MultiServerMC_classparser MultiMC_quazip Qt5::Core)

@@ -486,7 +486,7 @@ set_target_properties(MultiServerMC_logic PROPERTIES CXX_VISIBILITY_PRESET hidde
 generate_export_header(MultiServerMC_logic)
 
 # Link
-target_link_libraries(MultiServerMC_logic systeminfo MultiServerMC_quazip MultiServerMC_classparser ${NBT_NAME} ${ZLIB_LIBRARIES} optional-bare tomlc99 BuildConfig)
+target_link_libraries(MultiServerMC_logic systeminfo MultiMC_quazip MultiServerMC_classparser ${NBT_NAME} ${ZLIB_LIBRARIES} optional-bare tomlc99 BuildConfig)
 target_link_libraries(MultiServerMC_logic Qt5::Core Qt5::Xml Qt5::Network Qt5::Concurrent)
 
 # Mark and export headers
